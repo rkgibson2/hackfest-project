@@ -1,3 +1,50 @@
+/*tooltip styles*/
+
+/*these styles come from: https://github.com/Caged/d3-tip*/
+.d3-tip {
+  z-index: 101;
+  line-height: 1;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 1px;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* Northward tooltips */
+.d3-tip.n:after {
+/*content: "\25BC";*/
+margin: -1px 0 0 0;
+top: 100%;
+left: 0;
+text-align: center;
+}
+
+/* Southward tooltips */
+.d3-tip.s:after {
+/*content: "\25B2";*/
+margin: 0 0 1px 0;
+top: -8px;
+left: 0;
+text-align: center;
+}
+
+/* Eastward tooltips */
+.d3-tip.e:after {
+  margin: -4px 0 0 0;
+  top: 50%;
+  left: -8px;
+}
+
+/* Westward tooltips */
+.d3-tip.w:after {
+  margin: -4px 0 0 -1px;
+  top: 50%;
+  left: 100%;
+}
+
+
 body {
   font-family: Trebuchet, sans-serif;
   color: black;
@@ -22,7 +69,7 @@ label {
 }
 
 #page-content {
-  	margin-top: 180px;
+  	margin-top: 140px;
 }
 
 #page-content>div {
@@ -38,20 +85,62 @@ label {
   	text-align: center;
 }
 
-#champ_name {
+#champ {
 	position: absolute;
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	width: 100px;
-	left: 500px;
-	top: 30px;
-	font-size: 28px;
-
+	top: -5px;
+	left: 175px;
 }
 
+#champ_name {
+	font-size: 78px;
+	font-family: 'Marvel', cursive;
+	font-weight: bold;
+}
 
+#champ_title {
+	font-family: 'Marvel', cursive;
+	font-size: 45px;
+	margin-left: 10px;
+}
 
+#champ_blurb {
+	position: absolute;
+	width: 650px;
+	left: 220px;
+	top: 90px;
+	font-size: 12px;
+	text-align: center;
+}
+
+#champion_dropdown {
+	position: absolute;
+	left: 900px;
+}
+
+#summoner_spells_container {
+	position: relative;
+}
+
+#winrate_container {
+	position: relative;
+}
+
+#items_container {
+	position: relative;
+	left: 450px;
+	top: -300px;
+}
+
+#gpm_container {
+	position: relative;
+	top: -600px;
+	left: 850px;
+}
+
+#xpm_container {
+	position: relative;
+	top: -275px;
+	left: 450px;
+}
 
 

@@ -6,7 +6,8 @@
   <!--<link href="/bootstrap2/css/bootstrap.min.css" rel="stylesheet"></link>-->
   <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/intro.js/0.6.0/introjs.min.css"></link>
   <link rel="stylesheet" type="text/css" href="/main.css"></link>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <link href='http://fonts.googleapis.com/css?family=Marvel' rel='stylesheet' type='text/css'>  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <link href='http://fonts.googleapis.com/css?family=Dosis:500' rel='stylesheet' type='text/css'>
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
@@ -16,13 +17,39 @@
 
 	<div id="page-header">
 
+		<div id="champ">
+			<span id="champ_name"></span>
+			<span id="champ_title"></span>
+		</div>
+
 		<div id="champ_image"></div>
-		<div id="champ_name"></div>
 		<div id="champ_blurb"></div>
 
-    <div>
+		<div class="btn-group" id="champion_dropdown">
+		  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+		    Choose a Champion <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu" role="menu">
+		    <li><a href="#">Choices</a></li>
+		  </ul>
+		</div>
+
+    </div>
 
     <div id="page-content">
+
+    	<div class="graphs_row">
+        <div id="winrate_container"></div>
+        <div id="summoner_spells_container"></div>
+        <div id="items_container"></div>
+	       <!--  <div id="item_filters">
+	            <label id="value_sort_label"><input type="radio" id="value" name="itemgraph"> Sort bars by frequency</label>
+	            <label id="item_sort_label"><input type="radio" id="item" name="itemgraph"> Sort bars by item</label>
+	            <label id="cost_sort_label"><input type="radio" id="cost" name="itemgraph"> Sort bars by cost</label>
+	        </div>
+ -->    <div id="xpm_container"></div>
+        <div id="gpm_container"></div>
+
     </div>
 
 
