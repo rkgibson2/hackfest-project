@@ -4,6 +4,10 @@
 
 var champ_data;
 
+var graph_tip = d3.tip()
+        .attr("class", "d3-tip")
+        .offset([0,0]);
+
 //margins and bounding boxes for each graph visualization
 var bb_spells, bb_items, bb_xpm, bb_gpm, bb_masteries, bb_runes, bb_first_point, bb_maxed_at;
 
@@ -25,6 +29,8 @@ svg_summoner_spells = d3.select("#summoner_spells_container").append("svg").attr
 	height: bb_summoner_spells.h + bb_summoner_spells.margin.bottom + bb_summoner_spells.margin.top
 });
 
+svg_summoner_spells.call(graph_tip);
+
 svg_summoner_spells.append("rect")
 	.attr("height", bb_summoner_spells.h - 40)
 	.attr("width", bb_summoner_spells.w)
@@ -39,62 +45,105 @@ svg_summoner_spells.append("text")
 	.text("Summoner Spells")
 	.attr("stroke", "black");
 
-var summoner_spells = ["Barrier", "Clairvoyance", "Clarity", "Cleanse", "Exhaust", "Flash", "Ghost", "Heal", "Ignite", "Revive", "Smite", "Teleport"];
-var summoner_spells_length = summoner_spells.length;
-var row_width = 6;
-var image_size = 64;
+d3.json("/blurbs/summoner_spell_blurbs.json", function(summoner_spell_blurbs) {
 
-for (var i = 0; i < summoner_spells_length; i++) {
-	svg_summoner_spells.append("image")
-		.attr("x", 10 + i%row_width * (image_size + 5))
-		.attr("y", 50 + Math.floor(i/row_width)* (image_size + 5))
-		.attr("height", image_size)
-		.attr("width", image_size)
-		.attr("xlink:href", "/img/summoner_spells/" + summoner_spells[i] + ".png")
-		.attr("opacity", .4);
+	var summoner_spells = ["Barrier", "Clairvoyance", "Clarity", "Cleanse", "Exhaust", "Flash", "Ghost", "Heal", "Ignite", "Revive", "Smite", "Teleport"];
+	var summoner_spells_length = summoner_spells.length;
+	var row_width = 6;
+	var image_size = 64;
 
-	svg_summoner_spells.append("rect")
-		.attr("x", 10 + i%row_width * (image_size + 5))
-		.attr("y", 50 + Math.floor(i/row_width)* (image_size + 5))
-		.attr("height", image_size)
-		.attr("width", image_size)
-		.attr("stroke", "black")
-		.attr("stroke-width", 1)
-		.attr("fill", "none");
-}
+	for (var i = 0; i < summoner_spells_length; i++) {
+		svg_summoner_spells.append("image")
+			.attr("x", 10 + i%row_width * (image_size + 5))
+			.attr("y", 50 + Math.floor(i/row_width)* (image_size + 5))
+			.attr("height", image_size)
+			.attr("width", image_size)
+			.attr("class", "sum_spell_img")
+			.attr("id", summoner_spells[i])
+			.attr("xlink:href", "/img/summoner_spells/" + summoner_spells[i] + ".png")
+			.attr("opacity", .4)
 
-//corner hero image
-var elem = document.createElement("img")
-document.getElementById("champ_image").appendChild(elem);
-elem.src = "/img/champs/katarina.png";
-// elem.setAttribute("height", "768");
-// elem.setAttribute("width", "1024");
+		svg_summoner_spells.append("rect")
+			.attr("x", 10 + i%row_width * (image_size + 5))
+			.attr("y", 50 + Math.floor(i/row_width)* (image_size + 5))
+			.attr("height", image_size)
+			.attr("width", image_size)
+			.attr("stroke", "black")
+			.attr("stroke-width", 1)
+			.attr("fill", "none");
+	}
 
-d3.json("/blurbs/champ_blurbs.json", function(data) {
+	d3.selectAll(".sum_spell_img")
+		.on("mouseover", function(d, i) {
 
-	//set header and champion description
-	var current_hero = "Katarina";
 
-	d3.select("#champ_name")
-		.append("text")
-		.attr("x", 0)
-		.attr("y", 0)
-		.attr("class", "champ_name")
-		.text(current_hero.toUpperCase())
-		.style("fill", "black");
+			var current_spell = d3.select(this).attr("id");
 
-	d3.select("#champ_title")
-		.append("text")
-		.attr("x", 0)
-		.attr("y", 0)
-		.attr("class", "champ_title")
-		.text(data[current_hero].title)
+			//console.log(summoner_spell_blurbs)
 
-	d3.select("#champ_blurb")
-		.append("text")
-		.attr("x", 0)
-		.attr("y", 0)
-		.attr("class", "champ_blurb")
-		.text(data[current_hero].blurb.split("<br>")[0])
+			if (current_spell == "Ignite") {
+				current_spell = "Dot";
+			}
+			else if (current_spell == "Ghost") {
+				current_spell = "Haste";
+			}
+			else if (current_spell == "Clarity") {
+				current_spell = "Mana";
+			}
+			else if (current_spell == "Cleanse") {
+				current_spell = "Boost";
+			}
+			else {
+				current_spell = current_spell;
+			}
+
+			var spell_name = summoner_spell_blurbs[String("Summoner")+current_spell].name;
+			var description = summoner_spell_blurbs[String("Summoner")+current_spell].sanitizedDescription;
+
+			var html_string = "<b>" + spell_name + "</b><br>" + description;
+			graph_tip.html(html_string);
+			graph_tip.show(d,i);
+
+		})
+		.on("mouseout", function(d, i) {
+			graph_tip.hide(d,i);
+		})
+
+	//corner hero image
+	var elem = document.createElement("img")
+	document.getElementById("champ_image").appendChild(elem);
+	elem.src = "/img/champs/katarina.png";
+	// elem.setAttribute("height", "768");
+	// elem.setAttribute("width", "1024");
+
+	d3.json("/blurbs/champ_blurbs.json", function(data) {
+
+		//set header and champion description
+		var current_hero = "Katarina";
+
+		d3.select("#champ_name")
+			.append("text")
+			.attr("x", 0)
+			.attr("y", 0)
+			.attr("class", "champ_name")
+			.text(current_hero.toUpperCase())
+			.style("fill", "black");
+
+		d3.select("#champ_title")
+			.append("text")
+			.attr("x", 0)
+			.attr("y", 0)
+			.attr("class", "champ_title")
+			.text(data[current_hero].title)
+
+		d3.select("#champ_blurb")
+			.append("text")
+			.attr("x", 0)
+			.attr("y", 0)
+			.attr("class", "champ_blurb")
+			.text(data[current_hero].blurb.split("<br>")[0])
+
+	})
 
 })
+
