@@ -125,5 +125,10 @@ label {
 	position: relative;
 }
 
+#items_container {
+	position: relative;
+	left: 450px;
+	top: -300px;
+}
 
 

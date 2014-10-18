@@ -34,7 +34,54 @@ bb_winrate = {
 	}
 };
 
+bb_items = {
+	w: 750,
+	h: 350,
+	margin: {
+		top: 10,
+		right: 10,
+		bottom: 10,
+		left: 10
+	}
+};
+
+bb_xpm = {
+	w: 300,
+	h: 300,
+	margin: {
+		top: 10,
+		right: 10,
+		bottom: 10,
+		left: 10
+	}
+};
+
+bb_gpm = {
+	w: 300,
+	h: 300,
+	margin: {
+		top: 10,
+		right: 10,
+		bottom: 10,
+		left: 10
+	}
+};
+
 //set up svgs
+svg_xpm = d3.select("#xpm_container").append("svg").attr({
+	width: bb_xpm.w + bb_xpm.margin.left + bb_xpm.margin.right,
+	height: bb_xpm.h + bb_xpm.margin.bottom + bb_xpm.margin.top
+});
+
+svg_xpm.call(graph_tip);
+
+svg_gpm = d3.select("#gpm_container").append("svg").attr({
+	width: bb_gpm.w + bb_gpm.margin.left + bb_gpm.margin.right,
+	height: bb_gpm.h + bb_gpm.margin.bottom + bb_gpm.margin.top
+});
+
+svg_gpm.call(graph_tip);
+
 svg_summoner_spells = d3.select("#summoner_spells_container").append("svg").attr({
 	width: bb_summoner_spells.w + bb_summoner_spells.margin.left + bb_summoner_spells.margin.right + 20,
 	height: bb_summoner_spells.h + bb_summoner_spells.margin.bottom + bb_summoner_spells.margin.top
@@ -47,6 +94,24 @@ svg_winrate = d3.select("#winrate_container").append("svg").attr({
 	width: bb_winrate.w + bb_winrate.margin.left + bb_winrate.margin.right,
 	height: bb_winrate.h + bb_winrate.margin.bottom + bb_winrate.margin.top
 });
+
+
+svg_items = d3.select("#items_container").append("svg").attr({
+	width: bb_items.w + bb_items.margin.left + bb_items.margin.right,
+	height: bb_items.h + bb_items.margin.bottom + bb_items.margin.top
+});
+
+svg_items.call(graph_tip);
+
+
+//add nice rects and label text
+
+svg_items.append("rect")
+	.attr("height", bb_items.h)
+	.attr("width", bb_items.w)
+	.attr("fill", "black")
+	.attr("x", 0)
+	.attr("y", 0);
 
 svg_winrate.append("rect")
 	.attr("height", 40)
