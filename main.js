@@ -9,7 +9,7 @@ var graph_tip = d3.tip()
         .offset([0,0]);
 
 //margins and bounding boxes for each graph visualization
-var bb_spells, bb_items, bb_xpm, bb_gpm, bb_masteries, bb_runes, bb_first_point, bb_maxed_at;
+var bb_spells, bb_items, bb_xpm, bb_gpm, bb_masteries, bb_runes, bb_first_point, bb_maxed_at, bb_winrate;
 
 //set up bounding boxes
 bb_summoner_spells = {
@@ -23,6 +23,17 @@ bb_summoner_spells = {
     }
 };
 
+bb_winrate = {
+	w: 360,
+	h: 80,
+	margin: {
+		top: 5,
+		right: 10,
+		bottom: 5,
+		left: 10
+	}
+};
+
 //set up svgs
 svg_summoner_spells = d3.select("#summoner_spells_container").append("svg").attr({
 	width: bb_summoner_spells.w + bb_summoner_spells.margin.left + bb_summoner_spells.margin.right + 20,
@@ -30,6 +41,29 @@ svg_summoner_spells = d3.select("#summoner_spells_container").append("svg").attr
 });
 
 svg_summoner_spells.call(graph_tip);
+
+
+svg_winrate = d3.select("#winrate_container").append("svg").attr({
+	width: bb_winrate.w + bb_winrate.margin.left + bb_winrate.margin.right,
+	height: bb_winrate.h + bb_winrate.margin.bottom + bb_winrate.margin.top
+});
+
+svg_winrate.append("rect")
+	.attr("height", 40)
+	.attr("width", bb_winrate.w-20)
+	.attr("stroke", "black")
+	.attr("stroke-width", 2)
+	.attr("fill", "white")
+	.attr("x", 40)
+	.attr("y", 40);
+
+svg_winrate.append("text")
+	.attr("x", bb_winrate.w/2 - 0)
+	.attr("y", 25)
+	.attr("font-family", "Dosis")
+	.attr("font-size", "20px")
+	.text("Winrate")
+	.attr("stroke", "black");
 
 svg_summoner_spells.append("rect")
 	.attr("height", bb_summoner_spells.h - 40)
@@ -134,14 +168,14 @@ d3.json("/blurbs/summoner_spell_blurbs.json", function(summoner_spell_blurbs) {
 			.attr("x", 0)
 			.attr("y", 0)
 			.attr("class", "champ_title")
-			.text(data[current_hero].title)
+			.text(data[current_hero].title);
 
 		d3.select("#champ_blurb")
 			.append("text")
 			.attr("x", 0)
 			.attr("y", 0)
 			.attr("class", "champ_blurb")
-			.text(data[current_hero].blurb.split("<br>")[0])
+			.text(data[current_hero].blurb.split("<br>")[0]);
 
 	})
 

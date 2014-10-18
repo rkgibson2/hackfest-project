@@ -117,7 +117,13 @@ label {
 	left: 900px;
 }
 
+#summoner_spells_container {
+	position: relative;
+}
 
+#winrate_container {
+	position: relative;
+}
 
 
 
