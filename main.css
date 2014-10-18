@@ -38,19 +38,37 @@ label {
   	text-align: center;
 }
 
-#champ_name {
+#champ {
 	position: absolute;
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	width: 100px;
-	left: 500px;
-	top: 30px;
-	font-size: 28px;
-
+	top: -5px;
+	left: 175px;
 }
 
+#champ_name {
+	font-size: 78px;
+	font-family: 'Marvel', cursive;
+	font-weight: bold;
+}
+
+#champ_title {
+	font-family: 'Marvel', cursive;
+	font-size: 45px;
+	margin-left: 10px;
+}
+
+#champ_blurb {
+	position: absolute;
+	width: 650px;
+	left: 220px;
+	top: 90px;
+	font-size: 12px;
+	text-align: center;
+}
+
+#champion_dropdown {
+	position: absolute;
+	left: 900px;
+}
 
 
 
