@@ -82,5 +82,5 @@ if __name__ == "__main__":
         matches = fetch_match_history(user["id"])
         user["matches"] = matches
 
-    with open("match_data.json", "w") as outfile:
+    with open("match_data_by_player.json", "w") as outfile:
         json.dump(account_data, outfile, indent=4)
