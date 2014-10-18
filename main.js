@@ -8,22 +8,51 @@ var champ_data;
 var bb_spells, bb_items, bb_xpm, bb_gpm, bb_masteries, bb_runes, bb_first_point, bb_maxed_at;
 
 //set up bounding boxes
-bb_win_loss = {
-    w: 450,
-    h: 100,
+bb_summoner_spells = {
+    w: 500,
+    h: 190,
     margin: {
-    	top: 10,
+    	top: 20,
     	right: 10,
     	bottom: 10,
-    	left: 10
+    	left: 20
     }
 };
 
 //set up svgs
-svg_win_loss = d3.select("#win_loss_container").append("svg").attr({
-	width: bb_win_loss.w + bb_win_loss.margin.left + bb_win_loss.margin.right + 20,
-	height: bb_win_loss.h + bb_win_loss.margin.bottom + bb_win_loss.margin.top
-})
+svg_summoner_spells = d3.select("#summoner_spells_container").append("svg").attr({
+	width: bb_summoner_spells.w + bb_summoner_spells.margin.left + bb_summoner_spells.margin.right + 20,
+	height: bb_summoner_spells.h + bb_summoner_spells.margin.bottom + bb_summoner_spells.margin.top
+});
+
+svg_summoner_spells.append("rect")
+	.attr("height", bb_summoner_spells.h - 40)
+	.attr("width", bb_summoner_spells.w)
+	.attr("y", 40)
+	.attr("fill", "white");
+
+svg_summoner_spells.append("text")
+	.attr("x", bb_summoner_spells.w/2 - 70)
+	.attr("y", 25)
+	.attr("font-style", "Arial")
+	.attr("font-size", "18px")
+	.text("Summoner Spells")
+	.attr("stroke", "black");
+
+var summoner_spells = ["Barrier", "Clairvoyance", "Clarity", "Cleanse", "Exhaust", "Flash", "Garrison", "Ghost", "Heal", "Ignite", "Revive", "Smite", "Teleport"];
+var summoner_spells_length = summoner_spells.length;
+var row_width = 7;
+var image_size = 64;
+
+for (var i = 0; i < summoner_spells_length; i++) {
+	var row_begin_padding = (Math.floor(i / row_width) == 1) ? image_size / 2 : 0;
+	svg_summoner_spells.append("image")
+		.attr("x", 10 + row_begin_padding + i%row_width * (image_size + 5))
+		.attr("y", 50 + Math.floor(i/row_width)* (image_size + 5))
+		.attr("height", image_size)
+		.attr("width", image_size)
+		.attr("xlink:href", "/img/summoner_spells/" + summoner_spells[i] + ".png")
+}
 
 //corner hero image
 var elem = document.createElement("img")
