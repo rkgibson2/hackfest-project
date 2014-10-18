@@ -50,22 +50,27 @@ def fetch_match_history(account_id):
     params = {"api_key": api_key, "rankedQueues": "RANKED_SOLO_5x5", "beginIndex": 0}
     url = "/api/lol/{region}/v2.2/matchhistory/{summonerId}".format(region=region, summonerId=account_id)
 
-    print "Making request at index {0}   ".format(params["beginIndex"]),
+    print "Making request at game index {0}   ".format(params["beginIndex"]),
     r = my_request.get(url, params)
     data = r.json()["matches"]
+    data.reverse()
     matches = data
     print "{0} games returned".format(len(data))
 
     # keep looping until we run out of gamesx
     while len(data) >= 15:
         params["beginIndex"] += 15
-        print "Making request at index {0}   ".format(params["beginIndex"]),
+        print "Making request at game index {0}   ".format(params["beginIndex"]),
         r = my_request.get(url, params)
         data = r.json()["matches"]
+        data.reverse()
         matches += data
         print "{0} games returned".format(len(data))
 
     return matches
+
+def fetch_match(id):
+    params = {"api_key": api_key, "rankedQueues": "RANKED_SOLO_5x5", "beginIndex": 0}
 
 if __name__ == "__main__":
     account_data = fetch_summoner_by_name([user["name"] for user in accounts])
@@ -74,7 +79,8 @@ if __name__ == "__main__":
     
     for user in account_data.itervalues():
         print "Fetching data for {0}".format(user["name"])
-        user["matches"] = fetch_match_history(user["id"])
+        matches = fetch_match_history(user["id"])
+        user["matches"] = matches
 
     with open("match_data.json", "w") as outfile:
         json.dump(account_data, outfile, indent=4)
