@@ -32,26 +32,35 @@ svg_summoner_spells.append("rect")
 	.attr("fill", "white");
 
 svg_summoner_spells.append("text")
-	.attr("x", bb_summoner_spells.w/2 - 70)
-	.attr("y", 25)
-	.attr("font-style", "Arial")
-	.attr("font-size", "18px")
+	.attr("x", bb_summoner_spells.w/2 - 110)
+	.attr("y", 30)
+	.attr("font-family", "Dosis")
+	.attr("font-size", "20px")
 	.text("Summoner Spells")
 	.attr("stroke", "black");
 
-var summoner_spells = ["Barrier", "Clairvoyance", "Clarity", "Cleanse", "Exhaust", "Flash", "Garrison", "Ghost", "Heal", "Ignite", "Revive", "Smite", "Teleport"];
+var summoner_spells = ["Barrier", "Clairvoyance", "Clarity", "Cleanse", "Exhaust", "Flash", "Ghost", "Heal", "Ignite", "Revive", "Smite", "Teleport"];
 var summoner_spells_length = summoner_spells.length;
-var row_width = 7;
+var row_width = 6;
 var image_size = 64;
 
 for (var i = 0; i < summoner_spells_length; i++) {
-	var row_begin_padding = (Math.floor(i / row_width) == 1) ? image_size / 2 : 0;
 	svg_summoner_spells.append("image")
-		.attr("x", 10 + row_begin_padding + i%row_width * (image_size + 5))
+		.attr("x", 10 + i%row_width * (image_size + 5))
 		.attr("y", 50 + Math.floor(i/row_width)* (image_size + 5))
 		.attr("height", image_size)
 		.attr("width", image_size)
 		.attr("xlink:href", "/img/summoner_spells/" + summoner_spells[i] + ".png")
+		.attr("opacity", .4);
+
+	svg_summoner_spells.append("rect")
+		.attr("x", 10 + i%row_width * (image_size + 5))
+		.attr("y", 50 + Math.floor(i/row_width)* (image_size + 5))
+		.attr("height", image_size)
+		.attr("width", image_size)
+		.attr("stroke", "black")
+		.attr("stroke-width", 1)
+		.attr("fill", "none");
 }
 
 //corner hero image
