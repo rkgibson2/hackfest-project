@@ -46,7 +46,7 @@ bb_items = {
 };
 
 bb_xpm = {
-	w: 300,
+	w: 350,
 	h: 300,
 	margin: {
 		top: 10,
@@ -57,7 +57,7 @@ bb_xpm = {
 };
 
 bb_gpm = {
-	w: 300,
+	w: 350,
 	h: 300,
 	margin: {
 		top: 10,
@@ -105,6 +105,20 @@ svg_items.call(graph_tip);
 
 
 //add nice rects and label text
+
+svg_xpm.append("rect")
+	.attr("height", bb_xpm.h)
+	.attr("width", bb_xpm.w)
+	.attr("fill", "black")
+	.attr("x", 0)
+	.attr("y", 0);
+
+svg_gpm.append("rect")
+	.attr("height", bb_gpm.h)
+	.attr("width", bb_gpm.w)
+	.attr("fill", "black")
+	.attr("x", 0)
+	.attr("y", 0);
 
 svg_items.append("rect")
 	.attr("height", bb_items.h)

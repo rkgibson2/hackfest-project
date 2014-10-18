@@ -131,4 +131,16 @@ label {
 	top: -300px;
 }
 
+#gpm_container {
+	position: relative;
+	top: -600px;
+	left: 850px;
+}
+
+#xpm_container {
+	position: relative;
+	top: -275px;
+	left: 450px;
+}
+
 
