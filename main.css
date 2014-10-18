@@ -10,6 +10,7 @@
   border-radius: 1px;
   text-align: center;
   pointer-events: none;
+  width: 150px;
 }
 
 /* Northward tooltips */
@@ -141,6 +142,38 @@ label {
 	position: relative;
 	top: -275px;
 	left: 450px;
+}
+
+#masteries_container {
+	position: relative;
+	top: -600px;
+	left: 50px;
+}
+
+#offensive {
+	width: 400px;
+}
+
+/*histogram css*/
+
+.bar rect {
+  fill: steelblue;
+  shape-rendering: crispEdges;
+}
+
+.bar text {
+  fill: #fff;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.col {
+	width: 50px;
+	float: left;
 }
 
 
