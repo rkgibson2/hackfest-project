@@ -189,7 +189,6 @@ d3.json("/blurbs/summoner_spell_blurbs.json", function(summoner_spell_blurbs) {
 	d3.selectAll(".sum_spell_img")
 		.on("mouseover", function(d, i) {
 
-
 			var current_spell = d3.select(this).attr("id");
 
 			//console.log(summoner_spell_blurbs)
@@ -214,6 +213,9 @@ d3.json("/blurbs/summoner_spell_blurbs.json", function(summoner_spell_blurbs) {
 			var description = summoner_spell_blurbs[String("Summoner")+current_spell].sanitizedDescription;
 
 			var html_string = "<b>" + spell_name + "</b><br>" + description;
+
+			graph_tip.direction('e')
+
 			graph_tip.html(html_string);
 			graph_tip.show(d,i);
 
