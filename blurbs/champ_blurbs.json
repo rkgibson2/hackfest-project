@@ -1,0 +1,849 @@
+{
+    "MonkeyKing": {
+        "blurb": "During the chaos of the Rune Wars, an enormous runestone was lost deep within the Plague Jungles. It remained there, untouched for centuries, emanating a potent magic which infused nearby wildlife with sentience and vitality. A group of monkeys who ...", 
+        "title": "the Monkey King", 
+        "id": 62, 
+        "key": "MonkeyKing", 
+        "name": "Wukong"
+    }, 
+    "Jax": {
+        "blurb": "It is seldom the case where a champion is defined by his actions after joining the League of Legends rather than before. Such is the case with Jax, for whom the argument could be made that he is the most prolific tournament fighter currently at the ...", 
+        "title": "Grandmaster at Arms", 
+        "id": 24, 
+        "key": "Jax", 
+        "name": "Jax"
+    }, 
+    "Shaco": {
+        "blurb": "Most would say that death isn't funny. It isn't, unless you're Shaco - then it's hysterical. He is Valoran's first fully functioning homicidal comic; he jests until someone dies, and then he laughs. The figure that has come to be known as the Demon ...", 
+        "title": "the Demon Jester", 
+        "id": 35, 
+        "key": "Shaco", 
+        "name": "Shaco"
+    }, 
+    "Warwick": {
+        "blurb": "Warwick was once a man revered for his ability to track down human specimens for the darkest types of scientific research. When his ambitions exceeded his physical limits, he drank a dangerous elixir to transform himself into an unstoppable manhunter. ...", 
+        "title": "the Blood Hunter", 
+        "id": 19, 
+        "key": "Warwick", 
+        "name": "Warwick"
+    }, 
+    "Nidalee": {
+        "blurb": "There are few dwellers, let alone champions, residing in the blasted and dangerous lands that lie south of the Great Barrier. Much of that world still bears the scars of past Runes Wars, especially the mysterious Kumungu Jungle. There are ...", 
+        "title": "the Bestial Huntress", 
+        "id": 76, 
+        "key": "Nidalee", 
+        "name": "Nidalee"
+    }, 
+    "Zyra": {
+        "blurb": "Longing to take control of her fate, the ancient, dying plant Zyra transferred her consciousness into a human body for a second chance at life. Centuries ago, she and her kind dominated the Kumungu Jungle, using thorns and vines to consume any animal ...", 
+        "title": "Rise of the Thorns", 
+        "id": 143, 
+        "key": "Zyra", 
+        "name": "Zyra"
+    }, 
+    "Brand": {
+        "blurb": "In a faraway place known as Lokfar there was a seafaring marauder called Kegan Rodhe. As was his people's way, Kegan sailed far and wide with his fellows, stealing treasures from those unlucky enough to catch their attention. To some, he was a ...", 
+        "title": "the Burning Vengeance", 
+        "id": 63, 
+        "key": "Brand", 
+        "name": "Brand"
+    }, 
+    "Rammus": {
+        "blurb": "The mysteries that surround Rammus are numerous. How did a simple creature of the desert suddenly become able to reason? How did he craft his vaunted suit of armor? What is he searching for as he crosses the Shuriman desert? One thing is for certain: ...", 
+        "title": "the Armordillo", 
+        "id": 33, 
+        "key": "Rammus", 
+        "name": "Rammus"
+    }, 
+    "Corki": {
+        "blurb": "When Heimerdinger and his yordle colleagues migrated to Piltover, they embraced science as a way of life, and they immediately made several groundbreaking contributions to the techmaturgical community. What yordles lack in stature, they make up for ...", 
+        "title": "the Daring Bombardier", 
+        "id": 42, 
+        "key": "Corki", 
+        "name": "Corki"
+    }, 
+    "Braum": {
+        "blurb": "''Would you like a bedtime story?''<br><br>''Grandma, I'm too old for that.''<br><br>''You're never too old to be told a story.''<br><br>The girl reluctantly crawls into bed and waits, knowing she won't win this battle. A bitter wind howls outside, ...", 
+        "title": "the Heart of the Freljord", 
+        "id": 201, 
+        "key": "Braum", 
+        "name": "Braum"
+    }, 
+    "Anivia": {
+        "blurb": "Anivia is a being of the coldest winter, a mystical embodiment of ice magic, and an ancient protector of the Freljord. She commands all the power and fury of the land itself, calling the snow and bitter wind to defend her home from those who would ...", 
+        "title": "the Cryophoenix", 
+        "id": 34, 
+        "key": "Anivia", 
+        "name": "Anivia"
+    }, 
+    "Tryndamere": {
+        "blurb": "Fueled by his unbridled fury and rage, Tryndamere cuts his way through the tundra, mastering the art of battle by challenging the Freljord's greatest warriors. The wrathful barbarian seeks revenge on the one who decimated his clan and strikes down all ...", 
+        "title": "the Barbarian King", 
+        "id": 23, 
+        "key": "Tryndamere", 
+        "name": "Tryndamere"
+    }, 
+    "MissFortune": {
+        "blurb": "For those who brave the harsh seas of Runeterra, attaining one's own ship and crew is the pinnacle of success. Sarah Fortune, a well-respected (some would say legendary) bounty hunter from Bilgewater, was able to achieve this feat just after her ...", 
+        "title": "the Bounty Hunter", 
+        "id": 21, 
+        "key": "MissFortune", 
+        "name": "Miss Fortune"
+    }, 
+    "Blitzcrank": {
+        "blurb": "The city of Zaun is a place where both magic and science have gone awry. The unchecked nature of experimentation has taken its toll on the city. However, Zaun's lenient restrictions allow their researchers and inventors the leeway to push the bounds ...", 
+        "title": "the Great Steam Golem", 
+        "id": 53, 
+        "key": "Blitzcrank", 
+        "name": "Blitzcrank"
+    }, 
+    "Yorick": {
+        "blurb": "The work of gravediggers is essential amongst the living, but invaluable in the Shadow Isles. There are many shades of death there, and each is embraced rather than feared or reviled. One can only ascend from one state to the next with the magical aid ...", 
+        "title": "the Gravedigger", 
+        "id": 83, 
+        "key": "Yorick", 
+        "name": "Yorick"
+    }, 
+    "Xerath": {
+        "blurb": "Powerful beyond reckoning, the ascended being known as Xerath was once a mortal of flesh and blood. He is now something vastly different - a being of writhing arcane energy. Having emerged from millennia-spanning imprisonment, he is now ready to ...", 
+        "title": "the Magus Ascendant", 
+        "id": 101, 
+        "key": "Xerath", 
+        "name": "Xerath"
+    }, 
+    "Sivir": {
+        "blurb": "Known as the Battle Mistress, Sivir is a mercenary with a ruthless reputation. Combining unflinching bravery with endless ambition, she has garnered great fame and fortune. Faced with the revelation of her mysterious heritage, Sivir must weigh her ...", 
+        "title": "the Battle Mistress", 
+        "id": 15, 
+        "key": "Sivir", 
+        "name": "Sivir"
+    }, 
+    "Riven": {
+        "blurb": "In Noxus, any citizen may rise to power regardless of race, gender, or social standing - strength is all that matters. It was with committed faith in this ideal that Riven strove to greatness. She showed early potential as a soldier, forcing herself ...", 
+        "title": "the Exile", 
+        "id": 92, 
+        "key": "Riven", 
+        "name": "Riven"
+    }, 
+    "Orianna": {
+        "blurb": "There once was a Piltovian man named Corin Reveck who had a daughter named Orianna, whom he loved more than anything else in the world. Though Orianna had incredible talent for dancing, she was deeply fascinated by the champions of the League of ...", 
+        "title": "the Lady of Clockwork", 
+        "id": 61, 
+        "key": "Orianna", 
+        "name": "Orianna"
+    }, 
+    "Gangplank": {
+        "blurb": "Gangplank was born the son of the dread pirate captain Vincent the Shadow - one of the most wealthy and feared pirates in all of Blue Flame Island. One might think this would have spoiled the boy with a cushioned life of privilege, but the truth is ...", 
+        "title": "the Saltwater Scourge", 
+        "id": 41, 
+        "key": "Gangplank", 
+        "name": "Gangplank"
+    }, 
+    "Malphite": {
+        "blurb": "There is a world of perfect harmony, where all are part of the whole. The Monolith is the essence of all creation, and its denizens are but singular pieces of it. It is beautiful in its symmetry, and in its almost complete lack of uncertainty. The ...", 
+        "title": "Shard of the Monolith", 
+        "id": 54, 
+        "key": "Malphite", 
+        "name": "Malphite"
+    }, 
+    "Poppy": {
+        "blurb": "While other young yordle girls played skip-step and braided wreathes out of posies, Poppy spent her youth earning calluses and grease stains in her father's armor shop. Blomgrun, her father, was Bandle City's finest smith. The only thing he loved as ...", 
+        "title": "the Iron Ambassador", 
+        "id": 78, 
+        "key": "Poppy", 
+        "name": "Poppy"
+    }, 
+    "Karthus": {
+        "blurb": "Karthus is a terrible creature who was once a mortal so obsessed with death that he eagerly embraced the gift of undeath. Now in his unlife as a lich, Karthus is closer to his beloved grave than he ever imagined. He commands magic with oblivion as its ...", 
+        "title": "the Deathsinger", 
+        "id": 30, 
+        "key": "Karthus", 
+        "name": "Karthus"
+    }, 
+    "Jayce": {
+        "blurb": "Armed with wit, charm, and his signature transforming hammer, Jayce lives to protect his native Piltover. Long before his nation called him a hero, however, he was a promising young inventor. When Piltover commissioned him to study a rare arcane ...", 
+        "title": "the Defender of Tomorrow", 
+        "id": 126, 
+        "key": "Jayce", 
+        "name": "Jayce"
+    }, 
+    "Nunu": {
+        "blurb": "Sometimes bonds of friendship become stronger than even bonds of blood. When those bonds link a fearless boy to a fearsome Yeti, the bond becomes a force to be reckoned with. Given the responsibility of taming a terrifying beast, Nunu forged a ...", 
+        "title": "the Yeti Rider", 
+        "id": 20, 
+        "key": "Nunu", 
+        "name": "Nunu"
+    }, 
+    "Trundle": {
+        "blurb": "Trundle is a hulking and devious troll with a mischievous streak. There is nothing he can't beat into submission and bend to his will, not even the ice itself. With his massive, frozen club, he chills his enemies to the core and runs them through with ...", 
+        "title": "the Troll King", 
+        "id": 48, 
+        "key": "Trundle", 
+        "name": "Trundle"
+    }, 
+    "Sejuani": {
+        "blurb": "Sejuani was weaned on hardship and reared on barbarity. Where others succumbed to the harshness of the Freljord, she was tempered by it until pain became power, hunger an encouragement, and frost an ally in culling the weak. Through her ordeals, she ...", 
+        "title": "the Winter's Wrath", 
+        "id": 113, 
+        "key": "Sejuani", 
+        "name": "Sejuani"
+    }, 
+    "Graves": {
+        "blurb": "Malcolm Graves was born in the back of a Bilgewater tavern and left there with a bottle of spiked milk. He survived a childhood in the pirate-run slums using every dirty trick in the book. Intent on building a new life for himself, he stowed away on ...", 
+        "title": "the Outlaw", 
+        "id": 104, 
+        "key": "Graves", 
+        "name": "Graves"
+    }, 
+    "Morgana": {
+        "blurb": "There is a world far away populated by graceful and beautiful winged beings gifted with immortality, where an ancient conflict still rages. Like so many conflicts, this war split families. One side proclaimed themselves as beings of perfect order and ...", 
+        "title": "Fallen Angel", 
+        "id": 25, 
+        "key": "Morgana", 
+        "name": "Morgana"
+    }, 
+    "Gnar": {
+        "blurb": "The jungle does not forgive blindness. Every broken branch tells a story.<br><br>I've hunted every creature this jungle has to offer. I was certain there were no challenges left here, but now there is something new. Each track is the size of a ...", 
+        "title": "the Missing Link", 
+        "id": 150, 
+        "key": "Gnar", 
+        "name": "Gnar"
+    }, 
+    "Lux": {
+        "blurb": "Born to the prestigious Crownguards, the paragon family of Demacian service, Luxanna was destined for greatness. She grew up as the family's only daughter, and she immediately took to the advanced education and lavish parties required of families as ...", 
+        "title": "the Lady of Luminosity", 
+        "id": 99, 
+        "key": "Lux", 
+        "name": "Lux"
+    }, 
+    "Shyvana": {
+        "blurb": "A half-breed born from the union between dragon and human, Shyvana searched all her life for belonging. Persecution forged her into a brutal warrior, and those who dare stand against Shyvana face the fiery beast lurking just beneath her skin....", 
+        "title": "the Half-Dragon", 
+        "id": 102, 
+        "key": "Shyvana", 
+        "name": "Shyvana"
+    }, 
+    "Renekton": {
+        "blurb": "Renekton was once a staunch gatekeeper of ancient Shurima, but in the centuries since the fall of that once-glorious empire, he has been consumed by madness. Now, he is little more than a rage-fueled beast who seeks to kill his brother Nasus, who he ...", 
+        "title": "the Butcher of the Sands", 
+        "id": 58, 
+        "key": "Renekton", 
+        "name": "Renekton"
+    }, 
+    "Fiora": {
+        "blurb": "Fiora, Demacia's most notorious duelist, earned her fame with her sharp blade and sharper tongue. She boasts the refinement of an aristocratic upbringing, and a fierce devotion to the perfection of her craft. Having surpassed her peers at home, Fiora ...", 
+        "title": "the Grand Duelist", 
+        "id": 114, 
+        "key": "Fiora", 
+        "name": "Fiora"
+    }, 
+    "Jinx": {
+        "blurb": "Jinx lives to wreak havoc without a thought for the consequences, leaving a trail of mayhem and panic in her wake. A manic and impulsive criminal, she despises nothing more than boredom, and gleefully brings her own volatile brand of pandemonium to ...", 
+        "title": "the Loose Cannon", 
+        "id": 222, 
+        "key": "Jinx", 
+        "name": "Jinx"
+    }, 
+    "Fizz": {
+        "blurb": "Centuries ago, an ancient water-dwelling race built a hidden city beneath a mountain in the sea. Though these creatures had their enemies, the city was an impenetrable fortress, and, in the safety it provided, they grew complacent. Fizz, however, ...", 
+        "title": "the Tidal Trickster", 
+        "id": 105, 
+        "key": "Fizz", 
+        "name": "Fizz"
+    }, 
+    "Kassadin": {
+        "blurb": "There is a place between dimensions and between worlds. To some it is known as the Outside, to others it is the Unknown. To most, however, it is called the Void. Despite its name, the Void is not an empty place, but rather the home of unspeakable ...", 
+        "title": "the Void Walker", 
+        "id": 38, 
+        "key": "Kassadin", 
+        "name": "Kassadin"
+    }, 
+    "Sona": {
+        "blurb": "Sona has no memories of her true parents. As an infant, she was found abandoned on the doorstep of an Ionian adoption house, nestled atop an ancient instrument in an exquisite case of unknown origins. She was an unusually well-behaved child, always ...", 
+        "title": "Maven of the Strings", 
+        "id": 37, 
+        "key": "Sona", 
+        "name": "Sona"
+    }, 
+    "Irelia": {
+        "blurb": "The Ionians have developed some of the most breathtaking and deadly martial arts on all of Runeterra - just one manifestation of their pursuit of enlightenment. The most remarkable blade style to emerge, however, was the unusual byproduct of foreign ...", 
+        "title": "the Will of the Blades", 
+        "id": 39, 
+        "key": "Irelia", 
+        "name": "Irelia"
+    }, 
+    "Viktor": {
+        "blurb": "Early in life, Viktor discovered his passion for science and invention, particularly in the field of mechanical automation. He attended Zaun's prestigious College of Techmaturgy and led the team that constructed Blitzcrank - a scientific breakthrough ...", 
+        "title": "the Machine Herald", 
+        "id": 112, 
+        "key": "Viktor", 
+        "name": "Viktor"
+    }, 
+    "Cassiopeia": {
+        "blurb": "Cassiopeia is a terrifying creature - half woman, half snake - whose slightest glance brings death. The youngest daughter of one of Noxus' most influential families, she was once a beautiful and cunning temptress capable of manipulating the hardest ...", 
+        "title": "the Serpent's Embrace", 
+        "id": 69, 
+        "key": "Cassiopeia", 
+        "name": "Cassiopeia"
+    }, 
+    "Maokai": {
+        "blurb": "Maokai was once a peaceful nature spirit dwelling in an idyllic forest, but the arrogance of humans brought an end to that life. Now he is a gnarled shadow of his former self, twisted by dark magics that defied the natural order of life and death. ...", 
+        "title": "the Twisted Treant", 
+        "id": 57, 
+        "key": "Maokai", 
+        "name": "Maokai"
+    }, 
+    "Thresh": {
+        "blurb": "Thresh is a twisted reaper whose hungry chains ensnare the souls of the living. A moment's hesitation at the sight of his ghostly visage and there is no escape. He leaves in his wake hollow corpses, their souls ripped loose and trapped in the sickly ...", 
+        "title": "the Chain Warden", 
+        "id": 412, 
+        "key": "Thresh", 
+        "name": "Thresh"
+    }, 
+    "Kayle": {
+        "blurb": "In a world far away where an ancient war still rages, Kayle was a great hero - the strongest of an immortal race committed to destroying evil wherever it could be found. For ten thousand years, Kayle fought tirelessly for her people, wielding her ...", 
+        "title": "The Judicator", 
+        "id": 10, 
+        "key": "Kayle", 
+        "name": "Kayle"
+    }, 
+    "Hecarim": {
+        "blurb": "Since his first sighting on the northwestern shores of Valoran, the towering, armored specter known as Hecarim struck a chilling fear into the hearts of all who laid eyes upon him. No one had ever seen anything like his titanic, ethereal form before, ...", 
+        "title": "the Shadow of War", 
+        "id": 120, 
+        "key": "Hecarim", 
+        "name": "Hecarim"
+    }, 
+    "Khazix": {
+        "blurb": "A vicious Void predator, Kha'Zix infiltrated Valoran to devour the land's most promising creatures. With each kill he absorbs his prey's strength, evolving to grow more powerful. Kha'Zix hungers most to conquer and consume Rengar, the one beast he ...", 
+        "title": "the Voidreaver", 
+        "id": 121, 
+        "key": "Khazix", 
+        "name": "Kha'Zix"
+    }, 
+    "Olaf": {
+        "blurb": "Most men would say that death is a thing to be feared; none of those men would be Olaf. The Berserker lives only for the roar of a battle cry and the clash of steel. Spurred on by his hunger for glory and the looming curse of a forgettable death, Olaf ...", 
+        "title": "the Berserker", 
+        "id": 2, 
+        "key": "Olaf", 
+        "name": "Olaf"
+    }, 
+    "Ziggs": {
+        "blurb": "Ziggs was born with a talent for tinkering, but his chaotic, hyperactive nature was unusual among yordle scientists. Aspiring to be a revered inventor like Heimerdinger, he rattled through ambitious projects with manic zeal, emboldened by both his ...", 
+        "title": "the Hexplosives Expert", 
+        "id": 115, 
+        "key": "Ziggs", 
+        "name": "Ziggs"
+    }, 
+    "Syndra": {
+        "blurb": "Born with immense magical potential, Syndra loves nothing more than exercising the incredible power at her command. With each passing day, her mastery of magical force grows more potent and devastating. Refusing any notion of balance or restraint, ...", 
+        "title": "the Dark Sovereign", 
+        "id": 134, 
+        "key": "Syndra", 
+        "name": "Syndra"
+    }, 
+    "DrMundo": {
+        "blurb": "It is said that the man now known as Dr. Mundo was born without any sort of conscience.  Instead, he had an unquenchable desire to inflict pain through experimentation. By the time he was five, most of the pets in the Zaun neighborhood where Mundo ...", 
+        "title": "the Madman of Zaun", 
+        "id": 36, 
+        "key": "DrMundo", 
+        "name": "Dr. Mundo"
+    }, 
+    "Karma": {
+        "blurb": "Karma is a woman of indomitable will and unbound spiritual power. She is the soul of Ionia made manifest and an inspiring presence on the battlefield, shielding her allies and turning back her foes. A strong leader torn between tradition and ...", 
+        "title": "the Enlightened One", 
+        "id": 43, 
+        "key": "Karma", 
+        "name": "Karma"
+    }, 
+    "Annie": {
+        "blurb": "In the time shortly before the League, there were those within the sinister city-state of Noxus who did not agree with the evils perpetrated by the Noxian High Command. The High Command had just put down a coup attempt from the self-proclaimed Crown ...", 
+        "title": "the Dark Child", 
+        "id": 1, 
+        "key": "Annie", 
+        "name": "Annie"
+    }, 
+    "Akali": {
+        "blurb": "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", 
+        "title": "the Fist of Shadow", 
+        "id": 84, 
+        "key": "Akali", 
+        "name": "Akali"
+    }, 
+    "Leona": {
+        "blurb": "On the upper slopes of Mount Targon, the warriors of Rakkor live and breathe only for war. However, Targon's peak is reserved for a special group of Rakkoran who answer to a ''higher'' calling. Members of this group, called the Solari, retire their ...", 
+        "title": "the Radiant Dawn", 
+        "id": 89, 
+        "key": "Leona", 
+        "name": "Leona"
+    }, 
+    "Yasuo": {
+        "blurb": "Yasuo is a man of resolve, an agile swordsman who wields the wind itself to cut down his foes. This once-proud warrior has been disgraced by a false accusation and forced into a desperate fight for survival. With the world turned against him, he will ...", 
+        "title": "the Unforgiven", 
+        "id": 157, 
+        "key": "Yasuo", 
+        "name": "Yasuo"
+    }, 
+    "Kennen": {
+        "blurb": "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", 
+        "title": "the Heart of the Tempest", 
+        "id": 85, 
+        "key": "Kennen", 
+        "name": "Kennen"
+    }, 
+    "Rengar": {
+        "blurb": "On every wall of his den, the trophy hunter Rengar mounts the heads, horns, claws, and fangs of the most lethal creatures in Valoran. Though his collection is extensive, he remains unsatisfied, tirelessly seeking greater game. He takes time with every ...", 
+        "title": "the Pridestalker", 
+        "id": 107, 
+        "key": "Rengar", 
+        "name": "Rengar"
+    }, 
+    "Ryze": {
+        "blurb": "There are many on Runeterra who are attracted to the study of magic or, in recent times, the emerging field of techmaturgy. For most, pursuit of such knowledge is formalized in a college or university. The halls of traditional study were never for ...", 
+        "title": "the Rogue Mage", 
+        "id": 13, 
+        "key": "Ryze", 
+        "name": "Ryze"
+    }, 
+    "Shen": {
+        "blurb": "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness - all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou and ...", 
+        "title": "Eye of Twilight", 
+        "id": 98, 
+        "key": "Shen", 
+        "name": "Shen"
+    }, 
+    "Zac": {
+        "blurb": "Zac is the product of a Zaun experiment to manufacture a hexchem-engineered supersoldier - the Zaun Amorphous Combatant. Combining brute strength with limitless flexibility, he is a versatile juggernaut: a creative fighter who bounces over obstacles ...", 
+        "title": "the Secret Weapon", 
+        "id": 154, 
+        "key": "Zac", 
+        "name": "Zac"
+    }, 
+    "Pantheon": {
+        "blurb": "Far above the clouds on Mount Targon resides a stalwart tribe of people known as the Rakkor who still revere combat and war as ultimate artforms. They remember the Rune Wars of Runeterra and know that the League of Legends can only repress the rising ...", 
+        "title": "the Artisan of War", 
+        "id": 80, 
+        "key": "Pantheon", 
+        "name": "Pantheon"
+    }, 
+    "Swain": {
+        "blurb": "The earliest account of Swain's existence comes from a Noxian infirmary doctor's notes. According to them, Swain limped into the ward without cry or complaint; his right leg was snapped in half, with bone protruding from the skin. A small, scowling ...", 
+        "title": "the Master Tactician", 
+        "id": 50, 
+        "key": "Swain", 
+        "name": "Swain"
+    }, 
+    "Sion": {
+        "blurb": "BLOOD.<br><br>SMELL IT.<br><br>WANT. ACHING. NEED!<br><br>CLOSE NOW. THEY COME.<br><br>NO CHAINS? FREE! KILL!<br><br>IN REACH. YES! DIE! DIE!<br><br>Gone. Too quick. No fight. More. I want... more.<br><br>A voice? Unfamiliar. I see him. The Grand ...", 
+        "title": "The Undead Juggernaut", 
+        "id": 14, 
+        "key": "Sion", 
+        "name": "Sion"
+    }, 
+    "Vayne": {
+        "blurb": "The world is not always as civilized as people might think. There are still those who would follow the blackest paths of magic and become corrupted by the darker powers that flow through Runeterra. Shauna Vayne knows this fact well. As a young ...", 
+        "title": "the Night Hunter", 
+        "id": 67, 
+        "key": "Vayne", 
+        "name": "Vayne"
+    }, 
+    "Nasus": {
+        "blurb": "To some, Nasus is a demigod who walks among the ruins of an ancient civilization; to others, he is nothing more than a myth. Legend speaks of his dominion over death and time. Millennia ago, he stood at the apex of Shuriman society as curator and ...", 
+        "title": "the Curator of the Sands", 
+        "id": 75, 
+        "key": "Nasus", 
+        "name": "Nasus"
+    }, 
+    "TwistedFate": {
+        "blurb": "Although born to poor gypsy parents, the champion known as Twisted Fate was able to gamble his way to prosperity as a card shark in the seedy underground gambling circuits of Demacia and Noxus. No matter how close the authorities came to catching him, ...", 
+        "title": "the Card Master", 
+        "id": 4, 
+        "key": "TwistedFate", 
+        "name": "Twisted Fate"
+    }, 
+    "Chogath": {
+        "blurb": "There is a place between dimensions, between worlds. To some it is known as the Outside, to others it is the Unknown. To those that truly know, however, it is called the Void. Despite its name, the Void is not an empty place, but rather the home of ...", 
+        "title": "the Terror of the Void", 
+        "id": 31, 
+        "key": "Chogath", 
+        "name": "Cho'Gath"
+    }, 
+    "Udyr": {
+        "blurb": "Udyr is more than a man; he is a vessel for the untamed power of four primal animal spirits. When tapping into the spirits' bestial natures, Udyr can harness their unique strengths: the tiger grants him speed and ferocity, the turtle resilience, the ...", 
+        "title": "the Spirit Walker", 
+        "id": 77, 
+        "key": "Udyr", 
+        "name": "Udyr"
+    }, 
+    "Lucian": {
+        "blurb": "Lucian wields relic weapons imbued with ancient power and stands a stalwart guardian against the undead. His cold conviction never wavers, even in the face of the maddening horrors he destroys beneath his hail of purifying fire. Lucian walks alone on ...", 
+        "title": "the Purifier", 
+        "id": 236, 
+        "key": "Lucian", 
+        "name": "Lucian"
+    }, 
+    "Volibear": {
+        "blurb": "The unforgiving northern reaches of the Freljord are home to the Ursine, a fierce and warlike race that has endured the barren tundra for thousands of years. Their leader is a furious adversary who commands the force of lightning to strike fear within ...", 
+        "title": "the Thunder's Roar", 
+        "id": 106, 
+        "key": "Volibear", 
+        "name": "Volibear"
+    }, 
+    "Caitlyn": {
+        "blurb": "One of the reasons Piltover is known as the City of Progress is because it has an extraordinarily low crime rate. This hasn't always been the case; brigands and thieves of all sorts used to find the city-state an ideal mark for plunder, primarily due ...", 
+        "title": "the Sheriff of Piltover", 
+        "id": 51, 
+        "key": "Caitlyn", 
+        "name": "Caitlyn"
+    }, 
+    "Darius": {
+        "blurb": "There is no greater symbol of Noxian might than Darius, the nation's most feared and battle-hardened warrior. Orphaned at a young age, Darius had to fight to keep himself and his younger brother alive. By the time he joined the military, he had ...", 
+        "title": "the Hand of Noxus", 
+        "id": 122, 
+        "key": "Darius", 
+        "name": "Darius"
+    }, 
+    "Nocturne": {
+        "blurb": "Before Nocturne, people believed that dreams were figments of their imagination, meaningless images that flashed through the mind when one slept. This belief was put to the test when a rash of sleep-related incidents started afflicting summoners of ...", 
+        "title": "the Eternal Nightmare", 
+        "id": 56, 
+        "key": "Nocturne", 
+        "name": "Nocturne"
+    }, 
+    "Zilean": {
+        "blurb": "In the wastelands of Urtistan, there was once a great city. It perished long ago in a terrible Rune War, like most of the lands below the Great Barrier. Nevertheless, one man survived: a sorcerer named Zilean. Being obsessed with time, it was only ...", 
+        "title": "the Chronokeeper", 
+        "id": 26, 
+        "key": "Zilean", 
+        "name": "Zilean"
+    }, 
+    "Azir": {
+        "blurb": "Once a mortal man blinded by his own hubris, Azir has recently returned as an Ascended being with unmatched dominion over the burning sands. He seeks to restore Shurima to its former glory, but some dispute his right to rule them. Azir\u2019s power, ...", 
+        "title": "the Emperor of the Sands", 
+        "id": 268, 
+        "key": "Azir", 
+        "name": "Azir"
+    }, 
+    "Rumble": {
+        "blurb": "Even amongst yordles, Rumble was always the runt of the litter. As such, he was used to being bullied. In order to survive, he had to be scrappier and more resourceful than his peers. He developed a quick temper and a reputation for getting even, no ...", 
+        "title": "the Mechanized Menace", 
+        "id": 68, 
+        "key": "Rumble", 
+        "name": "Rumble"
+    }, 
+    "Skarner": {
+        "blurb": "Skarner, the crystalline guardian, defends the entrance to a realm deep beneath the Shuriman wastes. The few who survive trespassing his domain describe a creature of terrifying intelligence, anger, and precision. What this merciless creature protects,...", 
+        "title": "the Crystal Vanguard", 
+        "id": 72, 
+        "key": "Skarner", 
+        "name": "Skarner"
+    }, 
+    "Teemo": {
+        "blurb": "Teemo is a legend among his yordle brothers and sisters in Bandle City. As far as yordles are concerned, there is something just slightly off about him. While Teemo enjoys the companionship of other yordles, he also insists on frequent solo missions ...", 
+        "title": "the Swift Scout", 
+        "id": 17, 
+        "key": "Teemo", 
+        "name": "Teemo"
+    }, 
+    "Urgot": {
+        "blurb": "There are warriors who become great for their strength, cunning, or skill with arms. Others simply refuse to die. Urgot, once a great soldier of Noxus, may constitute a case in support of the latter. Prone to diving headlong into enemy battle lines, ...", 
+        "title": "the Headsman's Pride", 
+        "id": 6, 
+        "key": "Urgot", 
+        "name": "Urgot"
+    }, 
+    "Amumu": {
+        "blurb": "Amumu is a diminutive, animated cadaver who wanders the world, trying to discover his true identity. He rose from an ancient Shuriman tomb bound in corpse wrappings with no knowledge of his past, consumed with an uncontrollable sadness.", 
+        "title": "the Sad Mummy", 
+        "id": 32, 
+        "key": "Amumu", 
+        "name": "Amumu"
+    }, 
+    "Galio": {
+        "blurb": "Long before the League's regulation of such magic, mages experimented with the creation of artificial life. Now forbidden, instilling golems with reason was once not so uncommon a practice amongst the more expert of craftsmen. One such visionary was ...", 
+        "title": "the Sentinel's Sorrow", 
+        "id": 3, 
+        "key": "Galio", 
+        "name": "Galio"
+    }, 
+    "Heimerdinger": {
+        "blurb": "From the Journal of Professor Cecil B. Heimerdinger<br><br>10.14<br><br>09:15<br><br>Current meteorological conditions in Bandle City seem optimal. Atmospheric pressure is ideal for today's experiments!<br><br>Running a fifth trial for my ...", 
+        "title": "the Revered Inventor", 
+        "id": 74, 
+        "key": "Heimerdinger", 
+        "name": "Heimerdinger"
+    }, 
+    "Ashe": {
+        "blurb": "With each arrow she fires from her ancient ice-enchanted bow, Ashe proves she is a master archer. She chooses each target carefully, waits for the right moment, and then strikes with power and precision. It is with this same vision and focus that she ...", 
+        "title": "the Frost Archer", 
+        "id": 22, 
+        "key": "Ashe", 
+        "name": "Ashe"
+    }, 
+    "Velkoz": {
+        "blurb": "I pass into the sudden glare. Blink. Blink, blink, blink. My eyes adjust and evaluate the landscape before me.<br><br>There's a scurrying. I look down to find a small, white creature standing on its hind legs, sniffing at my body. It intrigues me....", 
+        "title": "the Eye of the Void", 
+        "id": 161, 
+        "key": "Velkoz", 
+        "name": "Vel'Koz"
+    }, 
+    "Singed": {
+        "blurb": "Singed descended from a long line of Zaun's revered chemists. Even in his youth, his talent for concocting potions far outstripped that of his peers, and he quickly distinguished himself from his less extraordinary chemist compatriots. It came as no ...", 
+        "title": "the Mad Chemist", 
+        "id": 27, 
+        "key": "Singed", 
+        "name": "Singed"
+    }, 
+    "Varus": {
+        "blurb": "For his incomparable skill with the bow and his unquestioned sense of honor, Varus was chosen to be the warden of a sacred Ionian temple. The temple was built to contain an ancient pit of corruption so vile that Ionian Elders feared it could envelop ...", 
+        "title": "the Arrow of Retribution", 
+        "id": 110, 
+        "key": "Varus", 
+        "name": "Varus"
+    }, 
+    "Twitch": {
+        "blurb": "H.I.V.E. Incident Report<br>Code Violation: Industrial Homicide<br>Casefile Status: Unsolved<br>Investigating Agent:  Rol, P.<br><br>Team responded to report of suspicious character, criminal activity; proceeded to Sump Works, Sector 90TZ. Sector 90TZ ...", 
+        "title": "the Plague Rat", 
+        "id": 29, 
+        "key": "Twitch", 
+        "name": "Twitch"
+    }, 
+    "Garen": {
+        "blurb": "Throughout Valoran, the resolve of Demacia's military is alternately celebrated or despised, but always respected. Their ''zero tolerance'' moral code is strictly upheld by civilians and soldiers alike. In combat, this means Demacian troops may not ...", 
+        "title": "The Might of Demacia", 
+        "id": 86, 
+        "key": "Garen", 
+        "name": "Garen"
+    }, 
+    "Diana": {
+        "blurb": "An unyielding avatar of the moon's power, Diana wages a dark crusade against the sun-worshipping Solari. Though she once sought the acceptance of her people, years of futile struggle shaped her into a bitter, resentful warrior. She now presents her ...", 
+        "title": "Scorn of the Moon", 
+        "id": 131, 
+        "key": "Diana", 
+        "name": "Diana"
+    }, 
+    "MasterYi": {
+        "blurb": "Through the ancient martial art of Wuju, Master Yi has tempered his body and sharpened his mind until thought and action have become one. Though he chooses to enter into violence as a last resort, the grace and speed with which he wields his blade ...", 
+        "title": "the Wuju Bladesman", 
+        "id": 11, 
+        "key": "MasterYi", 
+        "name": "Master Yi"
+    }, 
+    "Elise": {
+        "blurb": "Vicious and elegant, Elise's charismatic grace lures the innocent and greedy alike into her web of deceit. While her victims may discover her true intentions, no one has ever lived to reveal what dark secrets lie behind her enigmatic guise.<br><br>In ...", 
+        "title": "The Spider Queen", 
+        "id": 60, 
+        "key": "Elise", 
+        "name": "Elise"
+    }, 
+    "Alistar": {
+        "blurb": "As the mightiest warrior to ever emerge from the Minotaur tribes of the Great Barrier, Alistar defended his tribe from Valoran's many dangers; that is, until the coming of the Noxian army. Alistar was lured from his village by the machinations of ...", 
+        "title": "the Minotaur", 
+        "id": 12, 
+        "key": "Alistar", 
+        "name": "Alistar"
+    }, 
+    "Katarina": {
+        "blurb": "Driven by an intense killer instinct, Katarina uses her talents as an assassin for the glory of Noxus, and the continued elevation of her family. While her fervor drives her to ever-greater feats, it can sometimes lead her astray.<br><br>From ...", 
+        "title": "the Sinister Blade", 
+        "id": 55, 
+        "key": "Katarina", 
+        "name": "Katarina"
+    }, 
+    "Mordekaiser": {
+        "blurb": "Mordekaiser is a being of pure, living agony on a mysterious dread quest. It is said that he was the first of the undead, existing before the Shadow Isles were a whispered threat. His true name and past lost to history, Mordekaiser is feared for his ...", 
+        "title": "the Master of Metal", 
+        "id": 82, 
+        "key": "Mordekaiser", 
+        "name": "Mordekaiser"
+    }, 
+    "KogMaw": {
+        "blurb": "When the prophet Malzahar was reborn in Icathia, he was led there by an ominous voice which thereafter anchored itself to his psyche. From within, this voice bestowed upon him terrible purpose, and though Malzahar was no longer tormented by its call, ...", 
+        "title": "the Mouth of the Abyss", 
+        "id": 96, 
+        "key": "KogMaw", 
+        "name": "Kog'Maw"
+    }, 
+    "Aatrox": {
+        "blurb": "Aatrox is a legendary warrior, one of only five that remain of an ancient race known as the Darkin. He wields his massive blade with grace and poise, slicing through legions in a style that is hypnotic to behold. With each foe felled, Aatrox's ...", 
+        "title": "the Darkin Blade", 
+        "id": 266, 
+        "key": "Aatrox", 
+        "name": "Aatrox"
+    }, 
+    "Draven": {
+        "blurb": "Unlike his brother Darius, victory in battle was never enough for Draven. He craved recognition, acclaim, and glory. He first sought greatness in the Noxian military, but his flair for the dramatic went severely underappreciated. Thirsting for a ...", 
+        "title": "the Glorious Executioner", 
+        "id": 119, 
+        "key": "Draven", 
+        "name": "Draven"
+    }, 
+    "FiddleSticks": {
+        "blurb": "For nearly twenty years, Fiddlesticks has stood alone in the easternmost summoning chamber of the Institute of War. Only the burning emerald light of his unearthly gaze pierces the musty darkness of his dust-covered home. It is here that the Harbinger ...", 
+        "title": "the Harbinger of Doom", 
+        "id": 9, 
+        "key": "FiddleSticks", 
+        "name": "Fiddlesticks"
+    }, 
+    "Talon": {
+        "blurb": "Talon's earliest memories are the darkness of Noxus' underground passages and the reassuring steel of a blade. He remembers no family, warmth, or kindness. Instead, the clink of stolen gold and the security of a wall at his back are all the kinship he ...", 
+        "title": "the Blade's Shadow", 
+        "id": 91, 
+        "key": "Talon", 
+        "name": "Talon"
+    }, 
+    "XinZhao": {
+        "blurb": "Whenever Jarvan III, the king of Demacia, delivers one of his rallying speeches from the glinting marble balcony atop the Royal Palace, Xin Zhao is at his side. Coined the Seneschal of Demacia, Xin Zhao is the personal steward of the Lightshield ...", 
+        "title": "the Seneschal of Demacia", 
+        "id": 5, 
+        "key": "XinZhao", 
+        "name": "Xin Zhao"
+    }, 
+    "LeeSin": {
+        "blurb": "As a young teen, Lee Sin was intent on becoming a summoner. His will and dedication were unmatched by any of his peers, and his skill drew the attention of Reginald Ashram, the League's High Councilor at the time. While studying at the Arcanum Majoris,...", 
+        "title": "the Blind Monk", 
+        "id": 64, 
+        "key": "LeeSin", 
+        "name": "Lee Sin"
+    }, 
+    "Taric": {
+        "blurb": "There is a form of magic unknown to many Runeterrans and discredited by the few who are even aware of its existence. It is the magic of the earth, drawing power from the resonance of crystals and gems. Taric, the Gem Knight, is Runeterra's sole ...", 
+        "title": "the Gem Knight", 
+        "id": 44, 
+        "key": "Taric", 
+        "name": "Taric"
+    }, 
+    "Malzahar": {
+        "blurb": "Many men have gone mad beneath the glare of the Shurima sun, but it was during the night's chilling embrace that Malzahar relinquished his sanity. Malzahar was born a seer, blessed with the gift of prophecy. His talent, though unrefined, promised to ...", 
+        "title": "the Prophet of the Void", 
+        "id": 90, 
+        "key": "Malzahar", 
+        "name": "Malzahar"
+    }, 
+    "Lissandra": {
+        "blurb": "Lissandra's magic twists the pure power of ice into something dark and terrible. With the force of her black ice, she does more than freeze - she impales and crushes those who oppose her. To the terrified denizens of the north, she is known only as ...", 
+        "title": "the Ice Witch", 
+        "id": 127, 
+        "key": "Lissandra", 
+        "name": "Lissandra"
+    }, 
+    "Tristana": {
+        "blurb": "The Megling Commandos are something of a legend in Bandle City. They have a history that spans centuries, and they remain the oldest yordle military unit still in service. They are renowned for their courage, deadliness, and ruthlessness, making them ...", 
+        "title": "the Megling Gunner", 
+        "id": 18, 
+        "key": "Tristana", 
+        "name": "Tristana"
+    }, 
+    "Vladimir": {
+        "blurb": "There is a temple hidden in the mountains between Noxus and the Tempest Flats, where the secrets of an ancient and terrifying sorcery are kept. The area surrounding the temple is littered with the exsanguinated corpses of those who have mistakenly ...", 
+        "title": "the Crimson Reaper", 
+        "id": 8, 
+        "key": "Vladimir", 
+        "name": "Vladimir"
+    }, 
+    "JarvanIV": {
+        "blurb": "As the royal family of Demacia for centuries, members of the Lightshield line have spent their lives waging war against any who opposed Demacian ethics. It is said that every Lightshield is born with anti-Noxian sentiment in his blood. Jarvan IV is no ...", 
+        "title": "the Exemplar of Demacia", 
+        "id": 59, 
+        "key": "JarvanIV", 
+        "name": "Jarvan IV"
+    }, 
+    "Nami": {
+        "blurb": "Nami channels the primal energies of the ocean, harnessing its mystical restorative properties and commanding the raw power of the tides themselves. Though many doubted her, Nami had the bravery and determination to take on a dangerous quest when no ...", 
+        "title": "the Tidecaller", 
+        "id": 267, 
+        "key": "Nami", 
+        "name": "Nami"
+    }, 
+    "Soraka": {
+        "blurb": "A healer gifted with the magic of the stars, Soraka holds all living creatures close to her heart. She was once a celestial being, but she sacrificed her immortality and entered the world of mortals. So long as evil threatens life in Valoran, Soraka ...", 
+        "title": "the Starchild", 
+        "id": 16, 
+        "key": "Soraka", 
+        "name": "Soraka"
+    }, 
+    "Veigar": {
+        "blurb": "To most, thoughts of yordles do not conjure images to be feared. The easygoing half-pint race, though fierce, is often regarded with some degree of joviality. Their high-pitched voices and naturally cute forms inspire something of a protective ...", 
+        "title": "the Tiny Master of Evil", 
+        "id": 45, 
+        "key": "Veigar", 
+        "name": "Veigar"
+    }, 
+    "Janna": {
+        "blurb": "There are those sorcerers who give themselves over to the primal powers of nature, forgoing the learned practice of magic. Such a sorceress is Janna, who first learned magic as an orphan growing up amidst the chaos that is the city-state of Zaun. ...", 
+        "title": "the Storm's Fury", 
+        "id": 40, 
+        "key": "Janna", 
+        "name": "Janna"
+    }, 
+    "Nautilus": {
+        "blurb": "Once, Nautilus was a sailor commissioned by the Institute of War to explore the uncharted reaches of the Guardian's Sea. This expedition took him deep into unknown waters where he and his crew found a vast section of black oozing liquid that none of ...", 
+        "title": "the Titan of the Depths", 
+        "id": 111, 
+        "key": "Nautilus", 
+        "name": "Nautilus"
+    }, 
+    "Evelynn": {
+        "blurb": "Evelynn's origins are shrouded in mystery - a mystery she herself helps to perpetuate. What everyone does know about Evelynn, however, is that she is one of the most skilled assassins in Valoran. It is clear upon first meeting her that she is not ...", 
+        "title": "the Widowmaker", 
+        "id": 28, 
+        "key": "Evelynn", 
+        "name": "Evelynn"
+    }, 
+    "Gragas": {
+        "blurb": "The only thing more important to Gragas than fighting is drinking. His unquenchable thirst for stronger ale has led him in search of the most potent and unconventional ingredients to toss in his still. Impulsive and unpredictable, this rowdy carouser ...", 
+        "title": "the Rabble Rouser", 
+        "id": 79, 
+        "key": "Gragas", 
+        "name": "Gragas"
+    }, 
+    "Zed": {
+        "blurb": "Zed is the first ninja in 200 years to unlock the ancient, forbidden ways. He defied his clan and master, casting off the balance and discipline that had shackled him all his life. Zed now offers power to those who embrace knowledge of the shadows, ...", 
+        "title": "the Master of Shadows", 
+        "id": 238, 
+        "key": "Zed", 
+        "name": "Zed"
+    }, 
+    "Vi": {
+        "blurb": "To Vi, every problem is just another brick wall to punch through with her gigantic hextech gauntlets. Though she grew up on the wrong side of the law, Vi now uses her criminal know-how to serve Piltover's police force. Vi's brash attitude, abrasive ...", 
+        "title": "the Piltover Enforcer", 
+        "id": 254, 
+        "key": "Vi", 
+        "name": "Vi"
+    }, 
+    "Lulu": {
+        "blurb": "Perhaps more than any other champion in the League, Lulu marches to the beat of her own drum. During her youth in Bandle City, she spent most of her time wandering alone in the forest or lost in a daydream. It wasn't that she was antisocial; the ...", 
+        "title": "the Fae Sorceress", 
+        "id": 117, 
+        "key": "Lulu", 
+        "name": "Lulu"
+    }, 
+    "Ahri": {
+        "blurb": "Unlike other foxes that roamed the woods of southern Ionia, Ahri had always felt a strange connection to the magical world around her; a connection that was somehow incomplete. Deep inside, she felt the skin she had been born into was an ill fit for ...", 
+        "title": "the Nine-Tailed Fox", 
+        "id": 103, 
+        "key": "Ahri", 
+        "name": "Ahri"
+    }, 
+    "Quinn": {
+        "blurb": "Quinn and Valor are an elite ranger team. With crossbow and claw, they undertake their nation's most dangerous missions deep within enemy territory, from swift reconnaissance to lethal strikes. The pair's unbreakable bond is deadly on the battlefield, ...", 
+        "title": "Demacia's Wings", 
+        "id": 133, 
+        "key": "Quinn", 
+        "name": "Quinn"
+    }, 
+    "Leblanc": {
+        "blurb": "Every city has its dark side, even one whose reputation is already of a questionable hue. Noxus - though its name is already invoked with a mixture of reverence and revulsion - is no exception to this simple truth. Deep within the winding dungeons ...", 
+        "title": "the Deceiver", 
+        "id": 7, 
+        "key": "Leblanc", 
+        "name": "LeBlanc"
+    }, 
+    "Ezreal": {
+        "blurb": "The intrepid young adventurer Ezreal has explored some of the most remote and abandoned locations on Runeterra. During an expedition to the buried ruins of ancient Shurima, he recovered an amulet of incredible mystical power. Likely constructed to be ...", 
+        "title": "the Prodigal Explorer", 
+        "id": 81, 
+        "key": "Ezreal", 
+        "name": "Ezreal"
+    }
+}
