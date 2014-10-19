@@ -165,13 +165,18 @@ function update(current_hero) {
 	.attr("src", "/img/champs/"+ l2.getChampionInfo(current_hero).image.full);
     
     d3.select("#champ_name text")
-	.text(l2.getChampionDisplayName(current_hero));
+	.text(l2.getChampionDisplayName(current_hero).toUpperCase());
     
     d3.select("#champ_title text")
 	.text(l2.getChampionInfo(current_hero).title);
         
     d3.select("#champ_blurb text")
 	.text(l2.getChampionInfo(current_hero).blurb.split("<br>")[0].split(".")[0]+".");
+
+	if (current_hero == "36") {
+		d3.select("#champ_blurb text")
+			.text("It is said that the man now known as Dr. Mundo was born without any sort of conscience. Instead, he had an unquenchable desire to inflict pain through experimentation.")
+	}
 }
 
 function load(current_hero) {
@@ -276,7 +281,7 @@ function load(current_hero) {
 	    .attr("x", 0)
 	    .attr("y", 0)
 	    .attr("class", "champ_name")
-	    .text(l2.getChampionDisplayName(current_hero))
+	    .text(l2.getChampionDisplayName(current_hero).toUpperCase())
 	    .style("fill", "black");
         
 	d3.select("#champ_title")
