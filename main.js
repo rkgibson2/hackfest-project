@@ -26,8 +26,8 @@ bb_summoner_spells = {
 };
 
 bb_abilities = {
-    w: 400,
-    h: 500,
+    w: 350,
+    h: 430,
     margin: {
     	top: 20,
     	right: 10,
@@ -204,10 +204,10 @@ function update(current_hero) {
 	}
 
     d3.select("#champ_title text")
-	.text(l2.getChampionInfo(current_hero).title);
+		.text(l2.getChampionInfo(current_hero).title);
         
     d3.select("#champ_blurb text")
-	.text(l2.getChampionInfo(current_hero).blurb.split("<br>")[0].split(".")[0]+".");
+		.text(l2.getChampionInfo(current_hero).blurb.split("<br>")[0].split(".")[0]+".");
 
     if (current_hero == "36") {
 	d3.select("#champ_blurb text")
@@ -240,16 +240,39 @@ function update(current_hero) {
 	for (var i = 0; i < img_array.length; i++) {
 		svg_abilities.append("image")
 			.attr("x", 30)
-			.attr("y", 100 + i*abil_size + i*20)
+			.attr("y", 50 + i*abil_size + i*20)
 			.attr("height", abil_size)
 			.attr("width", abil_size)
 			.attr("class", "ability_image")
-			.attr("xlink:href", "img/spells/" + img_array[i]);
+			.attr("ability_number", i)
+			.attr("hero_id", current_hero)
+			.attr("xlink:href", "img/spells/" + img_array[i])
+			.on("mouseover", function(d) {
+				ability_number = d3.select(this).attr("ability_number")
+				hero_id = d3.select(this).attr("hero_id")
+		        
+				if (ability_number == 0) {
+					var name = l2.getChampionInfo(hero_id).passive.name
+				} else {
+					var name = l2.getChampionInfo(hero_id).spells[ability_number - 1].name
+				}
+
+			    //var html_string = "<b>" + spell_name + "</b><br>" + description + "<br> <i>Taken: " + (percentage * 100).toFixed() + "%</i>";
+		            
+			    graph_tip.direction('e')
+		            
+			    graph_tip.html(name);
+			    graph_tip.show(d,i);
+	            
+			})
+			.on("mouseout", function(d, i) {
+			    graph_tip.hide(d,i);
+			});
 	}
 
 	svg_abilities.append("text")
 		.attr("x", 130)
-		.attr("y", 70)
+		.attr("y", 20)
 		.text("Champion Spells")
 		.attr("class", "abilities");
 
@@ -257,7 +280,7 @@ function update(current_hero) {
 
 		svg_abilities.append('foreignObject')
             .attr('x', 100)
-            .attr('y', 100 + i*abil_size + i*18.5)
+            .attr('y', 50 + i*abil_size + i*18.5)
             .attr('width', 250)
             .attr('height', 100)
             .append("xhtml:body")
@@ -333,25 +356,25 @@ function update(current_hero) {
 
     // bind new mouseovers
     d3.selectAll(".sum_spell_img")
-	.on("mouseover", function(d, i) {
-            
-	    var current_spell = d3.select(this).attr("summoner_spell_id");
-            
-	    var spell_name = l2.getSummonerSpellInfo(current_spell).name
-	    var description = l2.getSummonerSpellInfo(current_spell).sanitizedDescription;
-            var percentage = d3.select(this).attr("percentage")
-            
-	    var html_string = "<b>" + spell_name + "</b><br>" + description + "<br> <i>Taken: " + (percentage * 100).toFixed() + "%</i>";
-            
-	    graph_tip.direction('e')
-            
-	    graph_tip.html(html_string);
-	    graph_tip.show(d,i);
-            
-	})
-	.on("mouseout", function(d, i) {
-	    graph_tip.hide(d,i);
-	});
+		.on("mouseover", function(d, i) {
+	            
+		    var current_spell = d3.select(this).attr("summoner_spell_id");
+	            
+		    var spell_name = l2.getSummonerSpellInfo(current_spell).name
+		    var description = l2.getSummonerSpellInfo(current_spell).sanitizedDescription;
+	            var percentage = d3.select(this).attr("percentage")
+	            
+		    var html_string = "<b>" + spell_name + "</b><br>" + description + "<br> <i>Taken: " + (percentage * 100).toFixed() + "%</i>";
+	            
+		    graph_tip.direction('e')
+	            
+		    graph_tip.html(html_string);
+		    graph_tip.show(d,i);
+	            
+		})
+		.on("mouseout", function(d, i) {
+		    graph_tip.hide(d,i);
+		});
     
     d3.selectAll("#xpm_container svg *").remove()
     
@@ -720,7 +743,7 @@ function load(current_hero) {
 	for (var i = 0; i < img_array.length; i++) {
 		svg_abilities.append("image")
 			.attr("x", 30)
-			.attr("y", 100 + i*abil_size + i*15)
+			.attr("y", 50 + i*abil_size + i*15)
 			.attr("height", abil_size)
 			.attr("width", abil_size)
 			.attr("class", "ability_image")
@@ -729,7 +752,7 @@ function load(current_hero) {
 
 	svg_abilities.append("text")
 		.attr("x", 130)
-		.attr("y", 70)
+		.attr("y", 20)
 		.text("Champion Spells")
 		.attr("class", "abilities");
 
@@ -737,7 +760,7 @@ function load(current_hero) {
 
 		svg_abilities.append('foreignObject')
             .attr('x', 100)
-            .attr('y', 100 + i*abil_size + i*15)
+            .attr('y', 50 + i*abil_size + i*15)
             .attr('width', 250)
             .attr('height', 100)
             .append("xhtml:body")
@@ -1120,9 +1143,8 @@ function load(current_hero) {
 	    	//console.log(d.y)
 	    	return d.count; 
 	    });
-
-	d3.json("blurbs/mastery_blurbs.json", function(mastery_blurbs) {
-	    d3.selectAll(".mastery_row img")
+	
+	d3.selectAll(".mastery_row img")
 		.each(function(d) {
 		    var mastery_id = d3.select(this).attr("mastery_id");
                     if (mastery_id != null) {
@@ -1130,9 +1152,9 @@ function load(current_hero) {
                         d3.select(this.parentNode).attr("tooltip", mastery.name + "\n" + mastery.sanitizedDescription.join("\n"));
                     }
 		})
-                    
-        })
         
+
+        update(current_hero)
     });
     
 }
