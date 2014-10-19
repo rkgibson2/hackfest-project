@@ -114,9 +114,6 @@ def fetch_match_info(match_id):
     for participant in participants: 
         participant["matchDuration"] = match_duration
 
-    #match_info["participants"]
-    print participants
-
     '''
     for frame in frames:
         if "events" in frame:
@@ -153,7 +150,6 @@ def fetch_rune_info(match_id):
     participants = r.json()["participants"]
 
     for participant in participants: 
-        print participant
         if "runes" in participant:
             flatlist = []
             runelist = participant["runes"]
@@ -163,6 +159,8 @@ def fetch_rune_info(match_id):
 
             rune_info[participant["championId"]] = flatlist
 
+    print rune_info
+            
     return rune_info
 
 def most_common(lst):
@@ -180,24 +178,27 @@ if __name__ == "__main__":
 
     for i in range(0, len(match_list)):
         match_runes = fetch_rune_info(match_list[i])
-        for champion in match_runes:
-            if champion in raw_rune_info:
-                raw_rune_info[champion].append(match_runes[champion]) 
-            else:
-                raw_rune_info[champion] = match_runes[champion]  
+        if match_runes is not None:
+            for champion in match_runes:
+                if champion in raw_rune_info:
+                    raw_rune_info[champion].append(match_runes[champion]) 
+                else:
+                    raw_rune_info[champion] = match_runes[champion]  
 
-    for champion in raw_rune_info:
-        champ_runes = raw_rune_info[champion]
-        flat_champ_runes = []
-        runeString = ""
-        for i in range(0, len(champ_runes)):
-            for j in range(0, champ_runes[i]): 
-                runeSet = champ_runes[i]
-                runeString += str(runeSet[j])   
-            flat_champ_runes.append(runeString)
+    if raw_rune_info is not None:
+        for champion in raw_rune_info:
+            champ_runes = raw_rune_info[champion]
+            flat_champ_runes = []
+            runeString = ""
+            for i in range(0, len(champ_runes)):
+                champ_runes[i] = sorted(champ_runes[i])
+                for j in range(0, champ_runes[i]): 
+                    runeSet = champ_runes[i]
+                    runeString += str(runeSet[j])   
+                flat_champ_runes.append(runeString)
 
-        runeSet = most_common(flat_champ_runes)
-        rune_info[champion] = runeSet
+            runeSet = most_common(flat_champ_runes)
+            rune_info[champion] = runeSet
 
     with open("rune_info.json", "w") as outfile:
         json.dump(rune_info, outfile, indent=4) 
