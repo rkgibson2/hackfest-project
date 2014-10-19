@@ -270,7 +270,6 @@ function load(current_hero) {
             
         });
        
-
     //add logo
     d3.select("#logo").append("img")
     	.attr("src", "logo.png")
