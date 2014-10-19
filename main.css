@@ -219,7 +219,23 @@ label {
   font: 10px sans-serif;
 }
 
+#gpm_container {
+  font: 10px sans-serif;
+}
+
+#xpm_container {
+  font: 10px sans-serif;
+}
+
 .bar rect:hover {
+	fill: green;
+}
+
+.bar_xpm rect:hover {
+	fill: green;
+}
+
+.bar_gpm rect:hover {
 	fill: green;
 }
 
