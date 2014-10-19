@@ -484,3 +484,17 @@ function load(current_hero) {
     });
     
 }
+
+function filter_by_id(champ_id) {
+    matches = l2.filterMatchData(champ_id);
+
+    // create GPM and XPM
+
+    matches.forEach(function(d, i) {
+        match_in_min = d.matchDuration / 60;
+        d.stats.GPM = d.stats.goldEarned / match_in_min;
+        d.stats.DPM = d.stats.totalDamageDealt / match_in_min;
+    })
+
+    return matches;
+}

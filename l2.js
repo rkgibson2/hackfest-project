@@ -8,6 +8,7 @@ var l2 = (function() {
     var rune = [];
     var champion = [];
     var summoner_spell = [];
+    var match = []
 
 
     function loadJSON(callback) {
@@ -33,10 +34,9 @@ var l2 = (function() {
             if (!--remaining) callback();
         });
 
-        d3.json("/data/match_data.json", function(error, data) {
-            // array of all usernames we've pulled
-            userData = data;
-
+        d3.json("/data/match_info.json", function(error, data) {
+            match = data;
+            
             if (!--remaining) callback();
         })
 
@@ -129,52 +129,10 @@ var l2 = (function() {
     // like d3.json, you need to provide a callback when you call this function.
     // The callback is used in the same way, with paramters error and data.
     // This function was written by Angela Fan !!! :)
-    function loadUserData(username, callback) {
-        username_lower = username.toLowerCase()
-
-        if (username_lower != "robbie" && username_lower != "benjy" && 
-            username_lower != "david" && username_lower != "dendi" && 
-            username_lower != "aui_2000" && username_lower != "merlini" &&
-            username_lower != "angela") {
-            throw new Error ("No data currently for user " + username)
-        }
-
-        d3.json("/data/" + username_lower + "_match_details.json", function(error, data) {
-            // find the player data for our given player and pull it to the top level
-            data.matches.forEach(function(d,i) {
-                our_player = d.players.filter(function(e) {
-                    return (e.account_id == data.id32)
-                })
-
-                //pull out player array
-                d.player_info = our_player[0];
-
-                //figure out if player was on radiant or dire
-                if (d.player_info.player_slot & 0x80) {
-                    d.player_side = "dire";
-                }
-                else {
-                    d.player_side = "radiant";
-                }
-
-                //figure out if the player won or lost based on his/her side
-                if ((d.player_side == "radiant" && d.radiant_win == true) ||
-                    (d.player_side == "dire" && d.radiant_win == false)) {
-                    d.player_win = true;
-                }
-                else {
-                    d.player_win = false;
-                }
-
-            })
-
-            //player left game before s/he even picked a hero, get rid of these matches
-            data.matches = data.matches.filter(function(d) {
-                return (d.player_info.hero_id != 0);
-            })
-
-            callback(error, data);
-        })
+    function filterMatchData(champ_id) {
+        return match.filter(function(d) {
+            return d.championId == champ_id
+        });
     }
 
     return {
@@ -201,7 +159,9 @@ var l2 = (function() {
 
         getRuneInfo: getRuneInfo,
 
-        getKeys: getKeys
+        getKeys: getKeys,
+
+        filterMatchData: filterMatchData
     }
 
 })();
