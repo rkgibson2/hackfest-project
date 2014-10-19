@@ -186,6 +186,15 @@ function update(current_hero) {
 
 	var filtered_data = filter_by_id(current_hero);
 
+    var mastery_counter = {};
+    var mastery_key_list = l2.getKeys("mastery");
+
+    for(var i = 0; i < mastery_key_list.length; i++) {
+        mastery_counter[mastery_key_list[i]] = 0;
+    }
+
+    console.log(mastery_counter);
+
 }
 
 function load(current_hero) {
