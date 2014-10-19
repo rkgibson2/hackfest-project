@@ -584,59 +584,109 @@ function load(current_hero) {
 
 
 	//items histogram
-	var values = d3.range(1000).map(d3.random.bates(10));
-        
-	var margin = bb_items.margins,
-	width = bb_items.w - 50,
-	height = bb_items.h - 60;
-        
-	var x = d3.scale.linear()
-	    .domain([0, 1])
-	    .range([0, width]);
-        
-	// Generate a histogram using twenty uniformly-spaced bins.
-	var data = d3.layout.histogram()
-	    .bins(x.ticks(20))
-	(values);
-        
+	var values = filtered_data.map(function(d) {
+		return [d.stats.item0, d.stats.item1, d.stats.item2, d.stats.item3, d.stats.item4, d.stats.item5];
+	});
+
+	var merged_values = [];
+
+	merged_values = merged_values.concat.apply(merged_values, values);
+
+	var items_dict = [];
+
+	var merged_values_length = merged_values.length;
+
+	for (var i = 0; i < merged_values_length; i++) {
+		console.log(merged_values[i])
+		if (merged_values[i] in items_dict) {
+			items_dict[merged_values[i]].count += 1;
+		}
+		else {
+			items_dict.push({
+				"key": merged_values[i],
+				"count": 1,
+				"name": l2.getItemInfo(merged_values[i]).name
+			})
+		}
+	};
+
+	var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = bb_items.w
+    height = bb_items.h - 40;
+
+	var x = d3.scale.ordinal()
+	    .rangeRoundBands([0, width], .1, 1);
+
 	var y = d3.scale.linear()
-	    .domain([0, d3.max(data, function(d) { return d.y; })])
 	    .range([height, 0]);
-        
+
 	var xAxis = d3.svg.axis()
 	    .scale(x)
-	    .orient("bottom");
-        
-	var bar = svg_items.selectAll(".bar")
-	    .data(data)
-	    .enter().append("g")
-	    .attr("class", "bar")
-	    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + (40+y(d.y)) + ")"; });
-        
-	bar.append("rect")
-	    .attr("x", 1)
-	    .attr("width", x(data[0].dx) - 1)
-	    .attr("height", function(d) { return height - y(d.y); });
-        
-	bar.append("text")
-	    .attr("dy", ".75em")
-	    .attr("y", 6)
-	    .attr("x", x(data[0].dx) / 2)
-	    .attr("text-anchor", "middle")
-	    .text(function(d) { return d.y; });
-        
+	    .orient("bottom")
+	    .innerTickSize([0])
+	    .outerTickSize([0]);
+
+	var yAxis = d3.svg.axis()
+	    .scale(y)
+	    .orient("left")
+	    .innerTickSize([0])
+	    .outerTickSize([0]);
+
+	x.domain(items_dict.map(function(d) { return d.name; }));
+	y.domain([d3.max(items_dict, function(d) { return d.count; })]);
+
 	svg_items.append("g")
 	    .attr("class", "x axis")
-	    .attr("transform", "translate(0," + (height+40) + ")")
+	    .attr("transform", "translate(0," + height + ")")
 	    .call(xAxis);
-    
-    svg_items.append("text")
-		.attr("x", 270)
-		.attr("y", 20)
-		.attr("font-family", "Dosis")
-		.attr("font-size", "22px")
-		.text("Items Purchased");
 
+	svg_items.append("g")
+	    .attr("class", "y axis")
+	    .call(yAxis)
+	  .append("text")
+	    .attr("transform", "rotate(-90)")
+	    .attr("y", 6)
+	    .attr("dy", ".71em")
+	    .style("text-anchor", "end")
+	    .text("Frequency");
+
+	svg_items.selectAll(".bar")
+	    .data(items_dict)
+	  .enter().append("rect")
+	    .attr("class", "bar")
+	    .attr("x", function(d) { return x(d.name); })
+	    .attr("width", x.rangeBand())
+	    .attr("y", function(d) { return y(d.count); })
+	    .attr("height", function(d) { return height - y(d.count); });
+
+	// d3.select("input").on("change", change);
+
+	// var sortTimeout = setTimeout(function() {
+	// 	d3.select("input").property("checked", true).each(change);
+	// }, 2000);
+
+	// function change() {
+	//   	clearTimeout(sortTimeout);
+
+	//     // Copy-on-write since tweens are evaluated after a delay.
+	//     var x0 = x.domain(data.sort(this.checked
+	//         ? function(a, b) { return b.frequency - a.frequency; }
+	//         : function(a, b) { return d3.ascending(a.letter, b.letter); })
+	//         .map(function(d) { return d.letter; }))
+	//         .copy();
+
+	//     var transition = svg.transition().duration(750),
+	//         delay = function(d, i) { return i * 50; };
+
+	//     transition.selectAll(".bar")
+	//         .delay(delay)
+	//         .attr("x", function(d) { return x0(d.letter); });
+
+	//     transition.select(".x.axis")
+	//         .call(xAxis)
+	//       .selectAll("g")
+	//         .delay(delay);
+	// }
 
 
 	d3.json("/blurbs/mastery_blurbs.json", function(mastery_blurbs) {
