@@ -447,11 +447,13 @@ function load(current_hero) {
 	    .call(xAxis);
         
 	d3.json("/blurbs/mastery_blurbs.json", function(mastery_blurbs) {
-	    d3.selectAll("#masteries_container img")
+	    d3.selectAll(".mastery_row img")
 		.each(function(d) {
-		    var img_source = d3.select(this).attr("src");
-		    var mastery_name = img_source.split("/")[3].split(".")[0]
-		    //console.log(mastery_blurbs)
+		    var mastery_id = d3.select(this).attr("mastery_id");
+                    if (mastery_id != null) {
+                        mastery = l2.getMasteryInfo(mastery_id);
+                        d3.select(this.parentNode).attr("tooltip", mastery.name);
+                    }
 		})
                     
         })
