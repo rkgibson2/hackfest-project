@@ -1121,7 +1121,7 @@ function load(current_hero) {
 	    	return d.count; 
 	    });
 
-	d3.json("/blurbs/mastery_blurbs.json", function(mastery_blurbs) {
+	d3.json("blurbs/mastery_blurbs.json", function(mastery_blurbs) {
 	    d3.selectAll(".mastery_row img")
 		.each(function(d) {
 		    var mastery_id = d3.select(this).attr("mastery_id");
