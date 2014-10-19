@@ -24,7 +24,7 @@ class MyRequest:
 
     def get(self, url, params):
         if self.requests == 10:
-            time.sleep(5)
+            time.sleep(10)
             self.requests = 0
 
         r = requests.get(base_url + url, params=params)
@@ -69,11 +69,91 @@ def fetch_match_history(account_id):
 
     return matches
 
-def fetch_match(id):
+def fetch_matchlist(account_id):
     params = {"api_key": api_key, "rankedQueues": "RANKED_SOLO_5x5", "beginIndex": 0}
+    url = "/api/lol/{region}/v2.2/matchhistory/{summonerId}".format(region=region, summonerId=account_id)
+    match_list = []
+
+    print "Making request at game index {0}   ".format(params["beginIndex"]),
+    r = my_request.get(url, params)
+    data = r.json()["matches"]
+    data.reverse()
+    for i in range(0, len(data)): 
+        match = data[i]
+        match_list.append(match["matchId"])
+    print "{0} games returned".format(len(data))
+
+    # keep looping until we run out of gamesx
+    while len(data) >= 15:
+        params["beginIndex"] += 15
+        print "Making request at game index {0}   ".format(params["beginIndex"]),
+        r = my_request.get(url, params)
+        data = r.json()["matches"]
+        data.reverse()
+        for i in range(0, len(data)): 
+            match = data[i]
+            match_list.append(match["matchId"])
+        print "{0} games returned".format(len(data))
+
+    match_list = list(set(match_list))
+    return match_list
+
+def fetch_match_info(match_id):
+    params = {"api_key": api_key, "includeTimeline": True}
+    url = "/api/lol/{region}/v2.2/match/{matchId}".format(region=region, matchId=match_id)
+    match_info = {}
+    events = []
+
+    r = my_request.get(url, params)
+    data = r.json()["timeline"]
+    frames = data["frames"]
+
+    for frame in frames:
+        if "events" in frame:
+            events += frame["events"]
+
+    match_info["timeline"] = events
+
+    match_info["matchDuration"] = r.json()["matchDuration"]
+    match_info["participantIdentities"] = r.json()["participantIdentities"]
+    match_info["participants"] = r.json()["participants"]
+
+    print events
+
+    '''
+    # keep looping until we run out of gamesx
+    while len(data) >= 15:
+        params["beginIndex"] += 15
+        print "Making request at game index {0}   ".format(params["beginIndex"])
+        r = my_request.get(url, params)
+        data = r.json()["matches"]
+        data.reverse()
+        for i in range(0, len(data)): 
+            match = data[i]
+            match_list.append(match["matchId"])
+        print "{0} games returned".format(len(data))
+    '''
+    return match_info
 
 if __name__ == "__main__":
     account_data = fetch_summoner_by_name([user["name"] for user in accounts])
+    match_list = []
+    match_info = []
+
+    for user in account_data.itervalues():
+        match_list += fetch_matchlist(user["id"])
+
+    with open("match_list.json", "w") as outfile: 
+        json.dump(match_list, outfile, indent=4)
+
+    for i in range(0, len(match_list)):
+        id = match_list[i]
+        match_info.append(fetch_match_info(id))
+
+    with open("match_info.json", "w") as outfile:
+        json.dump(match_info, outfile, indent=4)
+
+'''
     for name, data in account_data.iteritems():
         data["real_name"] = accounts[[user["name"].lower() for user in accounts].index(name)]["real_name"]
     
@@ -84,3 +164,9 @@ if __name__ == "__main__":
 
     with open("match_data_by_player.json", "w") as outfile:
         json.dump(account_data, outfile, indent=4)
+'''
+
+    
+
+
+
