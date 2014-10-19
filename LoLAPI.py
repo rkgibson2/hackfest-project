@@ -144,36 +144,60 @@ def fetch_match_info(match_id):
 def fetch_rune_info(match_id):
     params = {"api_key": api_key, "includeTimeline": True}
     url = "/api/lol/{region}/v2.2/match/{matchId}".format(region=region, matchId=match_id)
-    match_info = {}
-    raw_runes = []
+    rune_info = {}
 
     r = my_request.get(url, params)
-    data = r.json()["timeline"]
-    frames = data["frames"]
+    #data = r.json()["timeline"]
+    #frames = data["frames"]
 
     participants = r.json()["participants"]
 
     for participant in participants: 
-        flatlist = []
-        runelist = participant["runes"]
-        for object in runelist:
-            for i in range(0, object["rank"]):
-                flatlist.append(object["runeId"])
+        print participant
+        if "runes" in participant:
+            flatlist = []
+            runelist = participant["runes"]
+            for object in runelist:
+                for i in range(0, object["rank"]):
+                    flatlist.append(object["runeId"])
 
-        
+            rune_info[participant["championId"]] = flatlist
 
+    return rune_info
+
+def most_common(lst):
+    return max(set(lst), key=lst.count)
 
 if __name__ == "__main__":
     account_data = fetch_summoner_by_name([user["name"] for user in accounts])
     match_list = []
     match_info = []
-    rune_info = []
+    raw_rune_info = {}
+    rune_info = {}
 
-    with open("match_list.json") as infile:
+    with open("data/match_list.json") as infile:
         match_list = json.load(infile)
 
     for i in range(0, len(match_list)):
-        rune_info += fetch_rune_info(match_list[i])   
+        match_runes = fetch_rune_info(match_list[i])
+        for champion in match_runes:
+            if champion in raw_rune_info:
+                raw_rune_info[champion].append(match_runes[champion]) 
+            else:
+                raw_rune_info[champion] = match_runes[champion]  
+
+    for champion in raw_rune_info:
+        champ_runes = raw_rune_info[champion]
+        flat_champ_runes = []
+        runeString = ""
+        for i in range(0, len(champ_runes)):
+            for j in range(0, champ_runes[i]): 
+                runeSet = champ_runes[i]
+                runeString += str(runeSet[j])   
+            flat_champ_runes.append(runeString)
+
+        runeSet = most_common(flat_champ_runes)
+        rune_info[champion] = runeSet
 
     with open("rune_info.json", "w") as outfile:
         json.dump(rune_info, outfile, indent=4) 
