@@ -98,6 +98,11 @@ label {
 	font-weight: bold;
 }
 
+#champ_name:hover {
+	color: steelblue;
+	cursor: pointer;
+}
+
 #champ_title {
 	font-family: 'Marvel', cursive;
 	font-size: 45px;
@@ -300,7 +305,6 @@ label {
 
 #stat_graphs {
 	width: 1300px;
-
 }
 
 #page_content>div {
@@ -327,4 +331,12 @@ label {
 	left: 453px;
 	font-size: 12px;
 }
+
+.dropdown-menu>li>a, .dropdown-menu {
+    background-color: #8AB8E6;
+    color: white;
+}
+
+
+
 
