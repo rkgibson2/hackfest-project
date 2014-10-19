@@ -146,14 +146,14 @@ svg_items.call(graph_tip);
 // 	.attr("x", 0)
 // 	.attr("y", 0);
 
-svg_abilities.append("rect")
-	.attr("height", bb_abilities.h)
-	.attr("width", bb_abilities.w-20)
-	.attr("stroke", "black")
-	.attr("stroke-width", 2)
-	.attr("fill", "white")
-	.attr("x", 20)
-	.attr("y", 20);
+// svg_abilities.append("rect")
+// 	.attr("height", bb_abilities.h)
+// 	.attr("width", bb_abilities.w-20)
+// 	.attr("stroke", "black")
+// 	.attr("stroke-width", 2)
+// 	.attr("fill", "white")
+// 	.attr("x", 20)
+// 	.attr("y", 20);
 
 svg_winrate.append("rect")
 	.attr("height", 40)
@@ -651,10 +651,16 @@ function load(current_hero) {
 	var actives = l2.getChampionInfo(current_hero).spells
 	var passive = l2.getChampionInfo(current_hero).passive
 	var img_array = [l2.getChampionInfo(current_hero).name + ".png"];
+	var spell_descriptions = [];
+
+	spell_descriptions.push(passive.sanitizedDescription)
 
 	for (var i = 0; i < actives.length; i++) {
 		img_array.push(actives[i].image.full)
+		spell_descriptions.push(actives[i].sanitizedDescription)
 	}
+
+	//console.log(spell_descriptions)
 
 	//console.log(img_array)
 
@@ -663,7 +669,7 @@ function load(current_hero) {
 	for (var i = 0; i < img_array.length; i++) {
 		svg_abilities.append("image")
 			.attr("x", 30)
-			.attr("y", 110 + i*abil_size)
+			.attr("y", 100 + i*abil_size + i*15)
 			.attr("height", abil_size)
 			.attr("width", abil_size)
 			.attr("class", "ability_image")
@@ -672,13 +678,21 @@ function load(current_hero) {
 
 	svg_abilities.append("text")
 		.attr("x", 130)
-		.attr("y", 50)
-		.text("Champion Spells");
+		.attr("y", 70)
+		.text("Champion Spells")
+		.attr("class", "abilities");
 
+	for (var i = 0; i < img_array.length; i++) {
 
-	// d3.select("#abilities")
-	// 	.append("image")
-	// 	.attr("x", 10)
+		svg_abilities.append("text")
+			.attr("x", 110)
+			.attr("y", 100 + i*abil_size + i*15 + 10)
+			.text(spell_descriptions[i])
+			.attr("font-size", "12px")
+			.attr("font-family", "Arial")
+
+	}
+
         
 	d3.selectAll(".sum_spell_img")
 	    .on("mouseover", function(d, i) {

@@ -363,7 +363,7 @@ label {
 	position: relative;
 }
 
-#abilities text {
+.abilities {
 	font-family: Dosis;
 	font-size: 22px;
 }
