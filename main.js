@@ -216,6 +216,54 @@ function update(current_hero) {
     
     filtered_data = filter_by_id(current_hero);
 
+    d3.selectAll(".spell_descriptions").remove();
+
+    var actives = l2.getChampionInfo(current_hero).spells
+	var passive = l2.getChampionInfo(current_hero).passive
+	var img_array = [l2.getChampionInfo(current_hero).name + ".png"];
+	var spell_descriptions = [];
+
+	spell_descriptions.push(passive.sanitizedDescription)
+
+	for (var i = 0; i < actives.length; i++) {
+		img_array.push(actives[i].image.full)
+		spell_descriptions.push(actives[i].sanitizedDescription)
+	}
+
+	//console.log(spell_descriptions)
+
+	//console.log(img_array)
+
+	var abil_size = 65;
+
+	for (var i = 0; i < img_array.length; i++) {
+		svg_abilities.append("image")
+			.attr("x", 30)
+			.attr("y", 100 + i*abil_size + i*15)
+			.attr("height", abil_size)
+			.attr("width", abil_size)
+			.attr("class", "ability_image")
+			.attr("xlink:href", "/img/spells/" + img_array[i]);
+	}
+
+	svg_abilities.append("text")
+		.attr("x", 130)
+		.attr("y", 70)
+		.text("Champion Spells")
+		.attr("class", "abilities");
+
+	for (var i = 0; i < img_array.length; i++) {
+
+		svg_abilities.append("text")
+			.attr("x", 110)
+			.attr("y", 100 + i*abil_size + i*15 + 10)
+			.text(spell_descriptions[i])
+			.attr("font-size", "12px")
+			.attr("font-family", "Arial")
+			.attr("class", "spell_descriptions");
+	}
+
+
     // mastery stuff
     var mastery_filter = filtered_data.filter(function(d) {
         return "masteries" in d;
@@ -690,7 +738,7 @@ function load(current_hero) {
 			.text(spell_descriptions[i])
 			.attr("font-size", "12px")
 			.attr("font-family", "Arial")
-
+			.attr("class", "spell_descriptions")
 	}
 
         
