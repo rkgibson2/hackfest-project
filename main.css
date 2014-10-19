@@ -124,6 +124,15 @@ label {
 	top: 10px;
 }
 
+#stat_graphs {
+	width: 1230px;
+}
+
+#page_content>div {
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .graph_row > div {
 	display: inline-block;
 	vertical-align: top;
@@ -147,13 +156,37 @@ label {
 	height: 370px;
 }
 
-#xpm_container {
-	margin-left: 460px;
+.ability_pm_row {
+	width: 1170px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#abilities {
+	width: 400px;
 	position: relative;
 }
 
-#gpm_container {
+#xpm_container {
+	width: 370px;
 	position: relative;
+  	font: 10px sans-serif;
+}
+
+#gpm_container {
+	width: 370px;
+	position: relative;
+  	font: 10px sans-serif;
+}
+
+.masteries_row {
+	width: 810px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#masteries {
+	width: 810px;
 }
 
 #masteries_container {
@@ -232,14 +265,6 @@ label {
   font: 10px sans-serif;
 }
 
-#gpm_container {
-  font: 10px sans-serif;
-}
-
-#xpm_container {
-  font: 10px sans-serif;
-}
-
 .bar rect:hover {
 	fill: green;
 }
@@ -311,15 +336,6 @@ label {
 	top: 10px;
 }
 
-#stat_graphs {
-	width: 1300px;
-}
-
-#page_content>div {
-	margin-left: auto;
-	margin-right: auto;
-}
-
 #value_sort_label {
 	position: absolute;
 	top: 150px;
@@ -357,10 +373,6 @@ label {
 
 .footer a {
   color: #4f4f4f;
-}
-
-#abilities {
-	position: relative;
 }
 
 .abilities {
