@@ -664,11 +664,25 @@ function load(current_hero) {
 
 	merged_values = merged_values.concat.apply(merged_values, values);
 
-	var items_dict = [];
+	var items_dict = [{}];
 
 	var merged_values_length = merged_values.length;
 
 	for (var i = 0; i < merged_values_length; i++) {
+		//console.log(merged_values[i])
+
+		for (var j = 0; j < items_dict.length; j++) {
+
+			if (merged_values[i] in items_dict[j]) {
+				items_dict[j].count += 1;
+			}
+			else {
+				items_dict.push({
+					"key": merged_values[i],
+					"count": 1,
+					"name": l2.getItemInfo(merged_values[i]).name
+				});
+			}
 		// console.log(merged_values[i])
 		if (merged_values[i] in items_dict) {
 			items_dict[merged_values[i]].count += 1;
@@ -680,7 +694,10 @@ function load(current_hero) {
 				"name": l2.getItemInfo(merged_values[i]).name
 			})
 		}
+
 	};
+
+	console.log(items_dict)
 
 	var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = bb_items.w
@@ -705,7 +722,9 @@ function load(current_hero) {
 	    .outerTickSize([0]);
 
 	x.domain(items_dict.map(function(d) { return d.name; }));
-	y.domain([d3.max(items_dict, function(d) { return d.count; })]);
+	y.domain([0, d3.max(items_dict, function(d) { return d.count; })]);
+
+	//console.log(x.domain())
 
 	svg_items.append("g")
 	    .attr("class", "x axis")
