@@ -310,7 +310,7 @@ function load(current_hero) {
         
 	var margin_xpm = bb_xpm.margins,
 	width_xpm = bb_xpm.w - 50,
-	height_xpm = bb_xpm.h - 20;
+	height_xpm = bb_xpm.h - 60;
         
 	var x_xpm = d3.scale.linear()
 	    .domain([0, 1])
@@ -332,7 +332,7 @@ function load(current_hero) {
 	    .data(data_xpm)
 	    .enter().append("g")
 	    .attr("class", "bar")
-	    .attr("transform", function(d) { return "translate(" + x_xpm(d.x) + "," + y_xpm(d.y) + ")"; });
+	    .attr("transform", function(d) { return "translate(" + x_xpm(d.x) + "," + (40+y_xpm(d.y)) + ")"; });
         
 	bar_xpm.append("rect")
 	    .attr("x", 1)
@@ -348,8 +348,15 @@ function load(current_hero) {
         
 	svg_xpm.append("g")
 	    .attr("class", "x axis")
-	    .attr("transform", "translate(0," + height_xpm + ")")
+	    .attr("transform", "translate(0," + (height_xpm+40) + ")")
 	    .call(xAxis_xpm);
+
+	svg_xpm.append("text")
+		.attr("x", 100)
+		.attr("y", 20)
+		.attr("font-family", "Dosis")
+		.attr("font-size", "22px")
+		.text("Average XPM");
 
 
 	//gpm histogram
@@ -357,7 +364,7 @@ function load(current_hero) {
         
 	var margin_gpm = bb_gpm.margins,
 	width_gpm = bb_gpm.w - 50,
-	height_gpm = bb_gpm.h - 20;
+	height_gpm = bb_gpm.h - 60;
         
 	var x_gpm = d3.scale.linear()
 	    .domain([0, 1])
@@ -379,7 +386,7 @@ function load(current_hero) {
 	    .data(data_gpm)
 	    .enter().append("g")
 	    .attr("class", "bar")
-	    .attr("transform", function(d) { return "translate(" + x_gpm(d.x) + "," + y_gpm(d.y) + ")"; });
+	    .attr("transform", function(d) { return "translate(" + x_gpm(d.x) + "," + (40+y_gpm(d.y)) + ")"; });
         
 	bar_gpm.append("rect")
 	    .attr("x", 1)
@@ -395,8 +402,15 @@ function load(current_hero) {
         
 	svg_gpm.append("g")
 	    .attr("class", "x axis")
-	    .attr("transform", "translate(0," + height_gpm + ")")
+	    .attr("transform", "translate(0," + (height_gpm+40) + ")")
 	    .call(xAxis_gpm);
+
+	svg_gpm.append("text")
+		.attr("x", 100)
+		.attr("y", 20)
+		.attr("font-family", "Dosis")
+		.attr("font-size", "22px")
+		.text("Average GPM");
 
 
 	//items histogram
