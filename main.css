@@ -345,6 +345,18 @@ label {
     color: white;
 }
 
+.footer {
+  width: 1060px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #4f4f4f;
+}
 
+.footer a {
+  color: #4f4f4f;
+}
 
 
