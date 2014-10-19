@@ -360,12 +360,10 @@ function load(current_hero) {
         
 	bar_xpm.append("rect")
 	    .attr("x", 1)
-	    .attr("width", function(d) {
-	    	return x_xpm.range()[1]/20;
-	    })
+	    .attr("width", x_xpm.range()[1]/20)
 	    .attr("height", function(d) { return height_xpm - y_xpm(d.y); })
 	    .on("mouseover", function(d) {
-	    	graph_tip.html("DPM: " + d.x);
+	    	graph_tip.html("DPM: " + d.x.toFixed());
 	    	graph_tip.show(d);
 	    })
 	    .on("mouseout", function(d) {
@@ -406,7 +404,7 @@ function load(current_hero) {
 	    .range([0, width_gpm]);
         
 	var data_gpm = d3.layout.histogram()
-	    .bins(x_gpm.ticks(20))
+	    .bins(17)
 	    .range(d3.extent(values_gpm))
 	(values_gpm);
         
@@ -416,7 +414,9 @@ function load(current_hero) {
         
 	var xAxis_gpm = d3.svg.axis()
 	    .scale(x_gpm)
-	    .orient("bottom");
+	    .orient("bottom")
+	    .innerTickSize([0])
+	    .outerTickSize([0]);
         
 	var bar_gpm = svg_gpm.selectAll(".bar")
 	    .data(data_gpm)
@@ -429,7 +429,7 @@ function load(current_hero) {
 	    .attr("width", x_gpm.range()[1]/20)
 	    .attr("height", function(d) { return height_gpm - y_gpm(d.y); })
 	    .on("mouseover", function(d) {
-	    	graph_tip.html("GPM: " + d.x);
+	    	graph_tip.html("GPM: " + d.x.toFixed(2));
 	    	graph_tip.show(d);
 	    })
 	    .on("mouseout", function(d) {
