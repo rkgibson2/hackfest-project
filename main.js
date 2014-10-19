@@ -664,40 +664,29 @@ function load(current_hero) {
 
 	merged_values = merged_values.concat.apply(merged_values, values);
 
-	var items_dict = [{}];
+	var items_dict = [];
+
+	var item_ids = l2.getKeys("item");
+
+	for (var i = 0; i < item_ids.length; i++) {
+		items_dict[i] = {"id": item_ids[i], "count": 0, "name": l2.getItemInfo(item_ids[i]).name}
+	}
 
 	var merged_values_length = merged_values.length;
 
 	for (var i = 0; i < merged_values_length; i++) {
-		//console.log(merged_values[i])
+		if (merged_values[i] != 0) {
+			index = item_ids.indexOf(String(merged_values[i]))
 
-		for (var j = 0; j < items_dict.length; j++) {
-
-			if (merged_values[i] in items_dict[j]) {
-				items_dict[j].count += 1;
-			}
-			else {
-				items_dict.push({
-					"key": merged_values[i],
-					"count": 1,
-					"name": l2.getItemInfo(merged_values[i]).name
-				});
-			}
-		// console.log(merged_values[i])
-		if (merged_values[i] in items_dict) {
-			items_dict[merged_values[i]].count += 1;
+			items_dict[index].count += 1;
 		}
-		else {
-			items_dict.push({
-				"key": merged_values[i],
-				"count": 1,
-				"name": l2.getItemInfo(merged_values[i]).name
-			})
-		}
+	}
 
-	};
+	items_dict = items_dict.filter(function(d) {
+		return d.count != 0
+	})
 
-	console.log(items_dict)
+	//console.log(items_dict)
 
 	var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = bb_items.w
@@ -713,7 +702,8 @@ function load(current_hero) {
 	    .scale(x)
 	    .orient("bottom")
 	    .innerTickSize([0])
-	    .outerTickSize([0]);
+	    .outerTickSize([0])
+	    .tickFormat(function (d) { return ''; });
 
 	var yAxis = d3.svg.axis()
 	    .scale(y)
@@ -721,8 +711,13 @@ function load(current_hero) {
 	    .innerTickSize([0])
 	    .outerTickSize([0]);
 
-	x.domain(items_dict.map(function(d) { return d.name; }));
-	y.domain([0, d3.max(items_dict, function(d) { return d.count; })]);
+	x.domain(items_dict.map(function(d) {
+		return d.name
+	}))
+
+	y.domain([0, d3.max(items_dict, function(d) {
+		return d.count;
+	})])
 
 	//console.log(x.domain())
 
@@ -731,54 +726,48 @@ function load(current_hero) {
 	    .attr("transform", "translate(0," + height + ")")
 	    .call(xAxis);
 
-	svg_items.append("g")
-	    .attr("class", "y axis")
-	    .call(yAxis)
-	  .append("text")
-	    .attr("transform", "rotate(-90)")
-	    .attr("y", 6)
-	    .attr("dy", ".71em")
-	    .style("text-anchor", "end")
-	    .text("Frequency");
+	// svg_items.append("g")
+	//     .attr("class", "y axis")
+	//     .call(yAxis)
+	//   .append("text")
+	//     .attr("transform", "rotate(-90)")
+	//     .attr("y", 6)
+	//     .attr("dy", ".71em")
+	//     .style("text-anchor", "end")
+	//     .text("Frequency");
 
 	svg_items.selectAll(".bar")
 	    .data(items_dict)
 	  .enter().append("rect")
 	    .attr("class", "bar")
-	    .attr("x", function(d) { return x(d.name); })
+	    .attr("x", function(d,i) { 
+	    	//console.log(d)
+	    	return x(d.name); })
 	    .attr("width", x.rangeBand())
 	    .attr("y", function(d) { return y(d.count); })
 	    .attr("height", function(d) { return height - y(d.count); });
 
-	// d3.select("input").on("change", change);
+	svg_items.append("text")
+		.attr("x", 320)
+		.attr("y", 20)
+		.attr("font-family", "Dosis")
+		.attr("font-size", "22px")
+		.text("Items Purchased");
 
-	// var sortTimeout = setTimeout(function() {
-	// 	d3.select("input").property("checked", true).each(change);
-	// }, 2000);
-
-	// function change() {
-	//   	clearTimeout(sortTimeout);
-
-	//     // Copy-on-write since tweens are evaluated after a delay.
-	//     var x0 = x.domain(data.sort(this.checked
-	//         ? function(a, b) { return b.frequency - a.frequency; }
-	//         : function(a, b) { return d3.ascending(a.letter, b.letter); })
-	//         .map(function(d) { return d.letter; }))
-	//         .copy();
-
-	//     var transition = svg.transition().duration(750),
-	//         delay = function(d, i) { return i * 50; };
-
-	//     transition.selectAll(".bar")
-	//         .delay(delay)
-	//         .attr("x", function(d) { return x0(d.letter); });
-
-	//     transition.select(".x.axis")
-	//         .call(xAxis)
-	//       .selectAll("g")
-	//         .delay(delay);
-	// }
-
+	svg_items.selectAll(".bar").append("text")
+		.data(items_dict)
+		.attr("dy", ".75em")
+	    .attr("y", function(d) {
+	    	return y(d.count)
+	    })
+	    .attr("x", function(d,i) {
+	    	return x(d.name);
+	    })
+	    .attr("text-anchor", "middle")
+	    .text(function(d) { 
+	    	//console.log(d.y)
+	    	return d.y; 
+	    });
 
 	d3.json("/blurbs/mastery_blurbs.json", function(mastery_blurbs) {
 	    d3.selectAll(".mastery_row img")

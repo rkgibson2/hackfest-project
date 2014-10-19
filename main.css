@@ -205,7 +205,7 @@ label {
 
 /*histogram css*/
 
-.bar rect {
+.bar {
   fill: #8AB8E6;
   shape-rendering: crispEdges;
 }
