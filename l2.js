@@ -17,14 +17,14 @@ var l2 = (function() {
             callback = function() {}
         var remaining = 3;
 
-        d3.json("/data/blurbs.json", function(error, data) {   
+        d3.json("data/blurbs.json", function(error, data) {   
             blurbs = data;
 
             if (!--remaining) callback();
 
         });
 
-        d3.json("/data/static_data.json", function(error, data) {
+        d3.json("data/static_data.json", function(error, data) {
             mastery = data["mastery"];
             item = data["item"];
             rune = data["rune"];
@@ -34,7 +34,7 @@ var l2 = (function() {
             if (!--remaining) callback();
         });
 
-        d3.json("/data/match_info.json", function(error, data) {
+        d3.json("data/match_info.json", function(error, data) {
             match = data;
             
             if (!--remaining) callback();
