@@ -298,4 +298,12 @@ label {
 	top: 10px;
 }
 
+#stat_graphs {
+	width: 1300px;
 
+}
+
+#page_content>div {
+	margin-left: auto;
+	margin-right: auto;
+}
