@@ -1,6 +1,6 @@
-//Angela Fan, Robbie Gibson
+// Angela Fan, Robbie Gibson
 
-//data global
+// data global
 
 var champ_data;
 
@@ -324,7 +324,13 @@ function update(current_hero) {
 
     var mastery_counter = {};
     var mastery_key_list = l2.getKeys("mastery");
-    
+
+    var mastery_filters = filtered_data.filter(function(d) {
+        return "masteries" in d;
+    })
+
+    console.log(mastery_filters);
+
     for(var i = 0; i < mastery_key_list.length; i++) {
         mastery_counter[mastery_key_list[i]] = 0;
     }
