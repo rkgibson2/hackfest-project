@@ -216,7 +216,7 @@ function update(current_hero) {
     
     filtered_data = filter_by_id(current_hero);
 
-    d3.selectAll(".spell_descriptions").remove();
+    d3.selectAll(".ability_descrip").remove();
 
     var actives = l2.getChampionInfo(current_hero).spells
 	var passive = l2.getChampionInfo(current_hero).passive
@@ -254,14 +254,16 @@ function update(current_hero) {
 
 	for (var i = 0; i < img_array.length; i++) {
 
-		svg_abilities.append("text")
-			.attr("x", 110)
-			.attr("y", 100 + i*abil_size + i*15 + 10)
-			.text(spell_descriptions[i])
-			.attr("font-size", "12px")
-			.attr("font-family", "Arial")
-			.attr("class", "spell_descriptions");
+		svg_abilities.append('foreignObject')
+            .attr('x', 100)
+            .attr('y', 100 + i*abil_size + i*15)
+            .attr('width', 250)
+            .attr('height', 100)
+            .append("xhtml:body")
+            .attr("class", "ability_descrip")
+			.html('<div style="width: 250px; font-family: Arial; font-size: 12px;">' + String(spell_descriptions[i]) + '</div>')
 	}
+
 
 
     // mastery stuff
@@ -732,13 +734,14 @@ function load(current_hero) {
 
 	for (var i = 0; i < img_array.length; i++) {
 
-		svg_abilities.append("text")
-			.attr("x", 110)
-			.attr("y", 100 + i*abil_size + i*15 + 10)
-			.text(spell_descriptions[i])
-			.attr("font-size", "12px")
-			.attr("font-family", "Arial")
-			.attr("class", "spell_descriptions")
+		svg_abilities.append('foreignObject')
+            .attr('x', 100)
+            .attr('y', 100 + i*abil_size + i*15)
+            .attr('width', 250)
+            .attr('height', 100)
+            .append("xhtml:body")
+            .attr("class", "ability_descrip")
+			.html('<div style="width: 250px; font-family: Arial; font-size: 12px;">' + String(spell_descriptions[i]) + '</div>')
 	}
 
         
@@ -1150,3 +1153,4 @@ function filter_by_id(champ_id) {
 
     return matches;
 }
+
