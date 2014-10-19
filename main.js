@@ -313,6 +313,15 @@ d3.json("/blurbs/summoner_spell_blurbs.json", function(summoner_spell_blurbs) {
 			//     .attr("transform", "translate(0," + height + ")")
 			//     .call(xAxis);
 
+		d3.json("/blurbs/mastery_blurbs.json", function(mastery_blurbs) {
+			d3.selectAll("#masteries_container img")
+				.each(function(d) {
+					var img_source = d3.select(this).attr("src");
+					var mastery_name = img_source.split("/")[3].split(".")[0]
+					//console.log(mastery_blurbs)
+				})
+
+		})
 
 	})
 
