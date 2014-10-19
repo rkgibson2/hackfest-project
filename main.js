@@ -130,7 +130,6 @@ svg_items.call(graph_tip);
 // 	.attr("fill", "black")
 // 	.attr("x", 0)
 // 	.attr("y", 0);
-
 svg_winrate.append("rect")
 	.attr("height", 40)
 	.attr("width", bb_winrate.w-20)
@@ -534,6 +533,62 @@ function update(current_hero) {
 	    	//console.log(d.y)
 	    	return d.count; 
 	    });
+
+
+	d3.selectAll("#winrate_container svg *").remove();
+
+	var outcomes = filtered_data.map(function(d) {
+		return d.stats.winner;
+	});
+
+	var num_wins = 0;
+	var total_games = outcomes.length;
+
+	for (var i = 0; i < outcomes.length; i++) {
+		if (String(outcomes[i]) == "true") {
+			num_wins += 1;
+			//console.log("here")
+		}
+	};
+
+	var winrate = num_wins/total_games;
+
+	//console.log(winrate)
+
+	svg_winrate.append("rect")
+		.attr("height", 40)
+		.attr("width", bb_winrate.w-20)
+		.attr("stroke", "black")
+		.attr("stroke-width", 2)
+		.attr("fill", "white")
+		.attr("x", 40)
+		.attr("y", 40);
+
+	svg_winrate.append("text")
+		.attr("x", bb_winrate.w/2 - 0)
+		.attr("y", 25)
+		.attr("font-family", "Dosis")
+		.attr("font-size", "20px")
+		.text("Winrate")
+		.attr("stroke", "black");
+
+	svg_winrate.append("rect")
+		.attr("height", 40)
+		.attr("stroke", "black")
+		.attr("stroke-width", "1px")
+		.attr("width", winrate*(bb_winrate.w-20))
+		.attr("fill", "green")
+		.attr("x", 40)
+		.attr("y", 40);
+
+	svg_winrate.append("text")
+		.attr("x", 300)
+		.attr("y", 65)
+		.text(winrate.toFixed(2) + "%")
+		.attr("font-family", "Arial")
+		.attr("font-size", "18px")
+		.attr("font-weight", "bold");
+
 }
 
 function load(current_hero) {
@@ -571,21 +626,21 @@ function load(current_hero) {
 	d3.selectAll(".sum_spell_img")
 	    .on("mouseover", function(d, i) {
                 
-		var current_spell = d3.select(this).attr("summoner_spell_id");
-                
-		var spell_name = l2.getSummonerSpellInfo(current_spell).name
-		var description = l2.getSummonerSpellInfo(current_spell).sanitizedDescription;
-                
-		var html_string = "<b>" + spell_name + "</b><br>" + description;
-                
-		graph_tip.direction('e')
-                
-		graph_tip.html(html_string);
-		graph_tip.show(d,i);
+			var current_spell = d3.select(this).attr("summoner_spell_id");
+	                
+			var spell_name = l2.getSummonerSpellInfo(current_spell).name
+			var description = l2.getSummonerSpellInfo(current_spell).sanitizedDescription;
+	                
+			var html_string = "<b>" + spell_name + "</b><br>" + description;
+	                
+			graph_tip.direction('e')
+	                
+			graph_tip.html(html_string);
+			graph_tip.show(d,i);
                 
 	    })
 	    .on("mouseout", function(d, i) {
-		graph_tip.hide(d,i);
+			graph_tip.hide(d,i);
 	    })
         
         
@@ -651,7 +706,43 @@ function load(current_hero) {
 	    .attr("y", 0)
 	    .text(l2.getChampionInfo(current_hero).blurb.split("<br>")[0].split(".")[0]+".");
         
-        
+    //win-loss
+
+	var outcomes = filtered_data.map(function(d) {
+		return d.stats.winner;
+	});
+
+	var num_wins = 0;
+	var total_games = outcomes.length;
+
+	for (var i = 0; i < outcomes.length; i++) {
+		if (String(outcomes[i]) == "true") {
+			num_wins += 1;
+			//console.log("here")
+		}
+	};
+
+	var winrate = num_wins/total_games;
+
+	//console.log(winrate)
+
+	svg_winrate.append("rect")
+		.attr("height", 40)
+		.attr("stroke", "black")
+		.attr("stroke-width", "1px")
+		.attr("width", winrate*(bb_winrate.w-20))
+		.attr("fill", "green")
+		.attr("x", 40)
+		.attr("y", 40);
+
+	svg_winrate.append("text")
+		.attr("x", 300)
+		.attr("y", 65)
+		.text(winrate.toFixed(2) + "%")
+		.attr("font-family", "Arial")
+		.attr("font-size", "18px")
+		.attr("font-weight", "bold");
+
 	//xpm histogram
 	var values_xpm = filtered_data.map(function(d) {
 		return d.stats.DPM;
