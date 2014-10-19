@@ -13,7 +13,7 @@ var bb_spells, bb_items, bb_xpm, bb_gpm, bb_masteries, bb_runes, bb_first_point,
 
 //set up bounding boxes
 bb_summoner_spells = {
-    w: 500,
+    w: 400,
     h: 190,
     margin: {
     	top: 20,
@@ -21,17 +21,6 @@ bb_summoner_spells = {
     	bottom: 10,
     	left: 20
     }
-};
-
-bb_masteries = {
-	w: 400,
-	h: 500,
-	margin: {
-		top: 10,
-		right: 10,
-		bottom: 10,
-		left: 10
-	}
 };
 
 bb_winrate = {
@@ -77,14 +66,6 @@ bb_gpm = {
 		left: 10
 	}
 };
-
-//set up svgs
-svg_masteries = d3.select("#masteries_container").append("svg").attr({
-	width: bb_masteries.w + bb_masteries.margin.left + bb_masteries.margin.right,
-	height: bb_masteries.h + bb_masteries.margin.bottom + bb_masteries.margin.top
-});
-
-svg_masteries.call(graph_tip);
 
 svg_xpm = d3.select("#xpm_container").append("svg").attr({
 	width: bb_xpm.w + bb_xpm.margin.left + bb_xpm.margin.right,
@@ -168,7 +149,7 @@ svg_summoner_spells.append("rect")
 	.attr("fill", "white");
 
 svg_summoner_spells.append("text")
-	.attr("x", bb_summoner_spells.w/2 - 110)
+	.attr("x", bb_summoner_spells.w/2 - 50)
 	.attr("y", 30)
 	.attr("font-family", "Dosis")
 	.attr("font-size", "20px")
@@ -249,7 +230,7 @@ d3.json("/blurbs/summoner_spell_blurbs.json", function(summoner_spell_blurbs) {
 	// elem.setAttribute("height", "768");
 	// elem.setAttribute("width", "1024");
 
-	d3.json("/blurbs/champ_blurbs.json", function(data) {
+	d3.json("/blurbs/champion_blurbs.json", function(data) {
 
 		//set header and champion description
 		var current_hero = "Katarina";
@@ -271,10 +252,10 @@ d3.json("/blurbs/summoner_spell_blurbs.json", function(summoner_spell_blurbs) {
 
 		d3.select("#champ_blurb")
 			.append("text")
+			.attr("class", "champ_blurb")
 			.attr("x", 0)
 			.attr("y", 0)
-			.attr("class", "champ_blurb")
-			// .text(data[current_hero].blurb.split("<br>")[0]);
+			.text(data[current_hero].blurb.split("<br>")[0]);
 
 			// // Generate a Bates distribution of 10 random variables.
 			// var values = d3.range(1000).map(d3.random.bates(10));

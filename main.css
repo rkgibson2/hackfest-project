@@ -70,7 +70,7 @@ label {
 }
 
 #page-content {
-  	margin-top: 140px;
+  	margin-top: 150px;
 }
 
 #page-content>div {
@@ -118,41 +118,84 @@ label {
 	left: 900px;
 }
 
-#summoner_spells_container {
-	position: relative;
+.graph_row > div {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.graph_row > .graph_col {
+	width: 450px;
 }
 
 #winrate_container {
 	position: relative;
+	width: 450px;
+}
+
+#summoner_spells_container {
+	width: 450px;
 }
 
 #items_container {
+	width: 770px;
+	height: 370px;
+}
+
+#xpm_container {
+	margin-left: 460px;
 	position: relative;
-	left: 450px;
-	top: -300px;
 }
 
 #gpm_container {
 	position: relative;
-	top: -600px;
-	left: 850px;
-}
-
-#xpm_container {
-	position: relative;
-	top: -275px;
-	left: 450px;
 }
 
 #masteries_container {
+	margin-left: 10px;
+	width: 800px;
 	position: relative;
-	top: -600px;
-	left: 50px;
+	font-family: 'Dosis';
+	font-size: 18px;
+	font-weight: bold;
 }
 
-#offensive {
-	width: 400px;
+#masteries_container img {
+	opacity: 0.4;
 }
+
+#masteries_title {
+	width: 800px;
+	text-align: center;
+	font-family: 'Dosis';
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.mastery_column {
+	display: inline-block;
+	width: 240px;
+	height: 325px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.column_header {
+	text-align: center;
+}
+
+/*masteries*/
+.mastery_col {
+	display: inline-block;
+	vertical-align: top;
+	width: 45px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.mastery_row {
+	margin-top: 5px;
+}
+
 
 /*histogram css*/
 
@@ -171,9 +214,5 @@ label {
   shape-rendering: crispEdges;
 }
 
-.col {
-	width: 50px;
-	float: left;
-}
 
 
