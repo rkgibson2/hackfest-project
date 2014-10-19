@@ -141,23 +141,58 @@ def fetch_match_info(match_id):
     '''
     return participants
 
+def fetch_rune_info(match_id):
+    params = {"api_key": api_key, "includeTimeline": True}
+    url = "/api/lol/{region}/v2.2/match/{matchId}".format(region=region, matchId=match_id)
+    match_info = {}
+    raw_runes = []
+
+    r = my_request.get(url, params)
+    data = r.json()["timeline"]
+    frames = data["frames"]
+
+    participants = r.json()["participants"]
+
+    for participant in participants: 
+        flatlist = []
+        runelist = participant["runes"]
+        for object in runelist:
+            for i in range(0, object["rank"]):
+                flatlist.append(object["runeId"])
+
+        
+
+
 if __name__ == "__main__":
     account_data = fetch_summoner_by_name([user["name"] for user in accounts])
     match_list = []
     match_info = []
+    rune_info = []
 
+    with open("match_list.json") as infile:
+        match_list = json.load(infile)
+
+    for i in range(0, len(match_list)):
+        rune_info += fetch_rune_info(match_list[i])   
+
+    with open("rune_info.json", "w") as outfile:
+        json.dump(rune_info, outfile, indent=4) 
+
+'''
     for user in account_data.itervalues():
         match_list += fetch_matchlist(user["id"])
 
     with open("match_list.json", "w") as outfile: 
         json.dump(match_list, outfile, indent=4)
-
+'''
+'''
     for i in range(0, len(match_list)):
         id = match_list[i]
         match_info += fetch_match_info(id)
 
     with open("match_info.json", "w") as outfile:
         json.dump(match_info, outfile, indent=4)
+'''
 
 '''
     for name, data in account_data.iteritems():
