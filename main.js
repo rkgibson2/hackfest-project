@@ -25,6 +25,17 @@ bb_summoner_spells = {
     }
 };
 
+bb_abilities = {
+    w: 400,
+    h: 500,
+    margin: {
+    	top: 20,
+    	right: 10,
+    	bottom: 10,
+    	left: 20
+    }
+};
+
 bb_winrate = {
 	w: 360,
 	h: 80,
@@ -92,8 +103,12 @@ svg_summoner_spells = d3.select("#summoner_spells_container").append("svg").attr
 	height: bb_summoner_spells.h + bb_summoner_spells.margin.bottom + bb_summoner_spells.margin.top
 });
 
-svg_summoner_spells.call(graph_tip);
+svg_abilities = d3.select("#abilities").append("svg").attr({
+	width: bb_abilities.w + bb_abilities.margin.left + bb_abilities.margin.right + 20,
+	height: bb_abilities.h + bb_abilities.margin.bottom + bb_abilities.margin.top
+});
 
+svg_summoner_spells.call(graph_tip);
 
 svg_winrate = d3.select("#winrate_container").append("svg").attr({
 	width: bb_winrate.w + bb_winrate.margin.left + bb_winrate.margin.right,
@@ -130,6 +145,15 @@ svg_items.call(graph_tip);
 // 	.attr("fill", "black")
 // 	.attr("x", 0)
 // 	.attr("y", 0);
+
+// svg_abilities.append("rect")
+// 	.attr("height", bb_abilities.h)
+// 	.attr("width", bb_abilities.w-20)
+// 	.attr("stroke", "black")
+// 	.attr("stroke-width", 2)
+// 	.attr("fill", "white")
+// 	.attr("x", 20)
+// 	.attr("y", 20);
 
 svg_winrate.append("rect")
 	.attr("height", 40)
@@ -191,6 +215,57 @@ function update(current_hero) {
     }
     
     filtered_data = filter_by_id(current_hero);
+
+    d3.selectAll(".ability_descrip").remove();
+    d3.selectAll(".ability_image").remove();
+
+    var actives = l2.getChampionInfo(current_hero).spells
+	var passive = l2.getChampionInfo(current_hero).passive
+	var img_array = [l2.getChampionInfo(current_hero).name + ".png"];
+	var spell_descriptions = [];
+
+	spell_descriptions.push(passive.sanitizedDescription)
+
+	for (var i = 0; i < actives.length; i++) {
+		img_array.push(actives[i].image.full)
+		spell_descriptions.push(actives[i].sanitizedDescription)
+	}
+
+	//console.log(spell_descriptions)
+
+	//console.log(img_array)
+
+	var abil_size = 65;
+
+	for (var i = 0; i < img_array.length; i++) {
+		svg_abilities.append("image")
+			.attr("x", 30)
+			.attr("y", 100 + i*abil_size + i*20)
+			.attr("height", abil_size)
+			.attr("width", abil_size)
+			.attr("class", "ability_image")
+			.attr("xlink:href", "/img/spells/" + img_array[i]);
+	}
+
+	svg_abilities.append("text")
+		.attr("x", 130)
+		.attr("y", 70)
+		.text("Champion Spells")
+		.attr("class", "abilities");
+
+	for (var i = 0; i < img_array.length; i++) {
+
+		svg_abilities.append('foreignObject')
+            .attr('x', 100)
+            .attr('y', 100 + i*abil_size + i*18.5)
+            .attr('width', 250)
+            .attr('height', 100)
+            .append("xhtml:body")
+            .attr("class", "ability_descrip")
+			.html('<div style="width: 250px; font-family: Arial; font-size: 12px;">' + String(spell_descriptions[i]) + '</div>')
+	}
+
+
 
     // mastery stuff
     var mastery_filter = filtered_data.filter(function(d) {
@@ -407,6 +482,189 @@ function update(current_hero) {
 		.attr("font-family", "Dosis")
 		.attr("font-size", "22px")
 		.text("Average Gold/Min");
+
+
+    d3.selectAll("#items_container svg *").remove()
+
+	var values = filtered_data.map(function(d) {
+		return [d.stats.item0, d.stats.item1, d.stats.item2, d.stats.item3, d.stats.item4, d.stats.item5];
+	});
+
+	var merged_values = [];
+
+	merged_values = merged_values.concat.apply(merged_values, values);
+
+	var items_dict = [];
+
+	var item_ids = l2.getKeys("item");
+
+	for (var i = 0; i < item_ids.length; i++) {
+		items_dict[i] = {"id": item_ids[i], "count": 0, "name": l2.getItemInfo(item_ids[i]).name}
+	}
+
+	var merged_values_length = merged_values.length;
+
+	for (var i = 0; i < merged_values_length; i++) {
+		if (merged_values[i] != 0) {
+			index = item_ids.indexOf(String(merged_values[i]))
+
+			items_dict[index].count += 1;
+		}
+	}
+
+	items_dict = items_dict.filter(function(d) {
+		return d.count != 0
+	})
+
+	//console.log(items_dict)
+
+	var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = bb_items.w
+    height = bb_items.h - 40;
+
+	var x = d3.scale.ordinal()
+	    .rangeRoundBands([0, width], .1, 1);
+
+	var y = d3.scale.linear()
+	    .range([height, 0]);
+
+	var xAxis = d3.svg.axis()
+	    .scale(x)
+	    .orient("bottom")
+	    .innerTickSize([0])
+	    .outerTickSize([0])
+	    .tickFormat(function (d) { return ''; });
+
+	var yAxis = d3.svg.axis()
+	    .scale(y)
+	    .orient("left")
+	    .innerTickSize([0])
+	    .outerTickSize([0]);
+
+	x.domain(items_dict.map(function(d) {
+		return d.name
+	}))
+
+	y.domain([0, d3.max(items_dict, function(d) {
+		return d.count;
+	})])
+
+	//console.log(x.domain())
+
+	svg_items.append("g")
+	    .attr("class", "x axis")
+	    .attr("transform", "translate(0," + height + ")")
+	    .call(xAxis);
+
+	// svg_items.append("g")
+	//     .attr("class", "y axis")
+	//     .call(yAxis)
+	//   .append("text")
+	//     .attr("transform", "rotate(-90)")
+	//     .attr("y", 6)
+	//     .attr("dy", ".71em")
+	//     .style("text-anchor", "end")
+	//     .text("Frequency");
+
+	svg_items.selectAll(".bar")
+	    .data(items_dict)
+	  .enter().append("rect")
+	    .attr("class", "bar")
+	    .attr("x", function(d,i) { 
+	    	//console.log(d)
+	    	return x(d.name); })
+	    .attr("width", x.rangeBand())
+	    .attr("y", function(d) { return y(d.count); })
+	    .attr("height", function(d) { return height - y(d.count); })
+	    .on("mouseover", function(d) {
+
+	    	graph_tip.html("<b>" + d.name + "</b><br>Count: " + d.count)
+	    	graph_tip.show(d);
+
+	    })
+	    .on("mouseout", function(d) {
+	    	graph_tip.hide(d);
+	    });
+
+	svg_items.append("text")
+		.attr("x", 320)
+		.attr("y", 20)
+		.attr("font-family", "Dosis")
+		.attr("font-size", "22px")
+		.text("Items Purchased");
+
+	svg_items.selectAll(".text")
+		.data(items_dict)
+		.enter().append("text")
+		.attr("class", "item_text")
+		.attr("dy", ".75em")
+	    .attr("y", function(d) {
+	    	return y(d.count) + 2;
+	    })
+	    .attr("x", function(d,i) {
+	    	return x(d.name) + (x.range()[1] - x.range()[0])/2;
+	    })
+	    .attr("text-anchor", "middle")
+	    .text(function(d) { 
+	    	//console.log(d.y)
+	    	return d.count; 
+	    });
+
+
+	d3.selectAll("#winrate_container svg *").remove();
+
+	var outcomes = filtered_data.map(function(d) {
+		return d.stats.winner;
+	});
+
+	var num_wins = 0;
+	var total_games = outcomes.length;
+
+	for (var i = 0; i < outcomes.length; i++) {
+		if (String(outcomes[i]) == "true") {
+			num_wins += 1;
+			//console.log("here")
+		}
+	};
+
+	var winrate = num_wins/total_games;
+
+	//console.log(winrate)
+
+	svg_winrate.append("rect")
+		.attr("height", 40)
+		.attr("width", bb_winrate.w-20)
+		.attr("stroke", "black")
+		.attr("stroke-width", 2)
+		.attr("fill", "white")
+		.attr("x", 40)
+		.attr("y", 40);
+
+	svg_winrate.append("text")
+		.attr("x", bb_winrate.w/2 - 0)
+		.attr("y", 25)
+		.attr("font-family", "Dosis")
+		.attr("font-size", "20px")
+		.text("Winrate")
+		.attr("stroke", "black");
+
+	svg_winrate.append("rect")
+		.attr("height", 40)
+		.attr("stroke", "black")
+		.attr("stroke-width", "1px")
+		.attr("width", winrate*(bb_winrate.w-20))
+		.attr("fill", "green")
+		.attr("x", 40)
+		.attr("y", 40);
+
+	svg_winrate.append("text")
+		.attr("x", 300)
+		.attr("y", 65)
+		.text(winrate.toFixed(2) + "%")
+		.attr("font-family", "Arial")
+		.attr("font-size", "18px")
+		.attr("font-weight", "bold");
+
 }
 
 function load(current_hero) {
@@ -422,43 +680,90 @@ function load(current_hero) {
         
 	for (var i = 0; i < summoner_spells_length; i++) {
 	    svg_summoner_spells.append("image")
-		.attr("x", 10 + i%row_width * (image_size + 5))
-		.attr("y", 50 + Math.floor(i/row_width)* (image_size + 5))
-		.attr("height", image_size)
-		.attr("width", image_size)
-		.attr("class", "sum_spell_img")
-		.attr("summoner_spell_id", summoner_spells[i])
-		.attr("xlink:href", "/img/summoner_spells/" + l2.getSummonerSpellInfo(summoner_spells[i]).image.full)
-		.attr("opacity", .4)
+			.attr("x", 10 + i%row_width * (image_size + 5))
+			.attr("y", 50 + Math.floor(i/row_width)* (image_size + 5))
+			.attr("height", image_size)
+			.attr("width", image_size)
+			.attr("class", "sum_spell_img")
+			.attr("summoner_spell_id", summoner_spells[i])
+			.attr("xlink:href", "/img/summoner_spells/" + l2.getSummonerSpellInfo(summoner_spells[i]).image.full)
+			.attr("opacity", .4)
             
 	    svg_summoner_spells.append("rect")
-		.attr("x", 10 + i%row_width * (image_size + 5))
-		.attr("y", 50 + Math.floor(i/row_width)* (image_size + 5))
-		.attr("height", image_size)
-		.attr("width", image_size)
-		.attr("stroke", "black")
-		.attr("stroke-width", 1)
-		.attr("fill", "none");
+			.attr("x", 10 + i%row_width * (image_size + 5))
+			.attr("y", 50 + Math.floor(i/row_width)* (image_size + 5))
+			.attr("height", image_size)
+			.attr("width", image_size)
+			.attr("stroke", "black")
+			.attr("stroke-width", 1)
+			.attr("fill", "none");
 	}
+
+	var actives = l2.getChampionInfo(current_hero).spells
+	var passive = l2.getChampionInfo(current_hero).passive
+	var img_array = [l2.getChampionInfo(current_hero).name + ".png"];
+	var spell_descriptions = [];
+
+	spell_descriptions.push(passive.sanitizedDescription)
+
+	for (var i = 0; i < actives.length; i++) {
+		img_array.push(actives[i].image.full)
+		spell_descriptions.push(actives[i].sanitizedDescription)
+	}
+
+	//console.log(spell_descriptions)
+
+	//console.log(img_array)
+
+	var abil_size = 65;
+
+	for (var i = 0; i < img_array.length; i++) {
+		svg_abilities.append("image")
+			.attr("x", 30)
+			.attr("y", 100 + i*abil_size + i*15)
+			.attr("height", abil_size)
+			.attr("width", abil_size)
+			.attr("class", "ability_image")
+			.attr("xlink:href", "/img/spells/" + img_array[i]);
+	}
+
+	svg_abilities.append("text")
+		.attr("x", 130)
+		.attr("y", 70)
+		.text("Champion Spells")
+		.attr("class", "abilities");
+
+	for (var i = 0; i < img_array.length; i++) {
+
+		svg_abilities.append('foreignObject')
+            .attr('x', 100)
+            .attr('y', 100 + i*abil_size + i*15)
+            .attr('width', 250)
+            .attr('height', 100)
+            .append("xhtml:body")
+            .attr("class", "ability_descrip")
+			.html('<div style="width: 250px; font-family: Arial; font-size: 12px;">' + String(spell_descriptions[i]) + '</div>')
+	}
+
         
 	d3.selectAll(".sum_spell_img")
 	    .on("mouseover", function(d, i) {
                 
-		var current_spell = d3.select(this).attr("summoner_spell_id");
-                
-		var spell_name = l2.getSummonerSpellInfo(current_spell).name
-		var description = l2.getSummonerSpellInfo(current_spell).sanitizedDescription;
-                
-		var html_string = "<b>" + spell_name + "</b><br>" + description;
-                
-		graph_tip.direction('e')
-                
-		graph_tip.html(html_string);
-		graph_tip.show(d,i);
+			var current_spell = d3.select(this).attr("summoner_spell_id");
+	                
+			var spell_name = l2.getSummonerSpellInfo(current_spell).name
+			var description = l2.getSummonerSpellInfo(current_spell).sanitizedDescription;
+	                
+			var html_string = "<b>" + spell_name + "</b><br>" + description;
+	                
+			graph_tip.direction('e')
+	                
+			graph_tip.html(html_string);
+			graph_tip.show(d,i);
                 
 	    })
 	    .on("mouseout", function(d, i) {
-		graph_tip.hide(d,i);
+			graph_tip.hide(d,i);
 	    })
         
         
@@ -524,7 +829,43 @@ function load(current_hero) {
 	    .attr("y", 0)
 	    .text(l2.getChampionInfo(current_hero).blurb.split("<br>")[0].split(".")[0]+".");
         
-        
+    //win-loss
+
+	var outcomes = filtered_data.map(function(d) {
+		return d.stats.winner;
+	});
+
+	var num_wins = 0;
+	var total_games = outcomes.length;
+
+	for (var i = 0; i < outcomes.length; i++) {
+		if (String(outcomes[i]) == "true") {
+			num_wins += 1;
+			//console.log("here")
+		}
+	};
+
+	var winrate = num_wins/total_games;
+
+	//console.log(winrate)
+
+	svg_winrate.append("rect")
+		.attr("height", 40)
+		.attr("stroke", "black")
+		.attr("stroke-width", "1px")
+		.attr("width", winrate*(bb_winrate.w-20))
+		.attr("fill", "green")
+		.attr("x", 40)
+		.attr("y", 40);
+
+	svg_winrate.append("text")
+		.attr("x", 300)
+		.attr("y", 65)
+		.text(winrate.toFixed(2) + "%")
+		.attr("font-family", "Arial")
+		.attr("font-size", "18px")
+		.attr("font-weight", "bold");
+
 	//xpm histogram
 	var values_xpm = filtered_data.map(function(d) {
 		return d.stats.DPM;
@@ -664,40 +1005,29 @@ function load(current_hero) {
 
 	merged_values = merged_values.concat.apply(merged_values, values);
 
-	var items_dict = [{}];
+	var items_dict = [];
+
+	var item_ids = l2.getKeys("item");
+
+	for (var i = 0; i < item_ids.length; i++) {
+		items_dict[i] = {"id": item_ids[i], "count": 0, "name": l2.getItemInfo(item_ids[i]).name}
+	}
 
 	var merged_values_length = merged_values.length;
 
 	for (var i = 0; i < merged_values_length; i++) {
-		//console.log(merged_values[i])
+		if (merged_values[i] != 0) {
+			index = item_ids.indexOf(String(merged_values[i]))
 
-		for (var j = 0; j < items_dict.length; j++) {
-
-			if (merged_values[i] in items_dict[j]) {
-				items_dict[j].count += 1;
-			}
-			else {
-				items_dict.push({
-					"key": merged_values[i],
-					"count": 1,
-					"name": l2.getItemInfo(merged_values[i]).name
-				});
-			}
-		// console.log(merged_values[i])
-		if (merged_values[i] in items_dict) {
-			items_dict[merged_values[i]].count += 1;
+			items_dict[index].count += 1;
 		}
-		else {
-			items_dict.push({
-				"key": merged_values[i],
-				"count": 1,
-				"name": l2.getItemInfo(merged_values[i]).name
-			})
-		}
+	}
 
-	};
+	items_dict = items_dict.filter(function(d) {
+		return d.count != 0
+	})
 
-	console.log(items_dict)
+	//console.log(items_dict)
 
 	var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = bb_items.w
@@ -713,7 +1043,8 @@ function load(current_hero) {
 	    .scale(x)
 	    .orient("bottom")
 	    .innerTickSize([0])
-	    .outerTickSize([0]);
+	    .outerTickSize([0])
+	    .tickFormat(function (d) { return ''; });
 
 	var yAxis = d3.svg.axis()
 	    .scale(y)
@@ -721,8 +1052,13 @@ function load(current_hero) {
 	    .innerTickSize([0])
 	    .outerTickSize([0]);
 
-	x.domain(items_dict.map(function(d) { return d.name; }));
-	y.domain([0, d3.max(items_dict, function(d) { return d.count; })]);
+	x.domain(items_dict.map(function(d) {
+		return d.name
+	}))
+
+	y.domain([0, d3.max(items_dict, function(d) {
+		return d.count;
+	})])
 
 	//console.log(x.domain())
 
@@ -731,54 +1067,59 @@ function load(current_hero) {
 	    .attr("transform", "translate(0," + height + ")")
 	    .call(xAxis);
 
-	svg_items.append("g")
-	    .attr("class", "y axis")
-	    .call(yAxis)
-	  .append("text")
-	    .attr("transform", "rotate(-90)")
-	    .attr("y", 6)
-	    .attr("dy", ".71em")
-	    .style("text-anchor", "end")
-	    .text("Frequency");
+	// svg_items.append("g")
+	//     .attr("class", "y axis")
+	//     .call(yAxis)
+	//   .append("text")
+	//     .attr("transform", "rotate(-90)")
+	//     .attr("y", 6)
+	//     .attr("dy", ".71em")
+	//     .style("text-anchor", "end")
+	//     .text("Frequency");
 
 	svg_items.selectAll(".bar")
 	    .data(items_dict)
 	  .enter().append("rect")
 	    .attr("class", "bar")
-	    .attr("x", function(d) { return x(d.name); })
+	    .attr("x", function(d,i) { 
+	    	//console.log(d)
+	    	return x(d.name); })
 	    .attr("width", x.rangeBand())
 	    .attr("y", function(d) { return y(d.count); })
-	    .attr("height", function(d) { return height - y(d.count); });
+	    .attr("height", function(d) { return height - y(d.count); })
+	    .on("mouseover", function(d) {
 
-	// d3.select("input").on("change", change);
+	    	graph_tip.html("<b>" + d.name + "</b><br>Count: " + d.count)
+	    	graph_tip.show(d);
 
-	// var sortTimeout = setTimeout(function() {
-	// 	d3.select("input").property("checked", true).each(change);
-	// }, 2000);
+	    })
+	    .on("mouseout", function(d) {
+	    	graph_tip.hide(d);
+	    });
 
-	// function change() {
-	//   	clearTimeout(sortTimeout);
+	svg_items.append("text")
+		.attr("x", 320)
+		.attr("y", 20)
+		.attr("font-family", "Dosis")
+		.attr("font-size", "22px")
+		.text("Items Purchased");
 
-	//     // Copy-on-write since tweens are evaluated after a delay.
-	//     var x0 = x.domain(data.sort(this.checked
-	//         ? function(a, b) { return b.frequency - a.frequency; }
-	//         : function(a, b) { return d3.ascending(a.letter, b.letter); })
-	//         .map(function(d) { return d.letter; }))
-	//         .copy();
-
-	//     var transition = svg.transition().duration(750),
-	//         delay = function(d, i) { return i * 50; };
-
-	//     transition.selectAll(".bar")
-	//         .delay(delay)
-	//         .attr("x", function(d) { return x0(d.letter); });
-
-	//     transition.select(".x.axis")
-	//         .call(xAxis)
-	//       .selectAll("g")
-	//         .delay(delay);
-	// }
-
+	svg_items.selectAll(".text")
+		.data(items_dict)
+		.enter().append("text")
+		.attr("class", "item_text")
+		.attr("dy", ".75em")
+	    .attr("y", function(d) {
+	    	return y(d.count) + 2;
+	    })
+	    .attr("x", function(d,i) {
+	    	return x(d.name) + (x.range()[1] - x.range()[0])/2;
+	    })
+	    .attr("text-anchor", "middle")
+	    .text(function(d) { 
+	    	//console.log(d.y)
+	    	return d.count; 
+	    });
 
 	d3.json("/blurbs/mastery_blurbs.json", function(mastery_blurbs) {
 	    d3.selectAll(".mastery_row img")
@@ -813,3 +1154,4 @@ function filter_by_id(champ_id) {
 
     return matches;
 }
+

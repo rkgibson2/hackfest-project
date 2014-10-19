@@ -205,13 +205,21 @@ label {
 
 /*histogram css*/
 
-.bar rect {
+.bar {
   fill: #8AB8E6;
   shape-rendering: crispEdges;
 }
 
+.bar:hover {
+  fill: green;
+}
+
 .bar text {
   fill: #fff;
+}
+
+.item_text {
+	fill: white;
 }
 
 .axis path, .axis line {
@@ -337,6 +345,26 @@ label {
     color: white;
 }
 
+.footer {
+  width: 1060px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #4f4f4f;
+}
 
+.footer a {
+  color: #4f4f4f;
+}
 
+#abilities {
+	position: relative;
+}
+
+.abilities {
+	font-family: Dosis;
+	font-size: 22px;
+}
 
