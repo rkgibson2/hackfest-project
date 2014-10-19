@@ -155,14 +155,38 @@ svg_summoner_spells.append("text")
 	.attr("font-size", "20px")
 	.text("Summoner Spells")
 	.attr("stroke", "black");
+//loadData(d3.select("#userdropdown").node().value);
 
+
+load("Ahri")
 
 $(".dropdown-menu li a").click(function(){
   
 	var current_hero = d3.select(this).text();
-	load(current_hero);
+
+	update(current_hero);
 
 });
+
+function update(current_hero) {
+	d3.json("/blurbs/champion_blurbs.json", function(data) {
+
+		//corner hero image
+		d3.select("#champ_image img")
+			.attr("src", "/img/champs/"+ current_hero.toLowerCase() + ".png");
+
+		d3.select("#champ_name text")
+			.text(current_hero.toUpperCase());
+
+		d3.select("#champ_title text")
+			.text(data[current_hero].title);
+
+		d3.select("#champ_blurb text")
+			.text(data[current_hero].blurb.split("<br>")[0]);
+
+	})
+
+}
 
 function load(current_hero) {
 
