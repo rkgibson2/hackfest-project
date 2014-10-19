@@ -131,7 +131,7 @@ var l2 = (function() {
     // This function was written by Angela Fan !!! :)
     function filterMatchData(champ_id) {
         return match.filter(function(d) {
-            return d.championId == champ_id
+            return (d.championId == champ_id) && (d.stats.champLevel > 1)
         });
     }
 
