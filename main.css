@@ -279,6 +279,7 @@ label {
     font-family: Arial; 
     font-size: 14px;
     font-weight: normal;
+    white-space: pre-wrap
 }
 
 [tooltip]:not([tooltip-persistent]):before {

@@ -452,7 +452,7 @@ function load(current_hero) {
 		    var mastery_id = d3.select(this).attr("mastery_id");
                     if (mastery_id != null) {
                         mastery = l2.getMasteryInfo(mastery_id);
-                        d3.select(this.parentNode).attr("tooltip", mastery.name);
+                        d3.select(this.parentNode).attr("tooltip", mastery.name + "\n" + mastery.sanitizedDescription.join("\n"));
                     }
 		})
                     
