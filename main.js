@@ -155,10 +155,8 @@ svg_summoner_spells.append("text")
 	.attr("font-size", "20px")
 	.text("Summoner Spells")
 	.attr("stroke", "black");
-//loadData(d3.select("#userdropdown").node().value);
 
-
-load("Ahri")
+load("Ahri");
 
 $(".dropdown-menu li a").click(function(){
   
@@ -182,10 +180,9 @@ function update(current_hero) {
 			.text(data[current_hero].title);
 
 		d3.select("#champ_blurb text")
-			.text(data[current_hero].blurb.split("<br>")[0]);
+			.text(data[current_hero].blurb.split("<br>")[0].split(".")[0]+".");
 
-	})
-
+	});
 }
 
 function load(current_hero) {
@@ -289,7 +286,7 @@ function load(current_hero) {
 				.attr("class", "champ_blurb")
 				.attr("x", 0)
 				.attr("y", 0)
-				.text(data[current_hero].blurb.split("<br>")[0]);
+				.text(data[current_hero].blurb.split("<br>")[0].split(".")[0]+".");
 
 				// // Generate a Bates distribution of 10 random variables.
 				// var values = d3.range(1000).map(d3.random.bates(10));
