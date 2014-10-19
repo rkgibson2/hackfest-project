@@ -183,12 +183,17 @@ function update(current_hero) {
 		d3.select("#champ_blurb text")
 			.text("It is said that the man now known as Dr. Mundo was born without any sort of conscience. Instead, he had an unquenchable desire to inflict pain through experimentation.")
 	}
+
+	var filtered_data = filter_by_id(current_hero);
+
 }
 
 function load(current_hero) {
     
     l2.loadJson(function() {
-        
+    
+    var filtered_data = filter_by_id(current_hero);
+    
 	var summoner_spells = ['11', '10', '13', '12', '21', '1', '3', '2', '4', '7', '6', '14'];
 	var summoner_spells_length = summoner_spells.length;
 	var row_width = 6;
@@ -318,8 +323,12 @@ function load(current_hero) {
         
         
 	//xpm histogram
-	var values_xpm = d3.range(1000).map(d3.random.bates(10));
+	var values_xpm = filtered_data.map(function(d) {
+		return d.stats.DPM;
+	});
         
+	console.log(filtered_data)
+
 	var margin_xpm = bb_xpm.margins,
 	width_xpm = bb_xpm.w - 50,
 	height_xpm = bb_xpm.h - 60;
@@ -506,6 +515,10 @@ function filter_by_id(champ_id) {
         match_in_min = d.matchDuration / 60;
         d.stats.GPM = d.stats.goldEarned / match_in_min;
         d.stats.DPM = d.stats.totalDamageDealt / match_in_min;
+
+        if (d.stats.DPM < 500) {
+        	console.log(i, d);
+        }
     })
 
     return matches;
