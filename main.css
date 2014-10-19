@@ -115,7 +115,8 @@ label {
 
 #champion_dropdown {
 	position: absolute;
-	left: 900px;
+	left: 850px;
+	top: 10px;
 }
 
 .graph_row > div {
@@ -255,6 +256,12 @@ label {
     height: auto;
     max-height: 200px;
     overflow-x: hidden;
+}
+
+#logo {
+	position: absolute;
+	right: 10px;
+	top: 10px;
 }
 
 

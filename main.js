@@ -269,8 +269,15 @@ function load(current_hero) {
             update(current_hero);
             
         });
-        
-        
+       
+
+    //add logo
+    d3.select("#logo").append("img")
+    	.attr("src", "logo.png")
+    	.attr("width", 200)
+    	.attr("class", "logo_image")
+    	.style("border", "5px solid black");
+
 	//corner hero image
 	var elem = document.createElement("img");
 	document.getElementById("champ_image").appendChild(elem);
