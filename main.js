@@ -407,6 +407,133 @@ function update(current_hero) {
 		.attr("font-family", "Dosis")
 		.attr("font-size", "22px")
 		.text("Average Gold/Min");
+
+
+    d3.selectAll("#items_container svg *").remove()
+
+	var values = filtered_data.map(function(d) {
+		return [d.stats.item0, d.stats.item1, d.stats.item2, d.stats.item3, d.stats.item4, d.stats.item5];
+	});
+
+	var merged_values = [];
+
+	merged_values = merged_values.concat.apply(merged_values, values);
+
+	var items_dict = [];
+
+	var item_ids = l2.getKeys("item");
+
+	for (var i = 0; i < item_ids.length; i++) {
+		items_dict[i] = {"id": item_ids[i], "count": 0, "name": l2.getItemInfo(item_ids[i]).name}
+	}
+
+	var merged_values_length = merged_values.length;
+
+	for (var i = 0; i < merged_values_length; i++) {
+		if (merged_values[i] != 0) {
+			index = item_ids.indexOf(String(merged_values[i]))
+
+			items_dict[index].count += 1;
+		}
+	}
+
+	items_dict = items_dict.filter(function(d) {
+		return d.count != 0
+	})
+
+	//console.log(items_dict)
+
+	var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = bb_items.w
+    height = bb_items.h - 40;
+
+	var x = d3.scale.ordinal()
+	    .rangeRoundBands([0, width], .1, 1);
+
+	var y = d3.scale.linear()
+	    .range([height, 0]);
+
+	var xAxis = d3.svg.axis()
+	    .scale(x)
+	    .orient("bottom")
+	    .innerTickSize([0])
+	    .outerTickSize([0])
+	    .tickFormat(function (d) { return ''; });
+
+	var yAxis = d3.svg.axis()
+	    .scale(y)
+	    .orient("left")
+	    .innerTickSize([0])
+	    .outerTickSize([0]);
+
+	x.domain(items_dict.map(function(d) {
+		return d.name
+	}))
+
+	y.domain([0, d3.max(items_dict, function(d) {
+		return d.count;
+	})])
+
+	//console.log(x.domain())
+
+	svg_items.append("g")
+	    .attr("class", "x axis")
+	    .attr("transform", "translate(0," + height + ")")
+	    .call(xAxis);
+
+	// svg_items.append("g")
+	//     .attr("class", "y axis")
+	//     .call(yAxis)
+	//   .append("text")
+	//     .attr("transform", "rotate(-90)")
+	//     .attr("y", 6)
+	//     .attr("dy", ".71em")
+	//     .style("text-anchor", "end")
+	//     .text("Frequency");
+
+	svg_items.selectAll(".bar")
+	    .data(items_dict)
+	  .enter().append("rect")
+	    .attr("class", "bar")
+	    .attr("x", function(d,i) { 
+	    	//console.log(d)
+	    	return x(d.name); })
+	    .attr("width", x.rangeBand())
+	    .attr("y", function(d) { return y(d.count); })
+	    .attr("height", function(d) { return height - y(d.count); })
+	    .on("mouseover", function(d) {
+
+	    	graph_tip.html("<b>" + d.name + "</b><br>Count: " + d.count)
+	    	graph_tip.show(d);
+
+	    })
+	    .on("mouseout", function(d) {
+	    	graph_tip.hide(d);
+	    });
+
+	svg_items.append("text")
+		.attr("x", 320)
+		.attr("y", 20)
+		.attr("font-family", "Dosis")
+		.attr("font-size", "22px")
+		.text("Items Purchased");
+
+	svg_items.selectAll(".text")
+		.data(items_dict)
+		.enter().append("text")
+		.attr("class", "item_text")
+		.attr("dy", ".75em")
+	    .attr("y", function(d) {
+	    	return y(d.count) + 2;
+	    })
+	    .attr("x", function(d,i) {
+	    	return x(d.name) + (x.range()[1] - x.range()[0])/2;
+	    })
+	    .attr("text-anchor", "middle")
+	    .text(function(d) { 
+	    	//console.log(d.y)
+	    	return d.count; 
+	    });
 }
 
 function load(current_hero) {
