@@ -201,7 +201,7 @@ label {
 /*histogram css*/
 
 .bar rect {
-  fill: steelblue;
+  fill: #8AB8E6;
   shape-rendering: crispEdges;
 }
 
@@ -248,13 +248,18 @@ label {
     
     /* customizable */
     transition: all 0.15s ease;
-	line-height: 1;
-	font-weight: bold;
-	padding: 12px;
-	background: rgba(0, 0, 0, 0.8);
-	color: #fff;
-	border-radius: 2px;
-	pointer-events: none;   
+    z-index: 101;
+    line-height: 1;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 1px;
+    text-align: center;
+    pointer-events: none;
+    width: 150px;
+    font-family: Arial; 
+    font-size: 14px;
+    font-weight: normal;
 }
 
 [tooltip]:hover:before {
@@ -262,13 +267,18 @@ label {
     opacity: 1;
     
     /* customizable */
-	line-height: 1;
-	font-weight: bold;
-	padding: 12px;
-	background: rgba(0, 0, 0, 0.8);
-	color: #fff;
-	border-radius: 2px;
-	pointer-events: none;    
+    z-index: 101;
+    line-height: 1;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 1px;
+    text-align: center;
+    pointer-events: none;
+    width: 150px;
+    font-family: Arial; 
+    font-size: 14px;
+    font-weight: normal;
 }
 
 [tooltip]:not([tooltip-persistent]):before {
