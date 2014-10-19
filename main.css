@@ -307,3 +307,24 @@ label {
 	margin-left: auto;
 	margin-right: auto;
 }
+
+#value_sort_label {
+	position: absolute;
+	top: 150px;
+	font-size: 12px;
+}
+
+#cost_sort_label {
+	position: absolute;
+	top: 170px;
+	left: 453px;
+	font-size: 12px;
+}
+
+#item_sort_label {
+	position: absolute;
+	top: 190px;
+	left: 453px;
+	font-size: 12px;
+}
+
