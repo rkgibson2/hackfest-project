@@ -359,4 +359,10 @@ label {
   color: #4f4f4f;
 }
 
-
+#abilities {
+	position: absolute;
+	left: 20px;
+	top: 500px;
+	width: 400px;
+	height: 350px;
+}

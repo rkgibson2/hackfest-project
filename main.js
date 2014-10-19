@@ -604,24 +604,50 @@ function load(current_hero) {
         
 	for (var i = 0; i < summoner_spells_length; i++) {
 	    svg_summoner_spells.append("image")
-		.attr("x", 10 + i%row_width * (image_size + 5))
-		.attr("y", 50 + Math.floor(i/row_width)* (image_size + 5))
-		.attr("height", image_size)
-		.attr("width", image_size)
-		.attr("class", "sum_spell_img")
-		.attr("summoner_spell_id", summoner_spells[i])
-		.attr("xlink:href", "/img/summoner_spells/" + l2.getSummonerSpellInfo(summoner_spells[i]).image.full)
-		.attr("opacity", .4)
+			.attr("x", 10 + i%row_width * (image_size + 5))
+			.attr("y", 50 + Math.floor(i/row_width)* (image_size + 5))
+			.attr("height", image_size)
+			.attr("width", image_size)
+			.attr("class", "sum_spell_img")
+			.attr("summoner_spell_id", summoner_spells[i])
+			.attr("xlink:href", "/img/summoner_spells/" + l2.getSummonerSpellInfo(summoner_spells[i]).image.full)
+			.attr("opacity", .4)
             
 	    svg_summoner_spells.append("rect")
-		.attr("x", 10 + i%row_width * (image_size + 5))
-		.attr("y", 50 + Math.floor(i/row_width)* (image_size + 5))
-		.attr("height", image_size)
-		.attr("width", image_size)
-		.attr("stroke", "black")
-		.attr("stroke-width", 1)
-		.attr("fill", "none");
+			.attr("x", 10 + i%row_width * (image_size + 5))
+			.attr("y", 50 + Math.floor(i/row_width)* (image_size + 5))
+			.attr("height", image_size)
+			.attr("width", image_size)
+			.attr("stroke", "black")
+			.attr("stroke-width", 1)
+			.attr("fill", "none");
 	}
+
+	var actives = l2.getChampionInfo(current_hero).spells
+	var passive = l2.getChampionInfo(current_hero).passive
+	var img_array = [l2.getChampionInfo(current_hero).name + ".png"];
+
+	for (var i = 0; i < actives.length; i++) {
+		img_array.push(actives[i].image.full)
+	}
+
+	console.log(img_array)
+
+	var abil_size = 65;
+
+	for (var i = 0; i < img_array.length; i++) {
+		d3.select("#abilities").append("image")
+			.attr("x", 10)
+			.attr("y", 10 + (i*abil_size))
+			.attr("height", abil_size)
+			.attr("width", abil_size)
+			.attr("class", "ability_image")
+			.attr("xlink:href", "/img/spells/" + img_array[i]);
+	}
+
+	// d3.select("#abilities")
+	// 	.append("image")
+	// 	.attr("x", 10)
         
 	d3.selectAll(".sum_spell_img")
 	    .on("mouseover", function(d, i) {
