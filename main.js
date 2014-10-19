@@ -631,18 +631,25 @@ function load(current_hero) {
 		img_array.push(actives[i].image.full)
 	}
 
-	console.log(img_array)
+	d3.select("#abilities").append("text")
+		.attr("x", 0)
+		.attr("y", 0)
+		.attr("font-family", "Dosis")
+		.attr("font-size", "18px")
+		.text("Spells");
+
+	//console.log(img_array)
 
 	var abil_size = 65;
 
 	for (var i = 0; i < img_array.length; i++) {
-		d3.select("#abilities").append("image")
-			.attr("x", 10)
-			.attr("y", 10 + (i*abil_size))
+		d3.select("#abilities").append("img")
+			.attr("x", 100)
+			.attr("y", 50 + (i*abil_size))
 			.attr("height", abil_size)
 			.attr("width", abil_size)
 			.attr("class", "ability_image")
-			.attr("xlink:href", "/img/spells/" + img_array[i]);
+			.attr("src", "/img/spells/" + img_array[i]);
 	}
 
 	// d3.select("#abilities")
