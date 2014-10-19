@@ -187,9 +187,9 @@ function update(current_hero) {
 
 function load(current_hero) {
 
-	d3.json("/blurbs/summoner_spell_blurbs.json", function(summoner_spell_blurbs) {
+	l2.loadJson(function() {
 
-		var summoner_spells = ["Barrier", "Clairvoyance", "Clarity", "Cleanse", "Exhaust", "Flash", "Ghost", "Heal", "Ignite", "Revive", "Smite", "Teleport"];
+		var summoner_spells = ['11', '10', '13', '12', '21', '1', '3', '2', '4', '7', '6', '14'];
 		var summoner_spells_length = summoner_spells.length;
 		var row_width = 6;
 		var image_size = 64;
@@ -201,8 +201,8 @@ function load(current_hero) {
 				.attr("height", image_size)
 				.attr("width", image_size)
 				.attr("class", "sum_spell_img")
-				.attr("id", summoner_spells[i])
-				.attr("xlink:href", "/img/summoner_spells/" + summoner_spells[i] + ".png")
+				.attr("id", "summonerspells_" + summoner_spells[i])
+				.attr("xlink:href", "/img/summoner_spells/" + l2.getSummonerSpellInfo(summoner_spells[i]).image.full)
 				.attr("opacity", .4)
 
 			svg_summoner_spells.append("rect")
@@ -218,28 +218,28 @@ function load(current_hero) {
 		d3.selectAll(".sum_spell_img")
 			.on("mouseover", function(d, i) {
 
-				var current_spell = d3.select(this).attr("id");
+				var current_spell = d3.select(this).attr("id").split("_")[1];
 
 				//console.log(summoner_spell_blurbs)
 
-				if (current_spell == "Ignite") {
-					current_spell = "Dot";
-				}
-				else if (current_spell == "Ghost") {
-					current_spell = "Haste";
-				}
-				else if (current_spell == "Clarity") {
-					current_spell = "Mana";
-				}
-				else if (current_spell == "Cleanse") {
-					current_spell = "Boost";
-				}
-				else {
-					current_spell = current_spell;
-				}
+				// if (current_spell == "Ignite") {
+				// 	current_spell = "Dot";
+				// }
+				// else if (current_spell == "Ghost") {
+				// 	current_spell = "Haste";
+				// }
+				// else if (current_spell == "Clarity") {
+				// 	current_spell = "Mana";
+				// }
+				// else if (current_spell == "Cleanse") {
+				// 	current_spell = "Boost";
+				// }
+				// else {
+				// 	current_spell = current_spell;
+				// }
 
-				var spell_name = summoner_spell_blurbs[String("Summoner")+current_spell].name;
-				var description = summoner_spell_blurbs[String("Summoner")+current_spell].sanitizedDescription;
+				var spell_name = l2.getSummonerSpellInfo(current_spell).name
+				var description = l2.getSummonerSpellInfo(current_spell).sanitizedDescription;
 
 				var html_string = "<b>" + spell_name + "</b><br>" + description;
 
@@ -254,97 +254,97 @@ function load(current_hero) {
 			})
 
 
-		d3.json("/blurbs/champion_blurbs.json", function(data) {
+		var champ_ids = l2.getKeys("champion");
 
-			//corner hero image
-			var elem = document.createElement("img")
-			document.getElementById("champ_image").appendChild(elem);
-			elem.src = "/img/champs/"+ current_hero.toLowerCase() + ".png";
+		
 
-			d3.select("#champ_name")
-				.append("text")
-				.attr("x", 0)
-				.attr("y", 0)
-				.attr("class", "champ_name")
-				.text(current_hero.toUpperCase())
-				.style("fill", "black");
+		//corner hero image
+		var elem = document.createElement("img");
+		document.getElementById("champ_image").appendChild(elem);
+		elem.src = "/img/champs/"+ current_hero.toLowerCase() + ".png";
 
-			d3.select("#champ_title")
-				.append("text")
-				.attr("x", 0)
-				.attr("y", 0)
-				.attr("class", "champ_title")
-				.text(data[current_hero].title);
+		d3.select("#champ_name")
+			.append("text")
+			.attr("x", 0)
+			.attr("y", 0)
+			.attr("class", "champ_name")
+			.text(current_hero.toUpperCase())
+			.style("fill", "black");
 
-			d3.select("#champ_blurb")
-				.append("text")
-				.attr("class", "champ_blurb")
-				.attr("x", 0)
-				.attr("y", 0)
-				.text(data[current_hero].blurb.split("<br>")[0].split(".")[0]+".");
+		d3.select("#champ_title")
+			.append("text")
+			.attr("x", 0)
+			.attr("y", 0)
+			.attr("class", "champ_title")
+			.text(data[current_hero].title);
 
-
-			//items histogram
-			var values = d3.range(1000).map(d3.random.bates(10));
-
-			var margin = bb_items.margins,
-			    width = bb_items.w - 50,
-			    height = bb_items.h - 20;
-
-			var x = d3.scale.linear()
-			    .domain([0, 1])
-			    .range([0, width]);
-
-			// Generate a histogram using twenty uniformly-spaced bins.
-			var data = d3.layout.histogram()
-			    .bins(x.ticks(20))
-			    (values);
-
-			var y = d3.scale.linear()
-			    .domain([0, d3.max(data, function(d) { return d.y; })])
-			    .range([height, 0]);
-
-			var xAxis = d3.svg.axis()
-			    .scale(x)
-			    .orient("bottom");
-
-			var bar = svg_items.selectAll(".bar")
-			    .data(data)
-			  .enter().append("g")
-			    .attr("class", "bar")
-			    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
-
-			bar.append("rect")
-			    .attr("x", 1)
-			    .attr("width", x(data[0].dx) - 1)
-			    .attr("height", function(d) { return height - y(d.y); });
-
-			bar.append("text")
-			    .attr("dy", ".75em")
-			    .attr("y", 6)
-			    .attr("x", x(data[0].dx) / 2)
-			    .attr("text-anchor", "middle")
-			    .text(function(d) { return d.y; });
-
-			svg_items.append("g")
-			    .attr("class", "x axis")
-			    .attr("transform", "translate(0," + height + ")")
-			    .call(xAxis);
+		d3.select("#champ_blurb")
+			.append("text")
+			.attr("class", "champ_blurb")
+			.attr("x", 0)
+			.attr("y", 0)
+			.text(data[current_hero].blurb.split("<br>")[0].split(".")[0]+".");
 
 
-			d3.json("/blurbs/mastery_blurbs.json", function(mastery_blurbs) {
-				d3.selectAll("#masteries_container img")
-					.each(function(d) {
-						var img_source = d3.select(this).attr("src");
-						var mastery_name = img_source.split("/")[3].split(".")[0]
-						//console.log(mastery_blurbs)
-					})
+		//items histogram
+		var values = d3.range(1000).map(d3.random.bates(10));
 
-			})
+		var margin = bb_items.margins,
+		    width = bb_items.w - 50,
+		    height = bb_items.h - 20;
+
+		var x = d3.scale.linear()
+		    .domain([0, 1])
+		    .range([0, width]);
+
+		// Generate a histogram using twenty uniformly-spaced bins.
+		var data = d3.layout.histogram()
+		    .bins(x.ticks(20))
+		    (values);
+
+		var y = d3.scale.linear()
+		    .domain([0, d3.max(data, function(d) { return d.y; })])
+		    .range([height, 0]);
+
+		var xAxis = d3.svg.axis()
+		    .scale(x)
+		    .orient("bottom");
+
+		var bar = svg_items.selectAll(".bar")
+		    .data(data)
+		  .enter().append("g")
+		    .attr("class", "bar")
+		    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+		bar.append("rect")
+		    .attr("x", 1)
+		    .attr("width", x(data[0].dx) - 1)
+		    .attr("height", function(d) { return height - y(d.y); });
+
+		bar.append("text")
+		    .attr("dy", ".75em")
+		    .attr("y", 6)
+		    .attr("x", x(data[0].dx) / 2)
+		    .attr("text-anchor", "middle")
+		    .text(function(d) { return d.y; });
+
+		svg_items.append("g")
+		    .attr("class", "x axis")
+		    .attr("transform", "translate(0," + height + ")")
+		    .call(xAxis);
+
+		d3.json("/blurbs/mastery_blurbs.json", function(mastery_blurbs) {
+			d3.selectAll("#masteries_container img")
+				.each(function(d) {
+					var img_source = d3.select(this).attr("src");
+					var mastery_name = img_source.split("/")[3].split(".")[0]
+					//console.log(mastery_blurbs)
+				})
 
 		})
 
-	})
+	});
+
 }
 
 
