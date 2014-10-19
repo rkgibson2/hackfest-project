@@ -185,28 +185,114 @@ function update(current_hero) {
     d3.select("#champ_blurb text")
 	.text(l2.getChampionInfo(current_hero).blurb.split("<br>")[0].split(".")[0]+".");
 
-	if (current_hero == "36") {
-		d3.select("#champ_blurb text")
-			.text("It is said that the man now known as Dr. Mundo was born without any sort of conscience. Instead, he had an unquenchable desire to inflict pain through experimentation.")
-	}
+    if (current_hero == "36") {
+	d3.select("#champ_blurb text")
+	    .text("It is said that the man now known as Dr. Mundo was born without any sort of conscience. Instead, he had an unquenchable desire to inflict pain through experimentation.")
+    }
+    
+    filtered_data = filter_by_id(current_hero);
 
-	filtered_data = filter_by_id(current_hero);
+    // mastery stuff
+    var mastery_filter = filtered_data.filter(function(d) {
+        return "masteries" in d;
+    });
+    
+    var mastery_key_list = l2.getKeys("mastery");
+    var mastery_counter = {};
 
-	d3.selectAll("#xpm_container svg *").remove()
+    // set up opacity scale
+    var opacity_scale = d3.scale.linear()
+        .domain([0, 1])
+        .range([0.4, 1])
 
-	var values_xpm = filtered_data.map(function(d) {
-			return d.stats.DPM;
-		});
+    for (var i = 0; i < mastery_key_list.length; i++) {
+        mastery_counter[mastery_key_list[i]] = 0;
+    }
+
+    // count mastery points
+    for (var i = 0; i < mastery_filter.length; i++) {
+        masteries = mastery_filter[i].masteries;
+        for (var j = 0; j < masteries.length; j++) {
+            mastery_counter[masteries[j].masteryId] += masteries[j].rank;
+        }
+    }
+
+    // normalize mastery points and set opacity
+    for (var i = 0; i < mastery_key_list.length; i++) {
+        id = mastery_key_list[i];
+        mastery_counter[id] /= (mastery_filter.length * l2.getMasteryInfo(id).ranks);
         
-	x_xpm = d3.scale.linear()
-	    .domain(d3.extent(values_xpm))
-	    .range([0, width_xpm]);
+        img = d3.select("[mastery_id='" + id + "']")
+            .style("opacity", opacity_scale(mastery_counter[id]));
 
-	data_xpm = d3.layout.histogram()
-	    .bins(17)
-	    .range(d3.extent(values_xpm))
-	(values_xpm);
+        mastery = l2.getMasteryInfo(id);
+        d3.select(img.node().parentNode).attr("tooltip", mastery.name + "\n" + 
+                                              mastery.sanitizedDescription.join("\n") + "\n" + 
+                                              "Taken: " + (mastery_counter[id] * 100).toFixed() + "%");
+    }
+
+    // get summoner spells
+    var summoner_spells = ['11', '10', '13', '12', '21', '1', '3', '2', '4', '7', '6', '14'];
+
+    var summoner_counter = {};
+
+    for (var i = 0; i < summoner_spells.length; i++) {
+        summoner_counter[summoner_spells[i]] = 0;
+    }
+
+    // count mastery points
+    for (var i = 0; i < filtered_data.length; i++) {
+        summoner_counter[filtered_data[i].spell1Id] += 1;
+        summoner_counter[filtered_data[i].spell2Id] += 1;
+    }
+
+    // normalize mastery points and set opacity
+    for (var i = 0; i < summoner_spells.length; i++) {
+        id = summoner_spells[i];
+        summoner_counter[id] /= filtered_data.length;
         
+        img = d3.select("[summoner_spell_id='" + id + "']")
+            .style("opacity", opacity_scale(summoner_counter[id]))
+            .attr("percentage", summoner_counter[id]);
+    }
+
+    // bind new mouseovers
+    d3.selectAll(".sum_spell_img")
+	.on("mouseover", function(d, i) {
+            
+	    var current_spell = d3.select(this).attr("summoner_spell_id");
+            
+	    var spell_name = l2.getSummonerSpellInfo(current_spell).name
+	    var description = l2.getSummonerSpellInfo(current_spell).sanitizedDescription;
+            var percentage = d3.select(this).attr("percentage")
+            
+	    var html_string = "<b>" + spell_name + "</b><br>" + description + "<br> <i>Taken: " + (percentage * 100).toFixed() + "%</i>";
+            
+	    graph_tip.direction('e')
+            
+	    graph_tip.html(html_string);
+	    graph_tip.show(d,i);
+            
+	})
+	.on("mouseout", function(d, i) {
+	    graph_tip.hide(d,i);
+	});
+    
+    d3.selectAll("#xpm_container svg *").remove()
+    
+    var values_xpm = filtered_data.map(function(d) {
+	return d.stats.DPM;
+    });
+    
+    x_xpm = d3.scale.linear()
+	.domain(d3.extent(values_xpm))
+	.range([0, width_xpm]);
+    
+    data_xpm = d3.layout.histogram()
+	.bins(17)
+	.range(d3.extent(values_xpm))
+    (values_xpm);
+    
 	y_xpm = d3.scale.linear()
 	    .domain([0, d3.max(data_xpm, function(d) { return d.y; })])
 	    .range([height_xpm, 0]);
@@ -341,7 +427,7 @@ function load(current_hero) {
 		.attr("height", image_size)
 		.attr("width", image_size)
 		.attr("class", "sum_spell_img")
-		.attr("id", "summonerspells_" + summoner_spells[i])
+		.attr("summoner_spell_id", summoner_spells[i])
 		.attr("xlink:href", "/img/summoner_spells/" + l2.getSummonerSpellInfo(summoner_spells[i]).image.full)
 		.attr("opacity", .4)
             
@@ -358,7 +444,7 @@ function load(current_hero) {
 	d3.selectAll(".sum_spell_img")
 	    .on("mouseover", function(d, i) {
                 
-		var current_spell = d3.select(this).attr("id").split("_")[1];
+		var current_spell = d3.select(this).attr("summoner_spell_id");
                 
 		var spell_name = l2.getSummonerSpellInfo(current_spell).name
 		var description = l2.getSummonerSpellInfo(current_spell).sanitizedDescription;
@@ -597,6 +683,16 @@ function load(current_hero) {
 					"name": l2.getItemInfo(merged_values[i]).name
 				});
 			}
+		// console.log(merged_values[i])
+		if (merged_values[i] in items_dict) {
+			items_dict[merged_values[i]].count += 1;
+		}
+		else {
+			items_dict.push({
+				"key": merged_values[i],
+				"count": 1,
+				"name": l2.getItemInfo(merged_values[i]).name
+			})
 		}
 
 	};
