@@ -25,6 +25,17 @@ bb_summoner_spells = {
     }
 };
 
+bb_abilities = {
+    w: 400,
+    h: 500,
+    margin: {
+    	top: 20,
+    	right: 10,
+    	bottom: 10,
+    	left: 20
+    }
+};
+
 bb_winrate = {
 	w: 360,
 	h: 80,
@@ -92,8 +103,12 @@ svg_summoner_spells = d3.select("#summoner_spells_container").append("svg").attr
 	height: bb_summoner_spells.h + bb_summoner_spells.margin.bottom + bb_summoner_spells.margin.top
 });
 
-svg_summoner_spells.call(graph_tip);
+svg_abilities = d3.select("#abilities").append("svg").attr({
+	width: bb_abilities.w + bb_abilities.margin.left + bb_abilities.margin.right + 20,
+	height: bb_abilities.h + bb_abilities.margin.bottom + bb_abilities.margin.top
+});
 
+svg_summoner_spells.call(graph_tip);
 
 svg_winrate = d3.select("#winrate_container").append("svg").attr({
 	width: bb_winrate.w + bb_winrate.margin.left + bb_winrate.margin.right,
@@ -130,6 +145,16 @@ svg_items.call(graph_tip);
 // 	.attr("fill", "black")
 // 	.attr("x", 0)
 // 	.attr("y", 0);
+
+svg_abilities.append("rect")
+	.attr("height", bb_abilities.h)
+	.attr("width", bb_abilities.w-20)
+	.attr("stroke", "black")
+	.attr("stroke-width", 2)
+	.attr("fill", "white")
+	.attr("x", 20)
+	.attr("y", 20);
+
 svg_winrate.append("rect")
 	.attr("height", 40)
 	.attr("width", bb_winrate.w-20)
@@ -631,24 +656,25 @@ function load(current_hero) {
 		img_array.push(actives[i].image.full)
 	}
 
-	d3.select("#abilities").append("text")
-		.attr("x", 80)
-		.attr("y", 20)
-		.text("Champion Spells");
-
 	//console.log(img_array)
 
 	var abil_size = 65;
 
 	for (var i = 0; i < img_array.length; i++) {
-		d3.select("#abilities").append("img")
-			.attr("x", 100)
-			.attr("y", 10 + (i*abil_size))
+		svg_abilities.append("image")
+			.attr("x", 30)
+			.attr("y", 110 + i*abil_size)
 			.attr("height", abil_size)
 			.attr("width", abil_size)
 			.attr("class", "ability_image")
-			.attr("src", "/img/spells/" + img_array[i]);
+			.attr("xlink:href", "/img/spells/" + img_array[i]);
 	}
+
+	svg_abilities.append("text")
+		.attr("x", 130)
+		.attr("y", 50)
+		.text("Champion Spells");
+
 
 	// d3.select("#abilities")
 	// 	.append("image")
