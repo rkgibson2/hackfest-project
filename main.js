@@ -104,12 +104,12 @@ svg_items.call(graph_tip);
 
 
 //add nice rects and label text
-svg_xpm.append("rect")
-	.attr("height", bb_xpm.h)
-	.attr("width", bb_xpm.w)
-	.attr("fill", "black")
-	.attr("x", 0)
-	.attr("y", 0);
+// svg_xpm.append("rect")
+// 	.attr("height", bb_xpm.h)
+// 	.attr("width", bb_xpm.w)
+// 	.attr("fill", "black")
+// 	.attr("x", 0)
+// 	.attr("y", 0);
 
 svg_gpm.append("rect")
 	.attr("height", bb_gpm.h)
@@ -305,6 +305,54 @@ function load(current_hero) {
 	    .text(l2.getChampionInfo(current_hero).blurb.split("<br>")[0].split(".")[0]+".");
         
         
+	//xpm histogram
+	var values_xpm = d3.range(1000).map(d3.random.bates(10));
+        
+	var margin_xpm = bb_xpm.margins,
+	width_xpm = bb_xpm.w - 50,
+	height_xpm = bb_xpm.h - 20;
+        
+	var x_xpm = d3.scale.linear()
+	    .domain([0, 1])
+	    .range([0, width_xpm]);
+        
+	// Generate a histogram using twenty uniformly-spaced bins.
+	var data_xpm = d3.layout.histogram()
+	    .bins(x_xpm.ticks(20))
+	(values_xpm);
+        
+	var y_xpm = d3.scale.linear()
+	    .domain([0, d3.max(data_xpm, function(d) { return d.y; })])
+	    .range([height_xpm, 0]);
+        
+	var xAxis_xpm = d3.svg.axis()
+	    .scale(x_xpm)
+	    .orient("bottom");
+        
+	var bar_xpm = svg_xpm.selectAll(".bar")
+	    .data(data_xpm)
+	    .enter().append("g")
+	    .attr("class", "bar")
+	    .attr("transform", function(d) { return "translate(" + x_xpm(d.x) + "," + y_xpm(d.y) + ")"; });
+        
+	bar_xpm.append("rect")
+	    .attr("x", 1)
+	    .attr("width", x_xpm(data_xpm[0].dx) - 1)
+	    .attr("height", function(d) { return height_xpm - y_xpm(d.y); });
+        
+	bar_xpm.append("text")
+	    .attr("dy", ".75em")
+	    .attr("y", 6)
+	    .attr("x", x_xpm(data_xpm[0].dx) / 2)
+	    .attr("text-anchor", "middle")
+	    .text(function(d) { return d.y; });
+        
+	svg_xpm.append("g")
+	    .attr("class", "x axis")
+	    .attr("transform", "translate(0," + height_xpm + ")")
+	    .call(xAxis_xpm);
+
+
 	//items histogram
 	var values = d3.range(1000).map(d3.random.bates(10));
         
