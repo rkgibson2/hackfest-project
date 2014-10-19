@@ -1,6 +1,6 @@
-// Angela Fan, Robbie Gibson
+//Angela Fan, Robbie Gibson
 
-// data global
+//data global
 
 var champ_data;
 
@@ -315,27 +315,13 @@ function update(current_hero) {
 	    .attr("transform", "translate(0," + (height_gpm+40) + ")")
 	    .call(xAxis_gpm);
 
-    svg_gpm.append("text")
-	.attr("x", 80)
-	.attr("y", 20)
-	.attr("font-family", "Dosis")
-	.attr("font-size", "22px")
-	.text("Average Gold/Min");
-
-    var mastery_counter = {};
-    var mastery_key_list = l2.getKeys("mastery");
-
-    var mastery_filters = filtered_data.filter(function(d) {
-        return "masteries" in d;
-    })
-
-    console.log(mastery_filters);
-
-    for(var i = 0; i < mastery_key_list.length; i++) {
-        mastery_counter[mastery_key_list[i]] = 0;
-    }
-    
-    console.log(mastery_counter);
+	svg_gpm.append("text")
+		.attr("x", 80)
+		.attr("y", 20)
+		.attr("font-family", "Dosis")
+		.attr("font-size", "22px")
+		.text("Average Gold/Min");
+}
 
 function load(current_hero) {
     
