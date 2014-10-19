@@ -192,7 +192,7 @@ load(103);
 function update(current_hero) {
     //corner hero image
     d3.select("#champ_image img")
-	.attr("src", "/img/champs/"+ l2.getChampionInfo(current_hero).image.full);
+	.attr("src", "img/champs/"+ l2.getChampionInfo(current_hero).image.full);
     
     d3.select("#champ_name text")
 	.text(l2.getChampionDisplayName(current_hero).toUpperCase())
@@ -244,7 +244,7 @@ function update(current_hero) {
 			.attr("height", abil_size)
 			.attr("width", abil_size)
 			.attr("class", "ability_image")
-			.attr("xlink:href", "/img/spells/" + img_array[i]);
+			.attr("xlink:href", "img/spells/" + img_array[i]);
 	}
 
 	svg_abilities.append("text")
@@ -686,7 +686,7 @@ function load(current_hero) {
 			.attr("width", image_size)
 			.attr("class", "sum_spell_img")
 			.attr("summoner_spell_id", summoner_spells[i])
-			.attr("xlink:href", "/img/summoner_spells/" + l2.getSummonerSpellInfo(summoner_spells[i]).image.full)
+			.attr("xlink:href", "img/summoner_spells/" + l2.getSummonerSpellInfo(summoner_spells[i]).image.full)
 			.attr("opacity", .4)
             
 	    svg_summoner_spells.append("rect")
@@ -724,7 +724,7 @@ function load(current_hero) {
 			.attr("height", abil_size)
 			.attr("width", abil_size)
 			.attr("class", "ability_image")
-			.attr("xlink:href", "/img/spells/" + img_array[i]);
+			.attr("xlink:href", "img/spells/" + img_array[i]);
 	}
 
 	svg_abilities.append("text")
@@ -799,7 +799,7 @@ function load(current_hero) {
 	//corner hero image
 	var elem = document.createElement("img");
 	document.getElementById("champ_image").appendChild(elem);
-	elem.src = "/img/champs/"+ l2.getChampionInfo(current_hero).image.full;
+	elem.src = "img/champs/"+ l2.getChampionInfo(current_hero).image.full;
         
 	d3.select("#champ_name")
 	    .append("text")
