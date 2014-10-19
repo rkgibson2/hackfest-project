@@ -11,6 +11,8 @@ var graph_tip = d3.tip()
 //margins and bounding boxes for each graph visualization
 var bb_spells, bb_items, bb_xpm, bb_gpm, bb_masteries, bb_runes, bb_first_point, bb_maxed_at, bb_winrate;
 
+var x_xpm, y_xpm, data_xpm, xAxis_xpm, bar_xpm, x_gpm, y_gpm, data_gpm, xAxis_gpm, bar_gpm;
+
 //set up bounding boxes
 bb_summoner_spells = {
     w: 400,
@@ -55,6 +57,10 @@ bb_xpm = {
 		left: 10
 	}
 };
+
+var margin_xpm = bb_xpm.margins,
+	width_xpm = bb_xpm.w - 50,
+	height_xpm = bb_xpm.h - 60;
 
 bb_gpm = {
 	w: 350,
@@ -184,8 +190,137 @@ function update(current_hero) {
 			.text("It is said that the man now known as Dr. Mundo was born without any sort of conscience. Instead, he had an unquenchable desire to inflict pain through experimentation.")
 	}
 
-	var filtered_data = filter_by_id(current_hero);
+	filtered_data = filter_by_id(current_hero);
 
+	d3.selectAll("#xpm_container svg *").remove()
+
+	var values_xpm = filtered_data.map(function(d) {
+			return d.stats.DPM;
+		});
+        
+	x_xpm = d3.scale.linear()
+	    .domain(d3.extent(values_xpm))
+	    .range([0, width_xpm]);
+
+	data_xpm = d3.layout.histogram()
+	    .bins(17)
+	    .range(d3.extent(values_xpm))
+	(values_xpm);
+        
+	y_xpm = d3.scale.linear()
+	    .domain([0, d3.max(data_xpm, function(d) { return d.y; })])
+	    .range([height_xpm, 0]);
+        
+	xAxis_xpm = d3.svg.axis()
+	    .scale(x_xpm)
+	    .orient("bottom")
+	    .innerTickSize([0])
+	    .outerTickSize([0]);
+        
+	bar_xpm = svg_xpm.selectAll(".bar")
+	    .data(data_xpm)
+	    .enter().append("g")
+	    .attr("class", "bar")
+	    .attr("transform", function(d) { return "translate(" + x_xpm(d.x) + "," + (40+y_xpm(d.y)) + ")"; });
+        
+	bar_xpm.append("rect")
+	    .attr("x", 1)
+	    .attr("width", x_xpm.range()[1]/20)
+	    .attr("height", function(d) { return height_xpm - y_xpm(d.y); })
+	    .on("mouseover", function(d) {
+	    	graph_tip.html("DPM: " + d.x.toFixed());
+	    	graph_tip.show(d);
+	    })
+	    .on("mouseout", function(d) {
+	    	graph_tip.hide(d);
+	    });
+        
+	bar_xpm.append("text")
+	    .attr("dy", ".75em")
+	    .attr("y", 6)
+	    .attr("x", x_xpm.range()[1]/40)
+	    .attr("text-anchor", "middle")
+	    .text(function(d) { return d.y; });
+        
+	svg_xpm.append("g")
+	    .attr("class", "x axis")
+	    .attr("transform", "translate(0," + (height_xpm+40) + ")")
+	    .call(xAxis_xpm);
+
+	svg_xpm.append("text")
+		.attr("x", 80)
+		.attr("y", 20)
+		.attr("font-family", "Dosis")
+		.attr("font-size", "22px")
+		.text("Average Damage/Min");
+
+
+
+	d3.selectAll("#gpm_container svg *").remove()
+
+	var values_gpm = filtered_data.map(function(d) {
+		return d.stats.GPM;
+	});        
+
+	var margin_gpm = bb_gpm.margins,
+	width_gpm = bb_gpm.w - 50,
+	height_gpm = bb_gpm.h - 60;
+        
+	x_gpm = d3.scale.linear()
+	    .domain(d3.extent(values_gpm))
+	    .range([0, width_gpm]);
+        
+	data_gpm = d3.layout.histogram()
+	    .bins(17)
+	    .range(d3.extent(values_gpm))
+	(values_gpm);
+        
+	y_gpm = d3.scale.linear()
+	    .domain([0, d3.max(data_gpm, function(d) { return d.y; })])
+	    .range([height_gpm, 0]);
+        
+	xAxis_gpm = d3.svg.axis()
+	    .scale(x_gpm)
+	    .orient("bottom")
+	    .innerTickSize([0])
+	    .outerTickSize([0]);
+        
+	bar_gpm = svg_gpm.selectAll(".bar")
+	    .data(data_gpm)
+	    .enter().append("g")
+	    .attr("class", "bar")
+	    .attr("transform", function(d) { return "translate(" + x_gpm(d.x) + "," + (40+y_gpm(d.y)) + ")"; });
+        
+	bar_gpm.append("rect")
+	    .attr("x", 1)
+	    .attr("width", x_gpm.range()[1]/20)
+	    .attr("height", function(d) { return height_gpm - y_gpm(d.y); })
+	    .on("mouseover", function(d) {
+	    	graph_tip.html("GPM: " + d.x.toFixed(2));
+	    	graph_tip.show(d);
+	    })
+	    .on("mouseout", function(d) {
+	    	graph_tip.hide(d);
+	    });
+        
+	bar_gpm.append("text")
+	    .attr("dy", ".75em")
+	    .attr("y", 6)
+	    .attr("x", x_gpm.range()[1]/40)
+	    .attr("text-anchor", "middle")
+	    .text(function(d) { return d.y; });
+        
+	svg_gpm.append("g")
+	    .attr("class", "x axis")
+	    .attr("transform", "translate(0," + (height_gpm+40) + ")")
+	    .call(xAxis_gpm);
+
+	svg_gpm.append("text")
+		.attr("x", 80)
+		.attr("y", 20)
+		.attr("font-family", "Dosis")
+		.attr("font-size", "22px")
+		.text("Average Gold/Min");
 }
 
 function load(current_hero) {
@@ -224,24 +359,6 @@ function load(current_hero) {
 	    .on("mouseover", function(d, i) {
                 
 		var current_spell = d3.select(this).attr("id").split("_")[1];
-                
-		//console.log(summoner_spell_blurbs)
-                
-		// if (current_spell == "Ignite") {
-		// 	current_spell = "Dot";
-		// }
-		// else if (current_spell == "Ghost") {
-		// 	current_spell = "Haste";
-		// }
-		// else if (current_spell == "Clarity") {
-		// 	current_spell = "Mana";
-		// }
-		// else if (current_spell == "Cleanse") {
-		// 	current_spell = "Boost";
-		// }
-		// else {
-		// 	current_spell = current_spell;
-		// }
                 
 		var spell_name = l2.getSummonerSpellInfo(current_spell).name
 		var description = l2.getSummonerSpellInfo(current_spell).sanitizedDescription;
@@ -328,31 +445,27 @@ function load(current_hero) {
 	});
         
 	//console.log(values_xpm)
-
-	var margin_xpm = bb_xpm.margins,
-	width_xpm = bb_xpm.w - 50,
-	height_xpm = bb_xpm.h - 60;
         
-	var x_xpm = d3.scale.linear()
+	x_xpm = d3.scale.linear()
 	    .domain(d3.extent(values_xpm))
 	    .range([0, width_xpm]);
 
-	var data_xpm = d3.layout.histogram()
-	    .bins(x_xpm.ticks(20))
+	data_xpm = d3.layout.histogram()
+	    .bins(17)
 	    .range(d3.extent(values_xpm))
 	(values_xpm);
         
-	var y_xpm = d3.scale.linear()
+	y_xpm = d3.scale.linear()
 	    .domain([0, d3.max(data_xpm, function(d) { return d.y; })])
 	    .range([height_xpm, 0]);
         
-	var xAxis_xpm = d3.svg.axis()
+	xAxis_xpm = d3.svg.axis()
 	    .scale(x_xpm)
 	    .orient("bottom")
 	    .innerTickSize([0])
 	    .outerTickSize([0]);
         
-	var bar_xpm = svg_xpm.selectAll(".bar")
+	bar_xpm = svg_xpm.selectAll(".bar")
 	    .data(data_xpm)
 	    .enter().append("g")
 	    .attr("class", "bar")
@@ -399,26 +512,26 @@ function load(current_hero) {
 	width_gpm = bb_gpm.w - 50,
 	height_gpm = bb_gpm.h - 60;
         
-	var x_gpm = d3.scale.linear()
+	x_gpm = d3.scale.linear()
 	    .domain(d3.extent(values_gpm))
 	    .range([0, width_gpm]);
         
-	var data_gpm = d3.layout.histogram()
+	data_gpm = d3.layout.histogram()
 	    .bins(17)
 	    .range(d3.extent(values_gpm))
 	(values_gpm);
         
-	var y_gpm = d3.scale.linear()
+	y_gpm = d3.scale.linear()
 	    .domain([0, d3.max(data_gpm, function(d) { return d.y; })])
 	    .range([height_gpm, 0]);
         
-	var xAxis_gpm = d3.svg.axis()
+	xAxis_gpm = d3.svg.axis()
 	    .scale(x_gpm)
 	    .orient("bottom")
 	    .innerTickSize([0])
 	    .outerTickSize([0]);
         
-	var bar_gpm = svg_gpm.selectAll(".bar")
+	bar_gpm = svg_gpm.selectAll(".bar")
 	    .data(data_gpm)
 	    .enter().append("g")
 	    .attr("class", "bar")
@@ -539,7 +652,7 @@ function filter_by_id(champ_id) {
         d.stats.DPM = d.stats.totalDamageDealt / match_in_min;
 
         if (d.stats.DPM < 500) {
-        	console.log(i, d);
+        	//console.log(i, d);
         }
     })
 
