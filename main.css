@@ -361,5 +361,11 @@ label {
 
 #abilities {
 	position: relative;
-
+	margin-left: 20px;
 }
+
+#abilities text {
+	font-family: Dosis;
+	font-size: 22px;
+}
+

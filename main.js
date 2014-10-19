@@ -632,11 +632,9 @@ function load(current_hero) {
 	}
 
 	d3.select("#abilities").append("text")
-		.attr("x", 0)
-		.attr("y", 0)
-		.attr("font-family", "Dosis")
-		.attr("font-size", "18px")
-		.text("Spells");
+		.attr("x", 80)
+		.attr("y", 20)
+		.text("Champion Spells");
 
 	//console.log(img_array)
 
@@ -645,7 +643,7 @@ function load(current_hero) {
 	for (var i = 0; i < img_array.length; i++) {
 		d3.select("#abilities").append("img")
 			.attr("x", 100)
-			.attr("y", 50 + (i*abil_size))
+			.attr("y", 10 + (i*abil_size))
 			.attr("height", abil_size)
 			.attr("width", abil_size)
 			.attr("class", "ability_image")
