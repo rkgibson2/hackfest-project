@@ -108,19 +108,25 @@ def fetch_match_info(match_id):
     data = r.json()["timeline"]
     frames = data["frames"]
 
+    match_duration = r.json()["matchDuration"]
+    participants = r.json()["participants"]
+
+    for participant in participants: 
+        participant["matchDuration"] = match_duration
+
+    #match_info["participants"]
+    print participants
+
+    '''
     for frame in frames:
         if "events" in frame:
             events += frame["events"]
 
     match_info["timeline"] = events
 
-    match_info["matchDuration"] = r.json()["matchDuration"]
-    match_info["participantIdentities"] = r.json()["participantIdentities"]
-    match_info["participants"] = r.json()["participants"]
-
-    print events
-
-    '''
+    #match_info["matchDuration"] = r.json()["matchDuration"]
+    #match_info["participantIdentities"] = r.json()["participantIdentities"]
+    
     # keep looping until we run out of gamesx
     while len(data) >= 15:
         params["beginIndex"] += 15
@@ -133,7 +139,7 @@ def fetch_match_info(match_id):
             match_list.append(match["matchId"])
         print "{0} games returned".format(len(data))
     '''
-    return match_info
+    return participants
 
 if __name__ == "__main__":
     account_data = fetch_summoner_by_name([user["name"] for user in accounts])
@@ -148,7 +154,7 @@ if __name__ == "__main__":
 
     for i in range(0, len(match_list)):
         id = match_list[i]
-        match_info.append(fetch_match_info(id))
+        match_info += fetch_match_info(id)
 
     with open("match_info.json", "w") as outfile:
         json.dump(match_info, outfile, indent=4)
