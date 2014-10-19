@@ -78,6 +78,12 @@ label {
 	margin-left: auto;
 }
 
+#header_box {
+	width: 1230px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 #champ_image {
  	position: absolute;
 	margin-left: 10px;
@@ -89,7 +95,7 @@ label {
 #champ {
 	position: absolute;
 	top: -5px;
-	left: 175px;
+	margin-left: 175px;
 }
 
 #champ_name {
@@ -112,7 +118,7 @@ label {
 #champ_blurb {
 	position: absolute;
 	width: 650px;
-	left: 220px;
+	margin-left: 220px;
 	top: 90px;
 	font-size: 12px;
 	text-align: center;
@@ -120,7 +126,7 @@ label {
 
 #champion_dropdown {
 	position: absolute;
-	left: 850px;
+	margin-left: 850px;
 	top: 10px;
 }
 
