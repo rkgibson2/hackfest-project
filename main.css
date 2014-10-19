@@ -98,6 +98,11 @@ label {
 	font-weight: bold;
 }
 
+#champ_name:hover {
+	color: steelblue;
+	cursor: pointer;
+}
+
 #champ_title {
 	font-family: 'Marvel', cursive;
 	font-size: 45px;

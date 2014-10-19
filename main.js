@@ -165,8 +165,14 @@ function update(current_hero) {
 	.attr("src", "/img/champs/"+ l2.getChampionInfo(current_hero).image.full);
     
     d3.select("#champ_name text")
-	.text(l2.getChampionDisplayName(current_hero).toUpperCase());
+	.text(l2.getChampionDisplayName(current_hero).toUpperCase())
+	.on("click", OpenInNewTab);
     
+    function OpenInNewTab() {
+	  	var win = window.open("http://gameinfo.na.leagueoflegends.com/en/game-info/champions/"+ l2.getChampionDisplayName(current_hero).toLowerCase(), '_blank');
+	  	win.focus();
+	}
+
     d3.select("#champ_title text")
 	.text(l2.getChampionInfo(current_hero).title);
         
@@ -288,8 +294,14 @@ function load(current_hero) {
 	    .attr("y", 0)
 	    .attr("class", "champ_name")
 	    .text(l2.getChampionDisplayName(current_hero).toUpperCase())
-	    .style("fill", "black");
-        
+	    .style("fill", "black")
+	    .on("click", OpenInNewTab);
+
+	function OpenInNewTab() {
+	  	var win = window.open("http://gameinfo.na.leagueoflegends.com/en/game-info/champions/"+ l2.getChampionDisplayName(current_hero).toLowerCase(), '_blank');
+	  	win.focus();
+	}
+
 	d3.select("#champ_title")
 	    .append("text")
 	    .attr("x", 0)
