@@ -745,7 +745,16 @@ function load(current_hero) {
 	    	return x(d.name); })
 	    .attr("width", x.rangeBand())
 	    .attr("y", function(d) { return y(d.count); })
-	    .attr("height", function(d) { return height - y(d.count); });
+	    .attr("height", function(d) { return height - y(d.count); })
+	    .on("mouseover", function(d) {
+
+	    	graph_tip.html("<b>" + d.name + "</b><br>Count: " + d.count)
+	    	graph_tip.show(d);
+
+	    })
+	    .on("mouseout", function(d) {
+	    	graph_tip.hide(d);
+	    });
 
 	svg_items.append("text")
 		.attr("x", 320)
@@ -754,19 +763,21 @@ function load(current_hero) {
 		.attr("font-size", "22px")
 		.text("Items Purchased");
 
-	svg_items.selectAll(".bar").append("text")
+	svg_items.selectAll(".text")
 		.data(items_dict)
+		.enter().append("text")
+		.attr("class", "item_text")
 		.attr("dy", ".75em")
 	    .attr("y", function(d) {
-	    	return y(d.count)
+	    	return y(d.count) + 2;
 	    })
 	    .attr("x", function(d,i) {
-	    	return x(d.name);
+	    	return x(d.name) + (x.range()[1] - x.range()[0])/2;
 	    })
 	    .attr("text-anchor", "middle")
 	    .text(function(d) { 
 	    	//console.log(d.y)
-	    	return d.y; 
+	    	return d.count; 
 	    });
 
 	d3.json("/blurbs/mastery_blurbs.json", function(mastery_blurbs) {

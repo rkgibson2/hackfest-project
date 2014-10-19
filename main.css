@@ -210,8 +210,16 @@ label {
   shape-rendering: crispEdges;
 }
 
+.bar:hover {
+  fill: green;
+}
+
 .bar text {
   fill: #fff;
+}
+
+.item_text {
+	fill: white;
 }
 
 .axis path, .axis line {
