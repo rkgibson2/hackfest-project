@@ -327,18 +327,19 @@ function load(current_hero) {
 		return d.stats.DPM;
 	});
         
-	console.log(filtered_data)
+	//console.log(values_xpm)
 
 	var margin_xpm = bb_xpm.margins,
 	width_xpm = bb_xpm.w - 50,
 	height_xpm = bb_xpm.h - 60;
         
 	var x_xpm = d3.scale.linear()
-	    .domain([0, 1])
+	    .domain(d3.extent(values_xpm))
 	    .range([0, width_xpm]);
-        
+
 	var data_xpm = d3.layout.histogram()
 	    .bins(x_xpm.ticks(20))
+	    .range(d3.extent(values_xpm))
 	(values_xpm);
         
 	var y_xpm = d3.scale.linear()
@@ -347,7 +348,9 @@ function load(current_hero) {
         
 	var xAxis_xpm = d3.svg.axis()
 	    .scale(x_xpm)
-	    .orient("bottom");
+	    .orient("bottom")
+	    .innerTickSize([0])
+	    .outerTickSize([0]);
         
 	var bar_xpm = svg_xpm.selectAll(".bar")
 	    .data(data_xpm)
@@ -357,13 +360,22 @@ function load(current_hero) {
         
 	bar_xpm.append("rect")
 	    .attr("x", 1)
-	    .attr("width", x_xpm(data_xpm[0].dx) - 1)
-	    .attr("height", function(d) { return height_xpm - y_xpm(d.y); });
+	    .attr("width", function(d) {
+	    	return x_xpm.range()[1]/20;
+	    })
+	    .attr("height", function(d) { return height_xpm - y_xpm(d.y); })
+	    .on("mouseover", function(d) {
+	    	graph_tip.html("DPM: " + d.x);
+	    	graph_tip.show(d);
+	    })
+	    .on("mouseout", function(d) {
+	    	graph_tip.hide(d);
+	    });
         
 	bar_xpm.append("text")
 	    .attr("dy", ".75em")
 	    .attr("y", 6)
-	    .attr("x", x_xpm(data_xpm[0].dx) / 2)
+	    .attr("x", x_xpm.range()[1]/40)
 	    .attr("text-anchor", "middle")
 	    .text(function(d) { return d.y; });
         
@@ -373,26 +385,29 @@ function load(current_hero) {
 	    .call(xAxis_xpm);
 
 	svg_xpm.append("text")
-		.attr("x", 100)
+		.attr("x", 80)
 		.attr("y", 20)
 		.attr("font-family", "Dosis")
 		.attr("font-size", "22px")
-		.text("Average XPM");
+		.text("Average Damage/Min");
 
 
 	//gpm histogram
-	var values_gpm = d3.range(1000).map(d3.random.bates(10));
-        
+	var values_gpm = filtered_data.map(function(d) {
+		return d.stats.GPM;
+	});        
+
 	var margin_gpm = bb_gpm.margins,
 	width_gpm = bb_gpm.w - 50,
 	height_gpm = bb_gpm.h - 60;
         
 	var x_gpm = d3.scale.linear()
-	    .domain([0, 1])
+	    .domain(d3.extent(values_gpm))
 	    .range([0, width_gpm]);
         
 	var data_gpm = d3.layout.histogram()
 	    .bins(x_gpm.ticks(20))
+	    .range(d3.extent(values_gpm))
 	(values_gpm);
         
 	var y_gpm = d3.scale.linear()
@@ -411,13 +426,20 @@ function load(current_hero) {
         
 	bar_gpm.append("rect")
 	    .attr("x", 1)
-	    .attr("width", x_gpm(data_gpm[0].dx) - 1)
-	    .attr("height", function(d) { return height_gpm - y_gpm(d.y); });
+	    .attr("width", x_gpm.range()[1]/20)
+	    .attr("height", function(d) { return height_gpm - y_gpm(d.y); })
+	    .on("mouseover", function(d) {
+	    	graph_tip.html("GPM: " + d.x);
+	    	graph_tip.show(d);
+	    })
+	    .on("mouseout", function(d) {
+	    	graph_tip.hide(d);
+	    });
         
 	bar_gpm.append("text")
 	    .attr("dy", ".75em")
 	    .attr("y", 6)
-	    .attr("x", x_gpm(data_gpm[0].dx) / 2)
+	    .attr("x", x_gpm.range()[1]/40)
 	    .attr("text-anchor", "middle")
 	    .text(function(d) { return d.y; });
         
@@ -427,11 +449,11 @@ function load(current_hero) {
 	    .call(xAxis_gpm);
 
 	svg_gpm.append("text")
-		.attr("x", 100)
+		.attr("x", 80)
 		.attr("y", 20)
 		.attr("font-family", "Dosis")
 		.attr("font-size", "22px")
-		.text("Average GPM");
+		.text("Average Gold/Min");
 
 
 	//items histogram
