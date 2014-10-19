@@ -217,6 +217,7 @@ function update(current_hero) {
     filtered_data = filter_by_id(current_hero);
 
     d3.selectAll(".ability_descrip").remove();
+    d3.selectAll(".ability_image").remove();
 
     var actives = l2.getChampionInfo(current_hero).spells
 	var passive = l2.getChampionInfo(current_hero).passive
@@ -239,7 +240,7 @@ function update(current_hero) {
 	for (var i = 0; i < img_array.length; i++) {
 		svg_abilities.append("image")
 			.attr("x", 30)
-			.attr("y", 100 + i*abil_size + i*15)
+			.attr("y", 100 + i*abil_size + i*20)
 			.attr("height", abil_size)
 			.attr("width", abil_size)
 			.attr("class", "ability_image")
@@ -256,7 +257,7 @@ function update(current_hero) {
 
 		svg_abilities.append('foreignObject')
             .attr('x', 100)
-            .attr('y', 100 + i*abil_size + i*15)
+            .attr('y', 100 + i*abil_size + i*18.5)
             .attr('width', 250)
             .attr('height', 100)
             .append("xhtml:body")
