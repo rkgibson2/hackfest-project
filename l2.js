@@ -103,7 +103,7 @@ var l2 = (function() {
             throw new Error ("No rune with id " + id)
     }
 
-    function getKeys (datatype) {
+    function getKeys(datatype) {
         switch (datatype.toLowerCase()) {
             case "champion":
                 return Object.keys(champion);
