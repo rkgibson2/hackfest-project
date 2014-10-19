@@ -219,7 +219,23 @@ label {
   font: 10px sans-serif;
 }
 
+#gpm_container {
+  font: 10px sans-serif;
+}
+
+#xpm_container {
+  font: 10px sans-serif;
+}
+
 .bar rect:hover {
+	fill: green;
+}
+
+.bar_xpm rect:hover {
+	fill: green;
+}
+
+.bar_gpm rect:hover {
 	fill: green;
 }
 
@@ -232,10 +248,13 @@ label {
     
     /* customizable */
     transition: all 0.15s ease;
-    padding: 10px;
-    color: #333;
-    border-radius: 10px;
-    box-shadow: 2px 2px 1px silver;    
+	line-height: 1;
+	font-weight: bold;
+	padding: 12px;
+	background: rgba(0, 0, 0, 0.8);
+	color: #fff;
+	border-radius: 2px;
+	pointer-events: none;   
 }
 
 [tooltip]:hover:before {
@@ -243,9 +262,13 @@ label {
     opacity: 1;
     
     /* customizable */
-    background: yellow;
-    margin-top: -50px;
-    margin-left: 20px;    
+	line-height: 1;
+	font-weight: bold;
+	padding: 12px;
+	background: rgba(0, 0, 0, 0.8);
+	color: #fff;
+	border-radius: 2px;
+	pointer-events: none;    
 }
 
 [tooltip]:not([tooltip-persistent]):before {

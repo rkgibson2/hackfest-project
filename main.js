@@ -104,19 +104,19 @@ svg_items.call(graph_tip);
 
 
 //add nice rects and label text
-svg_xpm.append("rect")
-	.attr("height", bb_xpm.h)
-	.attr("width", bb_xpm.w)
-	.attr("fill", "black")
-	.attr("x", 0)
-	.attr("y", 0);
+// svg_xpm.append("rect")
+// 	.attr("height", bb_xpm.h)
+// 	.attr("width", bb_xpm.w)
+// 	.attr("fill", "black")
+// 	.attr("x", 0)
+// 	.attr("y", 0);
 
-svg_gpm.append("rect")
-	.attr("height", bb_gpm.h)
-	.attr("width", bb_gpm.w)
-	.attr("fill", "black")
-	.attr("x", 0)
-	.attr("y", 0);
+// svg_gpm.append("rect")
+// 	.attr("height", bb_gpm.h)
+// 	.attr("width", bb_gpm.w)
+// 	.attr("fill", "black")
+// 	.attr("x", 0)
+// 	.attr("y", 0);
 
 // svg_items.append("rect")
 // 	.attr("height", bb_items.h)
@@ -270,7 +270,6 @@ function load(current_hero) {
             
         });
        
-
     //add logo
     d3.select("#logo").append("img")
     	.attr("src", "logo.png")
@@ -306,6 +305,100 @@ function load(current_hero) {
 	    .text(l2.getChampionInfo(current_hero).blurb.split("<br>")[0].split(".")[0]+".");
         
         
+	//xpm histogram
+	var values_xpm = d3.range(1000).map(d3.random.bates(10));
+        
+	var margin_xpm = bb_xpm.margins,
+	width_xpm = bb_xpm.w - 50,
+	height_xpm = bb_xpm.h - 20;
+        
+	var x_xpm = d3.scale.linear()
+	    .domain([0, 1])
+	    .range([0, width_xpm]);
+        
+	var data_xpm = d3.layout.histogram()
+	    .bins(x_xpm.ticks(20))
+	(values_xpm);
+        
+	var y_xpm = d3.scale.linear()
+	    .domain([0, d3.max(data_xpm, function(d) { return d.y; })])
+	    .range([height_xpm, 0]);
+        
+	var xAxis_xpm = d3.svg.axis()
+	    .scale(x_xpm)
+	    .orient("bottom");
+        
+	var bar_xpm = svg_xpm.selectAll(".bar")
+	    .data(data_xpm)
+	    .enter().append("g")
+	    .attr("class", "bar")
+	    .attr("transform", function(d) { return "translate(" + x_xpm(d.x) + "," + y_xpm(d.y) + ")"; });
+        
+	bar_xpm.append("rect")
+	    .attr("x", 1)
+	    .attr("width", x_xpm(data_xpm[0].dx) - 1)
+	    .attr("height", function(d) { return height_xpm - y_xpm(d.y); });
+        
+	bar_xpm.append("text")
+	    .attr("dy", ".75em")
+	    .attr("y", 6)
+	    .attr("x", x_xpm(data_xpm[0].dx) / 2)
+	    .attr("text-anchor", "middle")
+	    .text(function(d) { return d.y; });
+        
+	svg_xpm.append("g")
+	    .attr("class", "x axis")
+	    .attr("transform", "translate(0," + height_xpm + ")")
+	    .call(xAxis_xpm);
+
+
+	//gpm histogram
+	var values_gpm = d3.range(1000).map(d3.random.bates(10));
+        
+	var margin_gpm = bb_gpm.margins,
+	width_gpm = bb_gpm.w - 50,
+	height_gpm = bb_gpm.h - 20;
+        
+	var x_gpm = d3.scale.linear()
+	    .domain([0, 1])
+	    .range([0, width_gpm]);
+        
+	var data_gpm = d3.layout.histogram()
+	    .bins(x_gpm.ticks(20))
+	(values_gpm);
+        
+	var y_gpm = d3.scale.linear()
+	    .domain([0, d3.max(data_gpm, function(d) { return d.y; })])
+	    .range([height_gpm, 0]);
+        
+	var xAxis_gpm = d3.svg.axis()
+	    .scale(x_gpm)
+	    .orient("bottom");
+        
+	var bar_gpm = svg_gpm.selectAll(".bar")
+	    .data(data_gpm)
+	    .enter().append("g")
+	    .attr("class", "bar")
+	    .attr("transform", function(d) { return "translate(" + x_gpm(d.x) + "," + y_gpm(d.y) + ")"; });
+        
+	bar_gpm.append("rect")
+	    .attr("x", 1)
+	    .attr("width", x_gpm(data_gpm[0].dx) - 1)
+	    .attr("height", function(d) { return height_gpm - y_gpm(d.y); });
+        
+	bar_gpm.append("text")
+	    .attr("dy", ".75em")
+	    .attr("y", 6)
+	    .attr("x", x_gpm(data_gpm[0].dx) / 2)
+	    .attr("text-anchor", "middle")
+	    .text(function(d) { return d.y; });
+        
+	svg_gpm.append("g")
+	    .attr("class", "x axis")
+	    .attr("transform", "translate(0," + height_gpm + ")")
+	    .call(xAxis_gpm);
+
+
 	//items histogram
 	var values = d3.range(1000).map(d3.random.bates(10));
         
