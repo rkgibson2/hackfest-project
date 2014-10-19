@@ -418,7 +418,7 @@ function load(current_hero) {
         
 	var margin = bb_items.margins,
 	width = bb_items.w - 50,
-	height = bb_items.h - 20;
+	height = bb_items.h - 60;
         
 	var x = d3.scale.linear()
 	    .domain([0, 1])
@@ -441,7 +441,7 @@ function load(current_hero) {
 	    .data(data)
 	    .enter().append("g")
 	    .attr("class", "bar")
-	    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+	    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + (40+y(d.y)) + ")"; });
         
 	bar.append("rect")
 	    .attr("x", 1)
@@ -457,9 +457,18 @@ function load(current_hero) {
         
 	svg_items.append("g")
 	    .attr("class", "x axis")
-	    .attr("transform", "translate(0," + height + ")")
+	    .attr("transform", "translate(0," + (height+40) + ")")
 	    .call(xAxis);
-        
+    
+    svg_items.append("text")
+		.attr("x", 270)
+		.attr("y", 20)
+		.attr("font-family", "Dosis")
+		.attr("font-size", "22px")
+		.text("Items Purchased");
+
+
+
 	d3.json("/blurbs/mastery_blurbs.json", function(mastery_blurbs) {
 	    d3.selectAll(".mastery_row img")
 		.each(function(d) {
