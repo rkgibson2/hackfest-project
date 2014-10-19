@@ -683,7 +683,7 @@ function update(current_hero) {
 	svg_winrate.append("text")
 		.attr("x", 300)
 		.attr("y", 65)
-		.text(winrate.toFixed(2) + "%")
+		.text((winrate * 100).toFixed(2) + "%")
 		.attr("font-family", "Arial")
 		.attr("font-size", "18px")
 		.attr("font-weight", "bold");
@@ -884,7 +884,7 @@ function load(current_hero) {
 	svg_winrate.append("text")
 		.attr("x", 300)
 		.attr("y", 65)
-		.text(winrate.toFixed(2) + "%")
+		.text((winrate * 100).toFixed(2) + "%")
 		.attr("font-family", "Arial")
 		.attr("font-size", "18px")
 		.attr("font-weight", "bold");
