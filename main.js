@@ -118,12 +118,12 @@ svg_gpm.append("rect")
 	.attr("x", 0)
 	.attr("y", 0);
 
-svg_items.append("rect")
-	.attr("height", bb_items.h)
-	.attr("width", bb_items.w)
-	.attr("fill", "black")
-	.attr("x", 0)
-	.attr("y", 0);
+// svg_items.append("rect")
+// 	.attr("height", bb_items.h)
+// 	.attr("width", bb_items.w)
+// 	.attr("fill", "black")
+// 	.attr("x", 0)
+// 	.attr("y", 0);
 
 svg_winrate.append("rect")
 	.attr("height", 40)
@@ -260,11 +260,6 @@ function load(current_hero) {
 			var elem = document.createElement("img")
 			document.getElementById("champ_image").appendChild(elem);
 			elem.src = "/img/champs/"+ current_hero.toLowerCase() + ".png";
-			// elem.setAttribute("height", "768");
-			// elem.setAttribute("width", "1024");
-
-			//set header and champion description
-			//var current_hero = "Katarina";
 
 			d3.select("#champ_name")
 				.append("text")
@@ -288,61 +283,54 @@ function load(current_hero) {
 				.attr("y", 0)
 				.text(data[current_hero].blurb.split("<br>")[0].split(".")[0]+".");
 
-				// // Generate a Bates distribution of 10 random variables.
-				// var values = d3.range(1000).map(d3.random.bates(10));
 
-				// // A formatter for counts.
-				// var formatCount = d3.format(",.0f");
+			//items histogram
+			var values = d3.range(1000).map(d3.random.bates(10));
 
-				// var margin = {top: 10, right: 30, bottom: 30, left: 30},
-				//     width = 960 - margin.left - margin.right,
-				//     height = 500 - margin.top - margin.bottom;
+			var margin = bb_items.margins,
+			    width = bb_items.w - 50,
+			    height = bb_items.h - 20;
 
-				// var x = d3.scale.linear()
-				//     .domain([0, 1])
-				//     .range([0, width]);
+			var x = d3.scale.linear()
+			    .domain([0, 1])
+			    .range([0, width]);
 
-				// // Generate a histogram using twenty uniformly-spaced bins.
-				// var data = d3.layout.histogram()
-				//     .bins(x.ticks(20))
-				//     (values);
+			// Generate a histogram using twenty uniformly-spaced bins.
+			var data = d3.layout.histogram()
+			    .bins(x.ticks(20))
+			    (values);
 
-				// var y = d3.scale.linear()
-				//     .domain([0, d3.max(data, function(d) { return d.y; })])
-				//     .range([height, 0]);
+			var y = d3.scale.linear()
+			    .domain([0, d3.max(data, function(d) { return d.y; })])
+			    .range([height, 0]);
 
-				// var xAxis = d3.svg.axis()
-				//     .scale(x)
-				//     .orient("bottom");
+			var xAxis = d3.svg.axis()
+			    .scale(x)
+			    .orient("bottom");
 
-				// var svg = d3.select("body").append("svg")
-				//     .attr("width", width + margin.left + margin.right)
-				//     .attr("height", height + margin.top + margin.bottom)
-				//   .append("g")
-				//     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+			var bar = svg_items.selectAll(".bar")
+			    .data(data)
+			  .enter().append("g")
+			    .attr("class", "bar")
+			    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
 
-				// var bar = svg.selectAll(".bar")
-				//     .data(data)
-				//   .enter().append("g")
-				//     .attr("class", "bar")
-				//     .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+			bar.append("rect")
+			    .attr("x", 1)
+			    .attr("width", x(data[0].dx) - 1)
+			    .attr("height", function(d) { return height - y(d.y); });
 
-				// bar.append("rect")
-				//     .attr("x", 1)
-				//     .attr("width", x(data[0].dx) - 1)
-				//     .attr("height", function(d) { return height - y(d.y); });
+			bar.append("text")
+			    .attr("dy", ".75em")
+			    .attr("y", 6)
+			    .attr("x", x(data[0].dx) / 2)
+			    .attr("text-anchor", "middle")
+			    .text(function(d) { return d.y; });
 
-				// bar.append("text")
-				//     .attr("dy", ".75em")
-				//     .attr("y", 6)
-				//     .attr("x", x(data[0].dx) / 2)
-				//     .attr("text-anchor", "middle")
-				//     .text(function(d) { return formatCount(d.y); });
+			svg_items.append("g")
+			    .attr("class", "x axis")
+			    .attr("transform", "translate(0," + height + ")")
+			    .call(xAxis);
 
-				// svg.append("g")
-				//     .attr("class", "x axis")
-				//     .attr("transform", "translate(0," + height + ")")
-				//     .call(xAxis);
 
 			d3.json("/blurbs/mastery_blurbs.json", function(mastery_blurbs) {
 				d3.selectAll("#masteries_container img")

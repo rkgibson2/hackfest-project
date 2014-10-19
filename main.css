@@ -214,6 +214,13 @@ label {
   shape-rendering: crispEdges;
 }
 
+#items_container {
+  font: 10px sans-serif;
+}
+
+.bar rect:hover {
+	fill: green;
+}
 
 /*html tooltip css*/
 [tooltip]:before {
