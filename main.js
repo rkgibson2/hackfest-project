@@ -27,7 +27,7 @@ bb_summoner_spells = {
 
 bb_abilities = {
     w: 350,
-    h: 430,
+    h: 450,
     margin: {
     	top: 20,
     	right: 10,
